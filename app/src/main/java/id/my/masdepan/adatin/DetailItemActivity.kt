@@ -20,10 +20,8 @@ class DetailItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_item)
         val pakaianId = intent.getIntExtra("productId", -1)
 
-        // 2. Query your GlobalStore to find the matching item
-        val selectedPakaian = daftarPakaian.find { it.id == pakaianId }
-
-        if (selectedPakaian == null) {
+        val pakaian = daftarPakaian.find { it.id == pakaianId }
+        if (pakaian == null) {
             Toast.makeText(this, "Pakaian Tidak Ditemukan", Toast.LENGTH_LONG).show()
             return
         }
@@ -35,13 +33,13 @@ class DetailItemActivity : AppCompatActivity() {
         val btnSewaSekarang = findViewById<Button>(R.id.btnSewaSekarang)
         val cgUkuran = findViewById<ChipGroup>(R.id.cgProductSizeSelection)
 
-        ivDetailImage.load("${selectedPakaian.gambar}.jpg") {
+        ivDetailImage.load("${pakaian.gambar}.jpg") {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }
 
-        tvDetailNama.text = selectedPakaian.nama
-        tvDetailDeskripsi.text = selectedPakaian.deskripsi
+        tvDetailNama.text = pakaian.nama
+        tvDetailDeskripsi.text = pakaian.deskripsi
         tvKetersediaan.text = "Tersedia"
 
         btnSewaSekarang.setOnClickListener {

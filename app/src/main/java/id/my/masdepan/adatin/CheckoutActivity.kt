@@ -1,5 +1,6 @@
 package id.my.masdepan.adatin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -54,7 +55,8 @@ class CheckoutActivity : AppCompatActivity() {
 
         val checkoutBtn = findViewById<Button>(R.id.checkoutBtn)
 
-        var totalPrice: Int
+        var totalPrice = 0
+        var rentingDays = 0
 
         etProductName.text = pakaian.nama
         etProductSizeSelected.text = "Ukuran ${selectedProductSize}"
@@ -62,7 +64,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         var isDelivery = rbDelivery.isChecked
 
-        rgDeliveryGroup.setOnCheckedChangeListener { group, i ->
+        rgDeliveryGroup.setOnCheckedChangeListener { _, i ->
             isDelivery = (i == rbDelivery.id)
             if (i == rbDelivery.id) {
                 etAddressLayout.visibility = View.VISIBLE
@@ -87,10 +89,11 @@ class CheckoutActivity : AppCompatActivity() {
                 etRentingDate.setText("$formattedStart - $formattedEnd")
 
                 val diffMillis = endDateMillis - startDateMillis
-                val rentingDays = (diffMillis / (1000L * 60 * 60 * 24))
-                tvRentingDuration.text = "${rentingDays + 1} hari"
+                val tempRentingDays = (diffMillis / (1000L * 60 * 60 * 24))
+                rentingDays = tempRentingDays.toInt() + 1
+                tvRentingDuration.text = "${rentingDays} hari"
 
-                totalPrice = (rentingDays.toInt() + 1) * pakaian.harga_per_hari
+                totalPrice = (rentingDays) * pakaian.harga_per_hari
                 tvTotalPrice.text = "Rp${totalPrice}"
             }
 
@@ -147,7 +150,17 @@ class CheckoutActivity : AppCompatActivity() {
             etRentingDate.error = null
             etPickupTime.error = null
 
-            Toast.makeText(this, "Pemesanan Berhasil", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, PaymentActivity::class.java)
+            intent.putExtra("productId", pakaianId)
+            intent.putExtra("selectedProductSize", selectedProductSize)
+            intent.putExtra("RenterName", etRenterName.text.toString())
+            intent.putExtra("RenterPhoneNumber", etRenterPhoneNumber.text.toString())
+            intent.putExtra("isDelivery", isDelivery)
+            intent.putExtra("renterAddress", etAddress.text.toString())
+            intent.putExtra("rentingDays", rentingDays)
+            intent.putExtra("totalPrice", totalPrice)
+            this.startActivity(intent)
+
         }
     }
 }
