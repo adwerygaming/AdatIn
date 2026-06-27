@@ -47,7 +47,7 @@ class DetailItemActivity : AppCompatActivity() {
         btnSewaSekarang.setOnClickListener {
             val checkedChipId = cgUkuran.checkedChipId
             val selectedChip = findViewById<Chip>(checkedChipId)
-            val selectedSize = selectedChip.toString()
+            val selectedSize = selectedChip.text.toString()
 
             val intent = Intent(this, CheckoutActivity::class.java)
             intent.putExtra("productId", pakaianId)

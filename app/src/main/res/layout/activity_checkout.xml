@@ -56,6 +56,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
                 android:hint="Nama Penyewa"
                 app:expandedHintEnabled="true"
                 app:hintEnabled="true">
@@ -100,6 +101,7 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
+                    android:id="@+id/rgDeliveryMethod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -123,14 +125,18 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/etAlamat"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etAddressLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Alamat Pengiriman"
-                android:inputType="text"
-                android:visibility="gone" />
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Alamat Pengiriman" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -143,11 +149,11 @@
                 android:id="@+id/tvSelectDateAndTimeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:layout_weight="1"
                 android:text="Tanggal dan Jam" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etRentingDate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,7 +162,7 @@
                 android:hint="Tanggal Sewa">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTanggal"
+                    android:id="@+id/etRentingDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -166,7 +172,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etPickupTime"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,7 +179,7 @@
                 android:hint="Jam Pengambilan">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etJam"
+                    android:id="@+id/etPickupTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -182,7 +187,86 @@
                     android:focusable="false"
                     app:drawableEndCompat="@drawable/ic_clock" />
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ProductPriceGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvProductPriceLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Biaya per Hari" />
+
+                <TextView
+                    android:id="@+id/tvProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="{{ProductPrice}}"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvRentingDurationLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Lama Sewa" />
+
+                <TextView
+                    android:id="@+id/tvRentingDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="{{RentingDuration}}"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTotalPriceLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total Harga" />
+
+                <TextView
+                    android:id="@+id/tvTotalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="{{TotalPrice}}"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/checkoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sewa" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

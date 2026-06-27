@@ -1,13 +1,17 @@
 package id.my.masdepan.adatin
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
@@ -33,18 +37,41 @@ class CheckoutActivity : AppCompatActivity() {
         val etProductName = findViewById<TextView>(R.id.etProductName)
         val etProductSizeSelected = findViewById<TextView>(R.id.etProductSizeSelected)
 
-        etProductName.text = pakaian.nama
-        etProductSizeSelected.text = "Ukuran ${selectedProductSize}"
+        val etRenterName = findViewById<TextInputEditText>(R.id.etRenterName)
+        val etRenterPhoneNumber = findViewById<TextInputEditText>(R.id.etRenterPhoneNumber)
 
-        val etNamaPenyewa = findViewById<TextInputEditText>(R.id.etRenterName)
-        val etNomorWA = findViewById<TextInputEditText>(R.id.etRenterPhoneNumber)
-        val etTanggal = findViewById<TextInputEditText>(R.id.etTanggal)
-        val etJam = findViewById<TextInputEditText>(R.id.etJam)
+        val etRentingDate = findViewById<TextInputEditText>(R.id.etRentingDate)
+        val etPickupTime = findViewById<TextInputEditText>(R.id.etPickupTime)
+        val etAddressLayout = findViewById<TextInputLayout>(R.id.etAddressLayout)
+        val etAddress = findViewById<TextInputEditText>(R.id.etAddress)
+
+        val rgDeliveryGroup = findViewById<RadioGroup>(R.id.rgDeliveryMethod)
         val rbDelivery = findViewById<RadioButton>(R.id.rbDelivery)
 
-        val isDelivery = rbDelivery.isChecked
+        val tvProductPrice = findViewById<TextView>(R.id.tvProductPrice)
+        val tvTotalPrice = findViewById<TextView>(R.id.tvTotalPrice)
+        val tvRentingDuration = findViewById<TextView>(R.id.tvRentingDuration)
 
-        etTanggal.setOnClickListener {
+        val checkoutBtn = findViewById<Button>(R.id.checkoutBtn)
+
+        var totalPrice: Int
+
+        etProductName.text = pakaian.nama
+        etProductSizeSelected.text = "Ukuran ${selectedProductSize}"
+        tvProductPrice.text = "Rp${pakaian.harga_per_hari} / hari"
+
+        var isDelivery = rbDelivery.isChecked
+
+        rgDeliveryGroup.setOnCheckedChangeListener { group, i ->
+            isDelivery = (i == rbDelivery.id)
+            if (i == rbDelivery.id) {
+                etAddressLayout.visibility = View.VISIBLE
+            } else {
+                etAddressLayout.visibility = View.GONE
+            }
+        }
+
+        etRentingDate.setOnClickListener {
             val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
                 .setTitleText("Pilih Rentang Waktu Sewa")
                 .build()
@@ -57,13 +84,20 @@ class CheckoutActivity : AppCompatActivity() {
                 val formattedStart = sdf.format(Date(startDateMillis))
                 val formattedEnd = sdf.format(Date(endDateMillis))
 
-                etTanggal.setText("$formattedStart - $formattedEnd")
+                etRentingDate.setText("$formattedStart - $formattedEnd")
+
+                val diffMillis = endDateMillis - startDateMillis
+                val rentingDays = (diffMillis / (1000L * 60 * 60 * 24))
+                tvRentingDuration.text = "${rentingDays + 1} hari"
+
+                totalPrice = (rentingDays.toInt() + 1) * pakaian.harga_per_hari
+                tvTotalPrice.text = "Rp${totalPrice}"
             }
 
             dateRangePicker.show(supportFragmentManager, "DATE_RANGE_PICKER")
         }
 
-        etJam.setOnClickListener {
+        etPickupTime.setOnClickListener {
             val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
                 .setHour(12)
@@ -73,12 +107,47 @@ class CheckoutActivity : AppCompatActivity() {
 
             timePicker.addOnPositiveButtonClickListener {
                 val formattedTime = String.format(Locale.getDefault(), "%02d:%02d", timePicker.hour, timePicker.minute)
-                etJam.setText(formattedTime)
+                etPickupTime.setText(formattedTime)
             }
 
             timePicker.show(supportFragmentManager, "TIME_PICKER")
         }
 
+        checkoutBtn.setOnClickListener {
+            if (etRenterName.text.toString().isEmpty()) {
+                etRenterName.error = "Nama Penyewa Tidak Boleh Kosong"
+                return@setOnClickListener
+            }
 
+            if (etRenterPhoneNumber.text.toString().isEmpty()) {
+                etRenterPhoneNumber.error = "Nomor WA Tidak Boleh Kosong"
+                return@setOnClickListener
+            }
+
+            if (isDelivery) {
+                if (etAddress.text.toString().isEmpty()) {
+                    etAddress.error = "Alamat Tidak Boleh Kosong"
+                    return@setOnClickListener
+                }
+            }
+
+            if (etRentingDate.text.toString().isEmpty()) {
+                etRentingDate.error = "Tanggal Sewa Tidak Boleh Kosong"
+                return@setOnClickListener
+            }
+
+            if (etPickupTime.text.toString().isEmpty()) {
+                etPickupTime.error = "Waktu Pengambilan Tidak Boleh Kosong"
+                return@setOnClickListener
+            }
+
+            etRenterName.error = null
+            etRenterPhoneNumber.error = null
+            etAddress.error = null
+            etRentingDate.error = null
+            etPickupTime.error = null
+
+            Toast.makeText(this, "Pemesanan Berhasil", Toast.LENGTH_LONG).show()
+        }
     }
 }
