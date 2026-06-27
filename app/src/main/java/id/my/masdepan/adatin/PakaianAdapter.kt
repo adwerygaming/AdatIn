@@ -27,12 +27,9 @@ class PakaianAdapter(private val listPakaian: List<Pakaian>) :
     override fun onBindViewHolder(holder: PakaianViewHolder, position: Int) {
         val pakaian = listPakaian[position]
 
-        val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivKatalog)
+        val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivProductImage)
 
         ivPakaian.load("${pakaian.gambar}.jpg") {
-            println(pakaian.nama)
-            println(pakaian.gambar)
-
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }

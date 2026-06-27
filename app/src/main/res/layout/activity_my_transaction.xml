@@ -21,6 +21,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="yoo transaction" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTransactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
         </LinearLayout>
     </LinearLayout>
 

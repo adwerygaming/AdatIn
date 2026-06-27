@@ -26,7 +26,7 @@ class PaymentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_payment)
 
         val productId = intent.getIntExtra("productId", -1)
-        val selectedProductSize = intent.getStringExtra("selectedProductSize")
+        val selectedProductSize = intent.getStringExtra("selectedProductSize") ?: "None"
         val renterName = intent.getStringExtra("RenterName")
         val renterPhoneNumber = intent.getStringExtra("RenterPhoneNumber")
         val isDelivery = intent.getBooleanExtra("isDelivery", false)
@@ -119,6 +119,7 @@ class PaymentActivity : AppCompatActivity() {
                 startRentDateMs,
                 endRentDateMs,
                 when (isDelivery) { true -> TipePengambilan.DELIVERY; false -> TipePengambilan.PICKUP },
+                selectedProductSize,
                 subtotal,
                 StatusSewa.DIPROSES
             )
