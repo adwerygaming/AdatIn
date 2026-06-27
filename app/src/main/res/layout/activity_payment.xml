@@ -298,6 +298,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+
             app:cardCornerRadius="12dp">
 
             <LinearLayout
@@ -366,10 +368,14 @@
                         android:textSize="16sp"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
-
-
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/PaymentCheckoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Buat Pesanan" />
     </LinearLayout>
 </ScrollView>

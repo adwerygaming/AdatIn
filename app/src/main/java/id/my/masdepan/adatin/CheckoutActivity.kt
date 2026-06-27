@@ -55,6 +55,8 @@ class CheckoutActivity : AppCompatActivity() {
 
         val checkoutBtn = findViewById<Button>(R.id.checkoutBtn)
 
+        var startRentDateMs = 0L
+        var endRentDateMs = 0L
         var totalPrice = 0
         var rentingDays = 0
 
@@ -81,6 +83,9 @@ class CheckoutActivity : AppCompatActivity() {
             dateRangePicker.addOnPositiveButtonClickListener { selection ->
                 val startDateMillis = selection.first
                 val endDateMillis = selection.second
+
+                startRentDateMs = startDateMillis
+                endRentDateMs = endDateMillis
 
                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 val formattedStart = sdf.format(Date(startDateMillis))
@@ -159,6 +164,8 @@ class CheckoutActivity : AppCompatActivity() {
             intent.putExtra("renterAddress", etAddress.text.toString())
             intent.putExtra("rentingDays", rentingDays)
             intent.putExtra("totalPrice", totalPrice)
+            intent.putExtra("startRentDateMs", startRentDateMs)
+            intent.putExtra("endRentDateMs", endRentDateMs)
             this.startActivity(intent)
 
         }

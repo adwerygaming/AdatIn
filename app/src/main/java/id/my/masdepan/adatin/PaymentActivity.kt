@@ -1,7 +1,11 @@
 package id.my.masdepan.adatin
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioButton
@@ -13,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import coil.load
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +33,8 @@ class PaymentActivity : AppCompatActivity() {
         val renterAddress = intent.getStringExtra("renterAddress")
         val rentingDays = intent.getIntExtra("rentingDays", -1)
         val totalPrice = intent.getIntExtra("totalPrice", -1)
+        val startRentDateMs = intent.getLongExtra("startRentDateMs", -1)
+        val endRentDateMs = intent.getLongExtra("endRentDateMs", -1)
 
         val pakaian = daftarPakaian.find { it.id == productId }
         if (pakaian == null) {
@@ -53,12 +60,14 @@ class PaymentActivity : AppCompatActivity() {
         val tvPaymentDetailsDeliveryFee = findViewById<TextView>(R.id.tvPaymentDetailsDeliveryFee)
         val tvPaymentTotal = findViewById<TextView>(R.id.tvPaymentTotal)
 
-        val rgPayment = findViewById<RadioGroup>(R.id.rgPayment)
-        val rbBCA = findViewById<RadioButton>(R.id.rbBCA)
-        val rbMandiri = findViewById<RadioButton>(R.id.rbMandiri)
-        val rbGoPay = findViewById<RadioButton>(R.id.rbGoPay)
-        val rbDana = findViewById<RadioButton>(R.id.rbDana)
-        val rbQRIS = findViewById<RadioButton>(R.id.rbQRIS)
+        val PaymentCheckoutBtn = findViewById<Button>(R.id.PaymentCheckoutBtn)
+
+//        val rgPayment = findViewById<RadioGroup>(R.id.rgPayment)
+//        val rbBCA = findViewById<RadioButton>(R.id.rbBCA)
+//        val rbMandiri = findViewById<RadioButton>(R.id.rbMandiri)
+//        val rbGoPay = findViewById<RadioButton>(R.id.rbGoPay)
+//        val rbDana = findViewById<RadioButton>(R.id.rbDana)
+//        val rbQRIS = findViewById<RadioButton>(R.id.rbQRIS)
 
         // product info
         tvPaymentProductName.text = pakaian.nama
@@ -101,5 +110,34 @@ class PaymentActivity : AppCompatActivity() {
 
         tvPaymentTotal.text = "Rp${subtotal}"
 
+        PaymentCheckoutBtn.setOnClickListener {
+            val invoiceId = "INV-${System.currentTimeMillis()}"
+
+            val newOrder = Penyewaan(
+                invoiceId,
+                pakaian.id,
+                startRentDateMs,
+                endRentDateMs,
+                when (isDelivery) { true -> TipePengambilan.DELIVERY; false -> TipePengambilan.PICKUP },
+                subtotal,
+                StatusSewa.DIPROSES
+            )
+
+            GlobalVariable.semuaTransaksi?.add(newOrder)
+
+            val dialog = MaterialAlertDialogBuilder(this)
+                .setView(R.layout.dialog_loading) // Create a simple layout with a ProgressBar
+                .setCancelable(false)
+                .show()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                dialog.dismiss()
+
+                val intent = Intent(this, PaymentSuccessActivity::class.java)
+                intent.putExtra("invoiceId", invoiceId)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }, 2000)
+        }
     }
 }
