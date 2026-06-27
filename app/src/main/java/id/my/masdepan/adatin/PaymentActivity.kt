@@ -47,6 +47,12 @@ class PaymentActivity : AppCompatActivity() {
         val tvPaymentRenterAddressLayout = findViewById<LinearLayout>(R.id.tvPaymentRenterAddressLayout)
         val tvPaymentRentingDuration = findViewById<TextView>(R.id.tvPaymentRentingDuration)
 
+        val tvPaymentDetailsProductNameLabel = findViewById<TextView>(R.id.tvPaymentDetailsProductNameLabel)
+        val tvPaymentDetailsProductName = findViewById<TextView>(R.id.tvPaymentDetailsProductName)
+        val tvPaymentDetailsDeliveryFeeLayout = findViewById<LinearLayout>(R.id.tvPaymentDetailsDeliveryFeeLayout)
+        val tvPaymentDetailsDeliveryFee = findViewById<TextView>(R.id.tvPaymentDetailsDeliveryFee)
+        val tvPaymentTotal = findViewById<TextView>(R.id.tvPaymentTotal)
+
         val rgPayment = findViewById<RadioGroup>(R.id.rgPayment)
         val rbBCA = findViewById<RadioButton>(R.id.rbBCA)
         val rbMandiri = findViewById<RadioButton>(R.id.rbMandiri)
@@ -54,6 +60,7 @@ class PaymentActivity : AppCompatActivity() {
         val rbDana = findViewById<RadioButton>(R.id.rbDana)
         val rbQRIS = findViewById<RadioButton>(R.id.rbQRIS)
 
+        // product info
         tvPaymentProductName.text = pakaian.nama
         tvPaymentProductSelectedSize.text = "Ukuran ${selectedProductSize}"
         tvPaymentProductPrice.text = "Rp${pakaian.harga_per_hari} / hari"
@@ -63,6 +70,7 @@ class PaymentActivity : AppCompatActivity() {
             error(R.drawable.ic_error)
         }
 
+        // renter info
         tvPaymentRenterName.text = renterName
         tvPaymentRenterPhoneNumber.text = renterPhoneNumber
         tvPaymentRenterAddress.text = renterAddress
@@ -76,6 +84,22 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         tvPaymentRentingDuration.text = "${rentingDays} hari"
+
+        // payment details
+        var subtotal = totalPrice
+        val deliveryFee = 10000
+
+        tvPaymentDetailsProductNameLabel.text = pakaian.nama
+        tvPaymentDetailsProductName.text = "1x Rp${pakaian.harga_per_hari}"
+        if (isDelivery) {
+            tvPaymentDetailsDeliveryFeeLayout.visibility = View.VISIBLE
+            tvPaymentDetailsDeliveryFee.text = "Rp10.000"
+            subtotal += deliveryFee
+        } else {
+            tvPaymentDetailsDeliveryFeeLayout.visibility = View.GONE
+        }
+
+        tvPaymentTotal.text = "Rp${subtotal}"
 
     }
 }

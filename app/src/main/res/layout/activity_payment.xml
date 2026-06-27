@@ -302,17 +302,72 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Rincian Pembayaran"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <LinearLayout style="@style/SummaryRowStyle">
+                    <TextView android:id="@+id/tvPaymentDetailsProductNameLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="{{ProductName}}" />
+                    <TextView
+                        android:id="@+id/tvPaymentDetailsProductName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="{{ProductTotal}}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tvPaymentDetailsDeliveryFeeLayout"
+                    style="@style/SummaryRowStyle">
+                    <TextView android:id="@+id/tvPaymentDetailsDeliveryFeeLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Biaya Pengiriman" />
+                    <TextView
+                        android:id="@+id/tvPaymentDetailsDeliveryFee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="{{DeliveryFee}}" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginVertical="8dp"/>
+
+                <LinearLayout style="@style/SummaryRowStyle">
+                    <TextView
+                        android:id="@+id/tvPaymentTotalLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total Pembayaran"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tvPaymentTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="{{TotalPrice}}"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
