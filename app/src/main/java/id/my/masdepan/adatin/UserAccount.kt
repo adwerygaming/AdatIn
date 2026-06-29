@@ -12,6 +12,8 @@ class UserPersonalInformation(
     val fullName: String,
     val address: String,
     val phoneNumber: String
-): UserAccount(email, password);
-
-// tes
+): UserAccount(email, password) {
+    fun getFullname(): String {
+        return fullName;
+    }
+};
