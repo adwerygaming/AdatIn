@@ -47,7 +47,7 @@ class ConfirmCancelActivity : AppCompatActivity() {
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-                updateStatus(transactionId, StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
+                GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
 
                 Toast.makeText(this, "Pembatalan Berhasil. Menunggu konfirmasi dari penual.", Toast.LENGTH_LONG).show()
                 startActivity(intent)

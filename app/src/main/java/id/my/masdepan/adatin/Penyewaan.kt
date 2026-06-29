@@ -31,15 +31,10 @@ data class Penyewaan(
     val ukuran: String,
     val subtotal: Int,
     var status: StatusSewa
-)
-
-fun updateStatus(transactionId: String, newStatus: StatusSewa): Penyewaan? {
-    val penyewaan = GlobalVariable.activeAccount?.getPurchaseById(transactionId);
-
-    if (penyewaan != null) {
-        penyewaan.status = newStatus
-        return penyewaan
+) {
+    fun updateStatus(newStatus: StatusSewa): Penyewaan? {
+        this.status = newStatus
+        return this
     }
-
-    return null
 }
+

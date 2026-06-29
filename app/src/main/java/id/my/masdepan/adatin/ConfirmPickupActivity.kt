@@ -46,7 +46,7 @@ class ConfirmPickupActivity : AppCompatActivity() {
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-                updateStatus(transactionId, StatusSewa.SEDANG_DISEWA)
+                GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SEDANG_DISEWA)
 
                 Toast.makeText(this, "Konfirmasi Berhasil. It's all yours.", Toast.LENGTH_LONG).show()
                 startActivity(intent)

@@ -46,13 +46,14 @@ class MyTransactionActivity : AppCompatActivity() {
                     delay(3000)
 
                     if (trx.tipe_pengambilan == TipePengambilan.DELIVERY) {
-                        updateStatus(transactionId, StatusSewa.SEDANG_DIANTAR)
+
+                        GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SEDANG_DIANTAR)
                         adapter.notifyDataSetChanged()
 
                         delay(6000)
-                        updateStatus(transactionId, StatusSewa.SAMPAI_TUJUAN)
+                        GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SAMPAI_TUJUAN)
                     } else {
-                        updateStatus(transactionId, StatusSewa.SIAP_DIAMBIL)
+                        GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SIAP_DIAMBIL)
                     }
                 }
 
@@ -60,7 +61,7 @@ class MyTransactionActivity : AppCompatActivity() {
                     delay(6000)
 
                     Toast.makeText(this@MyTransactionActivity, "Penjual telah mengkonfirmasi pembatalan. Dana telah dikembalikan ke metode pembayaran anda.", Toast.LENGTH_LONG).show()
-                    updateStatus(transactionId, StatusSewa.DIBATALKAN)
+                    GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.DIBATALKAN)
                 }
 
                 adapter.notifyDataSetChanged()
