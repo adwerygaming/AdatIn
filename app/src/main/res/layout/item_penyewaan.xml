@@ -89,7 +89,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <Button
                         android:id="@+id/btnReturn"
@@ -98,6 +98,22 @@
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:text="Kembalikan" />
+
+                    <Button
+                        android:id="@+id/btnPickupConfirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:text="Konfirmasi Ambil" />
+
+                    <Button
+                        android:id="@+id/btnCancelOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:text="Batalkan" />
 
                 </LinearLayout>
 

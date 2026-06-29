@@ -10,14 +10,14 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/black" /> <!-- Change to your primary color if you want -->
+        android:indeterminateTint="@color/white" /> <!-- Change to your primary color if you want -->
 
     <!-- The text next to it -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Memproses Pembayaran..."
+        android:text="Mohon Tunggu Sebentar..."
         android:textSize="16sp"
         android:textStyle="bold" />
 

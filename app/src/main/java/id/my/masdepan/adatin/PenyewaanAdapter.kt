@@ -1,5 +1,6 @@
 package id.my.masdepan.adatin
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,8 @@ class PenyewaanAdapter(private val semuaTransaksi: List<Penyewaan>) :
         val tvProductSelectedSize = itemView.findViewById<TextView>(R.id.tvProductSelectedSize)
         val tvProductInvoiceID = itemView.findViewById<TextView>(R.id.tvProductInvoiceID)
         val btnReturn: Button = itemView.findViewById(R.id.btnReturn)
+        val btnCancel: Button = itemView.findViewById(R.id.btnCancelOrder)
+        val btnConfirmOrder: Button = itemView.findViewById(R.id.btnPickupConfirm)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PenyewaanViewHolder {
@@ -50,6 +53,26 @@ class PenyewaanAdapter(private val semuaTransaksi: List<Penyewaan>) :
             holder.btnReturn.visibility = View.VISIBLE
         } else {
             holder.btnReturn.visibility = View.GONE
+        }
+
+        if (status == StatusSewa.SEDANG_DIPROSES) {
+            holder.btnCancel.visibility = View.VISIBLE
+        } else {
+            holder.btnCancel.visibility = View.GONE
+        }
+
+        if (status == StatusSewa.SIAP_DIAMBIL) {
+            holder.btnConfirmOrder.visibility = View.VISIBLE
+        } else {
+            holder.btnConfirmOrder.visibility = View.GONE
+        }
+
+        holder.btnConfirmOrder.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, ConfirmPickupActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.putExtra("transactionId", transaksi.id)
+            context.startActivity(intent)
         }
 
         holder.tvProductInvoiceID.text = transaksi.id

@@ -17,17 +17,17 @@ object GlobalVariable {
             TipePengambilan.DELIVERY,
             "[TEST]",
             0,
-            StatusSewa.DIBATALKAN
+            StatusSewa.SEDANG_DIPROSES
         ),
         Penyewaan(
-            "TRX-TEST",
+            "TRX-TEST-2",
             2,
             0,
             0,
-            TipePengambilan.DELIVERY,
+            TipePengambilan.PICKUP,
             "[TEST]",
             0,
-            StatusSewa.DIPROSES
+            StatusSewa.SEDANG_DIPROSES
         )
     )
 

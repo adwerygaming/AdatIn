@@ -121,13 +121,13 @@ class PaymentActivity : AppCompatActivity() {
                 when (isDelivery) { true -> TipePengambilan.DELIVERY; false -> TipePengambilan.PICKUP },
                 selectedProductSize,
                 subtotal,
-                StatusSewa.DIPROSES
+                StatusSewa.SEDANG_DIPROSES
             )
 
             GlobalVariable.semuaTransaksi?.add(newOrder)
 
             val dialog = MaterialAlertDialogBuilder(this)
-                .setView(R.layout.dialog_loading) // Create a simple layout with a ProgressBar
+                .setView(R.layout.dialog_loading)
                 .setCancelable(false)
                 .show()
 
