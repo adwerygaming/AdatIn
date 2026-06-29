@@ -5,18 +5,18 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import okio.Okio
 
-class ConfirmReturnActivity : AppCompatActivity() {
+class ConfirmCancelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_confirm_return)
+        setContentView(R.layout.activity_confirm_cancel)
 
         val transactionId = intent.getStringExtra("transactionId")
 
@@ -27,15 +27,10 @@ class ConfirmReturnActivity : AppCompatActivity() {
             return
         }
 
-        val produk = daftarPakaian.find { it.id == transaction.pakaianId }
+        val btnConfirmCancel = findViewById<Button>(R.id.btnConfirmCancel)
+        val btnCancelConfirm = findViewById<Button>(R.id.btnCancelConfirm)
 
-        val tvConfirmReturnTitle = findViewById<TextView>(R.id.tvConfirmReturnTitle);
-        val btnConfirmReturn = findViewById<Button>(R.id.btnConfirmReturn)
-        val btnCancelReturn = findViewById<Button>(R.id.btnCancelReturn)
-
-        tvConfirmReturnTitle.text = "Kembalikan ${produk?.nama}?"
-
-        btnConfirmReturn.setOnClickListener {
+        btnConfirmCancel.setOnClickListener {
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(R.layout.dialog_loading)
                 .setCancelable(false)
@@ -47,14 +42,14 @@ class ConfirmReturnActivity : AppCompatActivity() {
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-                updateStatus(transactionId, StatusSewa.SELESAI)
+                updateStatus(transactionId, StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
 
-                Toast.makeText(this, "Pengembalian Berhasil. Terima kasih.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Pembatalan Berhasil. Menunggu konfirmasi dari penual.", Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }, 2000)
         }
 
-        btnCancelReturn.setOnClickListener {
+        btnCancelConfirm.setOnClickListener {
             finish()
         }
     }

@@ -1,6 +1,7 @@
 package id.my.masdepan.adatin
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,32 +31,35 @@ class MyTransactionActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             adapter.notifyDataSetChanged()
-            
-            val activeTransactions = GlobalVariable.semuaTransaksi.filter { it.status == StatusSewa.SEDANG_DIPROSES }
 
-            println(GlobalVariable.semuaTransaksi)
-            println(activeTransactions)
-            if (activeTransactions.isEmpty()) {
-                println("NO ACTIVE TRANSACTIONS.")
-                return@launch
-            }
+            val allTransactions = GlobalVariable.semuaTransaksi
 
-            println("${activeTransactions.size} ACTIVE TRANSACTIONS.")
+            for (trx in allTransactions) {
+                val transactionId = trx.id
 
-            for (trx in activeTransactions) {
-                delay(3000)
+                if (trx.status == StatusSewa.SEDANG_DIPROSES) {
+                    delay(3000)
 
-                println(trx)
-                println(trx.status)
-                println(trx.tipe_pengambilan)
+                    if (trx.tipe_pengambilan == TipePengambilan.DELIVERY) {
+                        updateStatus(transactionId, StatusSewa.SEDANG_DIANTAR)
+                        adapter.notifyDataSetChanged()
 
-                if (trx.tipe_pengambilan == TipePengambilan.DELIVERY) {
-                    trx.status = StatusSewa.SEDANG_DIANTAR
-                } else {
-                    trx.status = StatusSewa.SIAP_DIAMBIL
+                        delay(6000)
+                        updateStatus(transactionId, StatusSewa.SAMPAI_TUJUAN)
+                    } else {
+                        updateStatus(transactionId, StatusSewa.SIAP_DIAMBIL)
+                    }
+                }
+
+                if (trx.status == StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN) {
+                    delay(6000)
+
+                    Toast.makeText(this@MyTransactionActivity, "Penjual telah mengkonfirmasi pembatalan. Dana telah dikembalikan ke metode pembayaran anda.", Toast.LENGTH_LONG).show()
+                    updateStatus(transactionId, StatusSewa.DIBATALKAN)
                 }
 
                 adapter.notifyDataSetChanged()
+
             }
         }
     }

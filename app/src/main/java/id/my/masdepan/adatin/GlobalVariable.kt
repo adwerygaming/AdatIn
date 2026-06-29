@@ -10,18 +10,18 @@ object GlobalVariable {
     var infoPribadi: UserPersonalInformation? = null
     val semuaTransaksi = mutableListOf(
         Penyewaan(
-            "TRX-TEST",
-            1,
+            "TRX-TEST-3",
+            3,
             0,
             0,
-            TipePengambilan.DELIVERY,
+            TipePengambilan.PICKUP,
             "[TEST]",
             0,
-            StatusSewa.SEDANG_DIPROSES
+            StatusSewa.DIBATALKAN
         ),
         Penyewaan(
             "TRX-TEST-2",
-            2,
+            3,
             0,
             0,
             TipePengambilan.PICKUP,

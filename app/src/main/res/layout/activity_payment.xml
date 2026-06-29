@@ -101,14 +101,14 @@
 
                     <TextView
                         android:id="@+id/tvPaymentRenterNameLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Atas Nama" />
 
                     <TextView
                         android:id="@+id/tvPaymentRenterName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="{{RenterName}}"
@@ -122,14 +122,14 @@
 
                     <TextView
                         android:id="@+id/tvPaymentRenterPhoneNumberLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Nomor WA" />
 
                     <TextView
                         android:id="@+id/tvPaymentRenterPhoneNumber"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="{{RenterPhoneNumber}}"
@@ -143,14 +143,14 @@
 
                     <TextView
                         android:id="@+id/tvPaymentDeliveryMethodLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Metode Pengiriman" />
 
                     <TextView
                         android:id="@+id/tvPaymentDeliveryMethod"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="{{DeliveryMethod}}"
@@ -166,14 +166,14 @@
 
                     <TextView
                         android:id="@+id/tvPaymentRenterAddressLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Alamat Pengiriman" />
 
                     <TextView
                         android:id="@+id/tvPaymentRenterAddress"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="{{RenterAddress}}"
@@ -187,14 +187,14 @@
 
                     <TextView
                         android:id="@+id/tvPaymentRentingDurationLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Lama Sewa" />
 
                     <TextView
                         android:id="@+id/tvPaymentRentingDuration"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="{{RentingDuration}}"

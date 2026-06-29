@@ -61,7 +61,7 @@ class PenyewaanAdapter(private val semuaTransaksi: List<Penyewaan>) :
             holder.btnCancel.visibility = View.GONE
         }
 
-        if (status == StatusSewa.SIAP_DIAMBIL) {
+        if (status == StatusSewa.SIAP_DIAMBIL || status == StatusSewa.SAMPAI_TUJUAN) {
             holder.btnConfirmOrder.visibility = View.VISIBLE
         } else {
             holder.btnConfirmOrder.visibility = View.GONE
@@ -70,7 +70,20 @@ class PenyewaanAdapter(private val semuaTransaksi: List<Penyewaan>) :
         holder.btnConfirmOrder.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, ConfirmPickupActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.putExtra("transactionId", transaksi.id)
+            context.startActivity(intent)
+        }
+
+        holder.btnReturn.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, ConfirmReturnActivity::class.java)
+            intent.putExtra("transactionId", transaksi.id)
+            context.startActivity(intent)
+        }
+
+        holder.btnCancel.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, ConfirmCancelActivity::class.java)
             intent.putExtra("transactionId", transaksi.id)
             context.startActivity(intent)
         }

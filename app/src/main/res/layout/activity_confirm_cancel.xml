@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfirmPickupActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ConfirmCancelActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,12 +17,11 @@
         android:padding="24dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView3"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginBottom="24dp"
-            android:tint="#FFFFFF"
-            app:srcCompat="@drawable/outline_article_person_24" />
+            android:tint="#EFEFEF"
+            app:srcCompat="@drawable/ic_credit_card_pending" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,28 +30,32 @@
             android:paddingVertical="12dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Konfirmasi Ambil?"
+                android:text="Batalkan Pesanan?"
                 android:textAlignment="center"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12dp"
-                android:text="Dengan menekan tombol &quot;Ambil Barang&quot; di bawah ini, barang sewaan menjadi tanggung jawab kamu sendiri. Ketentuan mulai berlaku. Waktu sewa dihitung akan dimulai."
-                android:textAlignment="center"
-                android:textSize="16sp" />
+                android:text="Setelah kami konfirmasi, uang akan dikembalikan ke metode pembayaran yang kamu pake tadi"
+                android:textAlignment="center" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnConfirmOrder"
+            android:id="@+id/btnConfirmCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ya, Saya sudah ambil" />
+            android:text="Ya, batalkan pesanan" />
+
+        <Button
+            android:id="@+id/btnCancelConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="eh gak jadi deng" />
     </LinearLayout>
 </LinearLayout>
