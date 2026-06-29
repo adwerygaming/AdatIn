@@ -3,40 +3,8 @@ package id.my.masdepan.adatin
 import kotlin.collections.mutableListOf
 
 object GlobalVariable {
-    var activeAccount: UserAccount? = null
-
+    var activeAccount: UserAccount? = Customer("masdepan@masdepan.my.id", "admin#1234", "MasDepan", "123", "08123123123") // dumy
     val accounts: MutableList<UserAccount> = mutableListOf(
-        UserAccount("password", "email")
+        Customer("masdepan@masdepan.my.id", "admin#1234", "MasDepan", "123", "08123123123") // dumy
     )
-
-    val semuaTransaksi = mutableListOf(
-        Penyewaan(
-            "TRX-TEST-3",
-            3,
-            0,
-            0,
-            TipePengambilan.PICKUP,
-            "[TEST]",
-            0,
-            StatusSewa.DIBATALKAN
-        ),
-        Penyewaan(
-            "TRX-TEST-2",
-            3,
-            0,
-            0,
-            TipePengambilan.PICKUP,
-            "[TEST]",
-            0,
-            StatusSewa.SEDANG_DIPROSES
-        )
-    )
-
-    fun isLoggedIn(): Boolean {
-        return akun != null
-    }
-
-    fun logout() {
-        akun = null
-    }
 }
