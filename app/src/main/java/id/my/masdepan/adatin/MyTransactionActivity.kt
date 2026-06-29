@@ -26,13 +26,18 @@ class MyTransactionActivity : AppCompatActivity() {
         val rvTransactions = findViewById<RecyclerView>(R.id.rvTransactions)
         rvTransactions.layoutManager = LinearLayoutManager(this)
 
-        val adapter = PenyewaanAdapter(GlobalVariable.semuaTransaksi)
+        val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory()
+
+        //! make better handling when there is no transactions
+        if (allTransactions.isNullOrEmpty()) {
+            return
+        }
+
+        val adapter = PenyewaanAdapter(allTransactions)
         rvTransactions.adapter = adapter
 
         lifecycleScope.launch {
             adapter.notifyDataSetChanged()
-
-            val allTransactions = GlobalVariable.semuaTransaksi
 
             for (trx in allTransactions) {
                 val transactionId = trx.id

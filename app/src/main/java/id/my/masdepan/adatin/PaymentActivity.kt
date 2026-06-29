@@ -124,7 +124,7 @@ class PaymentActivity : AppCompatActivity() {
                 StatusSewa.SEDANG_DIPROSES
             )
 
-            GlobalVariable.semuaTransaksi?.add(newOrder)
+            GlobalVariable.activeAccount?.addPurchaseHistory(newOrder)
 
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(R.layout.dialog_loading)

@@ -6,6 +6,10 @@ enum class TipePengambilan {
     DELIVERY, PICKUP
 }
 
+enum class JenisKetersediaan {
+    TERSEDIA, KOSONG
+}
+
 enum class StatusSewa {
     MENUNGGU_PEMBAYARAN,
     SEDANG_DIPROSES,
@@ -30,7 +34,7 @@ data class Penyewaan(
 )
 
 fun updateStatus(transactionId: String, newStatus: StatusSewa): Penyewaan? {
-    val penyewaan = GlobalVariable.semuaTransaksi?.find { it.id == transactionId }
+    val penyewaan = GlobalVariable.activeAccount?.getPurchaseById(transactionId);
 
     if (penyewaan != null) {
         penyewaan.status = newStatus

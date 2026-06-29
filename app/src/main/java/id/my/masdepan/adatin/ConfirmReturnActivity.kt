@@ -20,9 +20,14 @@ class ConfirmReturnActivity : AppCompatActivity() {
 
         val transactionId = intent.getStringExtra("transactionId")
 
-        val transaction = GlobalVariable.semuaTransaksi.find { it.id == transactionId }
+        if (transactionId == null) {
+            Toast.makeText(this, "Tidak ditemukan transactionId. Coba lagi nanti!", Toast.LENGTH_LONG).show()
+            return
+        }
 
-        if (transaction == null || transactionId == null) {
+        val transaction = GlobalVariable.activeAccount?.getPurchaseById(transactionId)
+
+        if (transaction == null) {
             Toast.makeText(this, "Transaksi Tidak Ditemukan", Toast.LENGTH_LONG).show()
             return
         }

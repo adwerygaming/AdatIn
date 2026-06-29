@@ -40,7 +40,11 @@ class DetailItemActivity : AppCompatActivity() {
 
         tvDetailNama.text = pakaian.nama
         tvDetailDeskripsi.text = pakaian.deskripsi
-        tvKetersediaan.text = "Tersedia"
+        tvKetersediaan.text = if (pakaian.tersedia) "Tersedia" else "Habis"
+
+        if (!pakaian.tersedia) {
+            btnSewaSekarang.isEnabled = false
+        }
 
         btnSewaSekarang.setOnClickListener {
             val checkedChipId = cgUkuran.checkedChipId
