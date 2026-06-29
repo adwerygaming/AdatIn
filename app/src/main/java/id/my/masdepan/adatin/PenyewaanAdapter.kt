@@ -1,9 +1,9 @@
 package id.my.masdepan.adatin
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -14,12 +14,14 @@ class PenyewaanAdapter(private val semuaTransaksi: List<Penyewaan>) :
     RecyclerView.Adapter<PenyewaanAdapter.PenyewaanViewHolder>() {
 
     class PenyewaanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val ivProductImage: ImageView = itemView.findViewById(R.id.ivProductImage)
-        val tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
-        val tvCity: TextView = itemView.findViewById(R.id.tvCity)
-        val tvSubtotal: TextView = itemView.findViewById(R.id.tvSubtotal)
-        val tvDeliveryType: TextView = itemView.findViewById(R.id.tvDeliveryType)
-        val tvProductSelectedSize: TextView = itemView.findViewById(R.id.tvProductSelectedSize)
+        val ivProductImage = itemView.findViewById<ImageView>(R.id.ivProductImage)
+        val tvProductName = itemView.findViewById<TextView>(R.id.tvProductName)
+        val tvCity = itemView.findViewById<TextView>(R.id.tvCity)
+        val tvSubtotal = itemView.findViewById<TextView>(R.id.tvSubtotal)
+        val tvStatus = itemView.findViewById<TextView>(R.id.tvStatus)
+        val tvProductSelectedSize = itemView.findViewById<TextView>(R.id.tvProductSelectedSize)
+        val tvProductInvoiceID = itemView.findViewById<TextView>(R.id.tvProductInvoiceID)
+        val btnReturn: Button = itemView.findViewById(R.id.btnReturn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PenyewaanViewHolder {
@@ -30,7 +32,6 @@ class PenyewaanAdapter(private val semuaTransaksi: List<Penyewaan>) :
 
     override fun onBindViewHolder(holder: PenyewaanViewHolder, position: Int) {
         val transaksi = semuaTransaksi[position]
-        println(transaksi)
         val pakaian = daftarPakaian.find { it.id == transaksi.pakaianId }
 
         if (pakaian == null) {
@@ -43,10 +44,19 @@ class PenyewaanAdapter(private val semuaTransaksi: List<Penyewaan>) :
             error(R.drawable.ic_error)
         }
 
+        val status = transaksi.status
+
+        if (status == StatusSewa.SEDANG_DISEWA) {
+            holder.btnReturn.visibility = View.VISIBLE
+        } else {
+            holder.btnReturn.visibility = View.GONE
+        }
+
+        holder.tvProductInvoiceID.text = transaksi.id
         holder.tvProductName.text = pakaian.nama
         holder.tvCity.text = pakaian.daerah
         holder.tvSubtotal.text = "Rp${transaksi.subtotal}"
-        holder.tvDeliveryType.text = "${transaksi.tipe_pengambilan}"
+        holder.tvStatus.text = "${transaksi.status}"
         holder.tvProductSelectedSize.text = "${transaksi.ukuran}"
     }
 

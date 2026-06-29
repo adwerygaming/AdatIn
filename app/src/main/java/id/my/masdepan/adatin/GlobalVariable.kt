@@ -21,13 +21,13 @@ object GlobalVariable {
         ),
         Penyewaan(
             "TRX-TEST",
-            1,
+            2,
             0,
             0,
             TipePengambilan.DELIVERY,
             "[TEST]",
             0,
-            StatusSewa.DIBATALKAN
+            StatusSewa.DIPROSES
         )
     )
 

@@ -141,4 +141,8 @@ class PaymentActivity : AppCompatActivity() {
             }, 2000)
         }
     }
+
+    fun makePurchase() {
+
+    }
 }
