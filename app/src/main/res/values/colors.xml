@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="brand_deep_brown">#4E342E</color>
+    <color name="brand_gold">#C89B3C</color>
+    <color name="brand_cream">#F8F4E9</color>
+    <color name="brand_navy">#263238</color>
+    <color name="brand_white">#FFFFFF</color>
+
+    <color name="state_error">#B3261E</color>
 </resources>

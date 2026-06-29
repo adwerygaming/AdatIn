@@ -3,11 +3,12 @@ package id.my.masdepan.adatin
 import kotlin.collections.mutableListOf
 
 object GlobalVariable {
-    var akun: UserAccount? = UserAccount(
-        "12345",
-        "test@masdepan.my.id"
+    var activeAccount: UserAccount? = null
+
+    val accounts: MutableList<UserAccount> = mutableListOf(
+        UserAccount("password", "email")
     )
-    var infoPribadi: UserPersonalInformation? = null
+
     val semuaTransaksi = mutableListOf(
         Penyewaan(
             "TRX-TEST-3",

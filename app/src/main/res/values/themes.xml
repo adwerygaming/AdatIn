@@ -5,7 +5,26 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.AdatIn" parent="Base.Theme.AdatIn" />
+    <style name="Theme.AdatIn" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimaryContainer">@color/brand_gold</item>
+        <item name="colorOnPrimaryContainer">@color/brand_navy</item>
+
+        <item name="colorSurfaceVariant">#E5E0D8</item>
+        <item name="colorOnSurfaceVariant">@color/brand_navy</item>
+
+        <item name="colorOutline">@color/brand_deep_brown</item>
+
+        <item name="colorPrimary">@color/brand_deep_brown</item>
+        <item name="colorOnPrimary">@color/brand_white</item>
+
+        <item name="colorSecondary">@color/brand_gold</item>
+        <item name="colorOnSecondary">@color/brand_navy</item>
+
+        <item name="android:colorBackground">@color/brand_cream</item>
+        <item name="colorOnBackground">@color/brand_navy</item> <item name="colorSurface">@color/brand_white</item>
+        <item name="colorOnSurface">@color/brand_navy</item>
+
+    </style>
 
     <style name="SummaryRowStyle">
         <item name="android:layout_width">match_parent</item>
