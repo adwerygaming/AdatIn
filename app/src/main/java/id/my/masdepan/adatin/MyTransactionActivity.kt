@@ -2,6 +2,8 @@ package id.my.masdepan.adatin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -36,18 +38,14 @@ class MyTransactionActivity : AppCompatActivity() {
         val rvTransactions = findViewById<RecyclerView>(R.id.rvTransactions)
         rvTransactions.layoutManager = LinearLayoutManager(this)
 
-        val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory()
-
-        //! make better handling when there is no transactions
-        if (allTransactions.isNullOrEmpty()) {
-            return
-        }
+        val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory()  ?: emptyList()
 
         adapter = MyTransactionAdapter(allTransactions)
         rvTransactions.adapter = adapter
 
         lifecycleScope.launch {
             adapter.notifyDataSetChanged()
+            updateView()
 
             for (trx in allTransactions) {
                 val transactionId = trx.id
@@ -83,7 +81,23 @@ class MyTransactionActivity : AppCompatActivity() {
         super.onResume()
 
         val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory() ?: emptyList()
+        updateView()
 
         adapter.updateData(allTransactions)
+    }
+
+    fun updateView() {
+        val MyTransactionScrollViewGroup = findViewById<LinearLayout>(R.id.MyTransactionScrollViewGroup)
+        val MyTransactionEmptyDetailGroup = findViewById<LinearLayout>(R.id.MyTransactionEmptyDetailGroup)
+
+        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+
+        if (allMyCarts.isEmpty()) {
+            MyTransactionScrollViewGroup.visibility = View.VISIBLE
+            MyTransactionEmptyDetailGroup.visibility = View.GONE
+        } else {
+            MyTransactionScrollViewGroup.visibility = View.GONE
+            MyTransactionEmptyDetailGroup.visibility = View.VISIBLE
+        }
     }
 }

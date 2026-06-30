@@ -1,7 +1,9 @@
 package id.my.masdepan.adatin
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,15 +25,13 @@ class MyCartActivity : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.nav_cart
         bottomNav.setupBottomNav(this)
 
+
         val rvCarts = findViewById<RecyclerView>(R.id.rvCarts)
         rvCarts.layoutManager = LinearLayoutManager(this)
 
-        val allMyCarts = GlobalVariable.activeAccount?.getMyCart()
+        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
 
-        if (allMyCarts.isNullOrEmpty()) {
-            Toast.makeText(this, "You have nothing.", Toast.LENGTH_LONG).show()
-            return
-        }
+        updateView()
 
         adapter = MyCartAdapter(allMyCarts)
         rvCarts.adapter = adapter
@@ -42,6 +42,23 @@ class MyCartActivity : AppCompatActivity() {
 
         val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
 
+        updateView()
+
         adapter.updateData(allMyCarts)
+    }
+
+    fun updateView() {
+        val MyCartScrollViewGroup = findViewById<LinearLayout>(R.id.MyCartScrollViewGroup)
+        val MyCartEmptyDetailGroup = findViewById<LinearLayout>(R.id.MyCartEmptyDetailGroup)
+
+        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+
+        if (allMyCarts.isEmpty()) {
+            MyCartScrollViewGroup.visibility = View.GONE
+            MyCartEmptyDetailGroup.visibility = View.VISIBLE
+        } else {
+            MyCartScrollViewGroup.visibility = View.VISIBLE
+            MyCartEmptyDetailGroup.visibility = View.GONE
+        }
     }
 }

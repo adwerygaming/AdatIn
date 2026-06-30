@@ -103,7 +103,8 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
         }
 
         val diffMs = transaksi.tanggal_selesai_sewa_ms - transaksi.tanggal_mulai_sewa_ms
-        val totalDays = (diffMs / (1000 * 60 * 60 * 24)).toInt()
+        var totalDays = (diffMs / (1000 * 60 * 60 * 24)).toInt()
+        totalDays = totalDays + 1
 
         val deliveryString = if (transaksi.tipe_pengambilan == TipePengambilan.DELIVERY) {
             "Delivery"

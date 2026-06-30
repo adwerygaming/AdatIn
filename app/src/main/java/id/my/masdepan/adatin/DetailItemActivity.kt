@@ -69,10 +69,7 @@ class DetailItemActivity : AppCompatActivity() {
             }
         }
 
-        var productQuantity = 1
-        if (quantity != null) {
-            productQuantity = quantity
-        }
+        var productQuantity = quantity
 
         tvQuantity.text = productQuantity.toString()
 
@@ -93,7 +90,7 @@ class DetailItemActivity : AppCompatActivity() {
             val selectedChip = findViewById<Chip>(checkedChipId)
             val selectedSize = selectedChip.text.toString()
 
-            val cartItem = CartItem(pakaianId, 1, UkuranPakaian.valueOf(selectedSize))
+            val cartItem = CartItem(pakaianId, productQuantity, UkuranPakaian.valueOf(selectedSize))
             GlobalVariable.activeAccount?.addToCart(cartItem)
 
             Toast.makeText(this, "${pakaian.nama} berhasil ditambahkan ke keranjang", Toast.LENGTH_LONG).show()

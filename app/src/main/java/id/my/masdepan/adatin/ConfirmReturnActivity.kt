@@ -12,7 +12,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import okio.Okio
 
 class ConfirmReturnActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +47,7 @@ class ConfirmReturnActivity : AppCompatActivity() {
         val btnTransactionProductReturnBack = findViewById<Button>(R.id.btnTransactionProductReturnBack)
 
         tvConfirmReturnProductName.text = produk.nama
-        tvConfirmReturnProductSize.text = transaction.ukuran
+        tvConfirmReturnProductSize.text = "Ukuran ${transaction.ukuran}"
 
         ivConfirmReturnProductImage.load("${produk.gambar}.jpg") {
             placeholder(R.drawable.ic_loading)

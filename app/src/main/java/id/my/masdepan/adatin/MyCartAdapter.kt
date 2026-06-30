@@ -55,7 +55,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
 
         holder.btnDecreaseQuantity.setOnClickListener {
             if (cartItem.quantity > 1) {
-                cartItem.quantity--
+                cartItem.quantity = cartItem.quantity - 1
                 holder.tvCartProductQuantity.text = "${cartItem.quantity}"
                 notifyDataSetChanged()
             } else {
@@ -67,7 +67,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
         }
 
         holder.btnIncreaseQuantity.setOnClickListener {
-            cartItem.quantity++
+            cartItem.quantity = cartItem.quantity + 1
             holder.tvCartProductQuantity.text = "${cartItem.quantity}"
             notifyDataSetChanged()
         }

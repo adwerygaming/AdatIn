@@ -10,7 +10,7 @@ data class Pakaian(
     val tersedia: Boolean
 )
 
-val daftarPakaian = mutableListOf<Pakaian>(
+val daftarPakaian = mutableListOf(
     Pakaian(
         id = 1,
         nama = "Ulee Balang",

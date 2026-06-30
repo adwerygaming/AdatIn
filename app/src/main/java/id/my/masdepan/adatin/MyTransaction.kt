@@ -15,7 +15,7 @@ enum class StatusSewa {
     SAMPAI_TUJUAN,
     SEDANG_DIANTAR,
     SEDANG_DISEWA,
-    MENUNGGU_KONFIRMASI_PEMBATALAN, // used after user canceling their order
+    MENUNGGU_KONFIRMASI_PEMBATALAN,
     SELESAI,
     DIBATALKAN
 }

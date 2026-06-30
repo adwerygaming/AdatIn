@@ -17,33 +17,9 @@ class Customer(
     val address: String,
     val phoneNumber: String
 ): UserAccount(email, password) {
-    private val semuaTransaksi = mutableListOf(
-        TransactionItem(
-            "TRX-TEST-3",
-            3,
-            0,
-            0,
-            TipePengambilan.PICKUP,
-            "[TEST]",
-            0,
-            StatusSewa.DIBATALKAN
-        ),
-        TransactionItem(
-            "TRX-TEST-2",
-            3,
-            0,
-            0,
-            TipePengambilan.PICKUP,
-            "[TEST]",
-            0,
-            StatusSewa.SEDANG_DIPROSES
-        )
-    )
+    private val semuaTransaksi = mutableListOf<TransactionItem>()
 
-    //! somehow i think we need to store the size as well
-    private val keranjang = mutableListOf(
-        CartItem(1, 1, UkuranPakaian.M)
-    )
+    private val keranjang = mutableListOf<CartItem>()
 
     fun addPurchaseHistory(transaction: TransactionItem) {
         semuaTransaksi.add(transaction)
@@ -51,8 +27,6 @@ class Customer(
 
     fun addToCart(product: CartItem): CartItem {
         val items = this.getMyCart()
-
-        println(product)
 
         for (item in items) {
             if (item.pakaianId == product.pakaianId && item.size == product.size) {
@@ -75,7 +49,7 @@ class Customer(
 
     fun getPurchaseById(transactionId: String): TransactionItem? {
         val allTransactions = semuaTransaksi
-        return allTransactions.find { it?.id == transactionId }
+        return allTransactions.find { it.id == transactionId }
     }
 
     fun getMyPurchaseHistory(): List<TransactionItem> {
