@@ -25,7 +25,6 @@ class MyCartActivity : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.nav_cart
         bottomNav.setupBottomNav(this)
 
-
         val rvCarts = findViewById<RecyclerView>(R.id.rvCarts)
         rvCarts.layoutManager = LinearLayoutManager(this)
 
