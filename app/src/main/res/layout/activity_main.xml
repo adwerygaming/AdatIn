@@ -20,14 +20,12 @@
             android:paddingHorizontal="24dp"
             android:paddingTop="56dp">
 
-            <TextView
-                android:id="@+id/appTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="AdatIn Prototype"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="233dp"
+                android:layout_height="74dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/brand_logo" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,5 +66,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        android:background="@android:color/white"
+        app:itemIconTint="@color/brand_deep_brown"
+        app:itemTextColor="@color/brand_deep_brown"
+        app:menu="@menu/bottom_nav_menu"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
