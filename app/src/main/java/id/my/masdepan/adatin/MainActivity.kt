@@ -26,7 +26,5 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PakaianAdapter(daftarPakaian)
         rvKatalog.adapter = adapter
-
-        // tes
     }
 }

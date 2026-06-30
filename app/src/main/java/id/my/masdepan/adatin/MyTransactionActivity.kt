@@ -46,7 +46,6 @@ class MyTransactionActivity : AppCompatActivity() {
                     delay(3000)
 
                     if (trx.tipe_pengambilan == TipePengambilan.DELIVERY) {
-
                         GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SEDANG_DIANTAR)
                         adapter.notifyDataSetChanged()
 
