@@ -1,6 +1,8 @@
 package id.my.masdepan.adatin
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +27,13 @@ class MyProfileActivity : AppCompatActivity() {
         }
 
         val tvUsername = findViewById<TextView>(R.id.tvUsername)
+        val btnMyTransactions = findViewById<Button>(R.id.btnMyTransactions)
 
-        tvUsername.text = account.fullName
+        tvUsername.text = "Hai, ${account.fullName}!"
+
+        btnMyTransactions.setOnClickListener {
+            val intent = Intent(this, MyTransactionActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 
-class PakaianAdapter(private val listPakaian: List<Pakaian>) :
+class PakaianAdapter(private var listPakaian: List<Pakaian>) :
     RecyclerView.Adapter<PakaianAdapter.PakaianViewHolder>() {
 
     class PakaianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,7 +26,6 @@ class PakaianAdapter(private val listPakaian: List<Pakaian>) :
 
     override fun onBindViewHolder(holder: PakaianViewHolder, position: Int) {
         val pakaian = listPakaian[position]
-
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivProductImage)
 
         ivPakaian.load("${pakaian.gambar}.jpg") {
@@ -48,5 +47,10 @@ class PakaianAdapter(private val listPakaian: List<Pakaian>) :
 
     override fun getItemCount(): Int {
         return listPakaian.size
+    }
+
+    fun updateData(newList: List<Pakaian>) {
+        this.listPakaian = newList
+        notifyDataSetChanged()
     }
 }

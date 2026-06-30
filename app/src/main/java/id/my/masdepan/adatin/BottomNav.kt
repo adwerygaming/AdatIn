@@ -18,8 +18,8 @@ fun BottomNavigationView.setupBottomNav(currentActivity: Activity) {
                 true
             }
             R.id.nav_cart -> {
-                if (currentActivity !is MyTransactionActivity) {
-                    val intent = Intent(currentActivity, MyTransactionActivity::class.java)
+                if (currentActivity !is MyCartActivity) {
+                    val intent = Intent(currentActivity, MyCartActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     currentActivity.startActivity(intent)
 

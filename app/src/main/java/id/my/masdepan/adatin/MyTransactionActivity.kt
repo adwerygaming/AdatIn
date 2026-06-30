@@ -19,10 +19,6 @@ class MyTransactionActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_my_transaction)
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.selectedItemId = R.id.nav_cart
-        bottomNav.setupBottomNav(this)
-
         val rvTransactions = findViewById<RecyclerView>(R.id.rvTransactions)
         rvTransactions.layoutManager = LinearLayoutManager(this)
 

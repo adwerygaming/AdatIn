@@ -65,7 +65,6 @@
                     android:id="@+id/cgProductSizeSelection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
                     app:selectionRequired="true"
                     app:singleSelection="true">
 
@@ -101,11 +100,18 @@
             </LinearLayout>
         </LinearLayout>
         <Button
-            android:id="@+id/btnSewaSekarang"
+            android:id="@+id/btnRentNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sewa Sekarang"
             android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/btnAddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Tambah Ke Keranjang" />
 
     </LinearLayout>
 

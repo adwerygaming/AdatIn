@@ -7,7 +7,6 @@ open class UserAccount(
     fun login(email: String, password: String): Boolean {
         return this.email == email && this.password == password
     }
-
 }
 
 class Customer(
@@ -42,17 +41,29 @@ class Customer(
     )
 
     //! somehow i think we need to store the size as well
-    private val keranjang = mutableListOf<Pakaian>()
+    private val keranjang = mutableListOf<CartItem>()
 
     fun addPurchaseHistory(transaction: Penyewaan) {
         semuaTransaksi.add(transaction)
     }
 
-    fun addToCart(product: Pakaian) {
-        keranjang.add(product)
+    fun addToCart(product: CartItem): CartItem {
+        val items = this.getMyCart()
+
+        println(product)
+
+        for (item in items) {
+            if (item.pakaianId == product.pakaianId && item.size == product.size) {
+                item.quantity += product.quantity
+                return item
+            }
+        }
+
+        this.keranjang.add(product)
+        return product
     }
 
-    fun getMyCart(): List<Pakaian> {
+    fun getMyCart(): List<CartItem> {
         return keranjang
     }
 

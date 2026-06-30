@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MyCartActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,44 +20,32 @@
             android:paddingTop="56dp">
 
             <TextView
-                android:id="@+id/appTitle"
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="AdatIn Prototype"
-                android:textAlignment="center"
+                android:text="Keranjang"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="12dp"
-            android:paddingHorizontal="24dp">
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="12dp"
-                android:hint="Cari baju adat..."
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:drawablePadding="8dp"
-                android:maxLines="1"
-                android:inputType="text" />
-        </LinearLayout>
+            android:padding="24dp">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="124dp">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvKatalog"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="24dp" />
-        </ScrollView>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="12dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCarts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

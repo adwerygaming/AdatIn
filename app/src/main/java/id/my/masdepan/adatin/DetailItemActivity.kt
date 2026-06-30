@@ -30,8 +30,9 @@ class DetailItemActivity : AppCompatActivity() {
         val tvDetailNama = findViewById<TextView>(R.id.tvProductName)
         val tvDetailDeskripsi = findViewById<TextView>(R.id.tvProductDescription)
         val tvKetersediaan = findViewById<TextView>(R.id.tvAvailibility)
-        val btnSewaSekarang = findViewById<Button>(R.id.btnSewaSekarang)
+        val btnRentNow = findViewById<Button>(R.id.btnRentNow)
         val cgUkuran = findViewById<ChipGroup>(R.id.cgProductSizeSelection)
+        val btnAddToCart = findViewById<Button>(R.id.btnAddToCart)
 
         ivDetailImage.load("${pakaian.gambar}.jpg") {
             placeholder(R.drawable.ic_loading)
@@ -43,10 +44,22 @@ class DetailItemActivity : AppCompatActivity() {
         tvKetersediaan.text = if (pakaian.tersedia) "Tersedia" else "Habis"
 
         if (!pakaian.tersedia) {
-            btnSewaSekarang.isEnabled = false
+            btnRentNow.isEnabled = false
+            btnAddToCart.isEnabled = false
         }
 
-        btnSewaSekarang.setOnClickListener {
+        btnAddToCart.setOnClickListener {
+            val checkedChipId = cgUkuran.checkedChipId
+            val selectedChip = findViewById<Chip>(checkedChipId)
+            val selectedSize = selectedChip.text.toString()
+
+            val cartItem = CartItem(pakaianId, 1, UkuranPakaian.valueOf(selectedSize))
+            GlobalVariable.activeAccount?.addToCart(cartItem)
+
+            Toast.makeText(this, "${pakaian.nama} berhasil ditambahkan ke keranjang", Toast.LENGTH_LONG).show()
+        }
+
+        btnRentNow.setOnClickListener {
             val checkedChipId = cgUkuran.checkedChipId
             val selectedChip = findViewById<Chip>(checkedChipId)
             val selectedSize = selectedChip.text.toString()

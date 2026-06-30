@@ -1,14 +1,14 @@
 package id.my.masdepan.adatin
 
 import android.os.Bundle
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.core.widget.doAfterTextChanged
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,5 +26,22 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PakaianAdapter(daftarPakaian)
         rvKatalog.adapter = adapter
+
+        val etSearch = findViewById<EditText>(R.id.etSearch)
+
+        etSearch.doAfterTextChanged { editable ->
+            val query = editable.toString().trim().lowercase()
+
+            if (query.isEmpty()) {
+                adapter.updateData(daftarPakaian)
+            } else {
+                val filteredList = daftarPakaian.filter { pakaian ->
+                    pakaian.nama.lowercase().contains(query)
+                }
+
+                adapter.updateData(filteredList)
+            }
+        }
+
     }
 }
