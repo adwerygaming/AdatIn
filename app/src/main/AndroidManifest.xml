@@ -14,13 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdatIn">
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
             android:name=".MyCartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OnboardingActivity"
             android:exported="false" />
         <activity
             android:name=".ConfirmCancelActivity"
