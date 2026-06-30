@@ -66,7 +66,7 @@ class PaymentActivity : AppCompatActivity() {
         // product info
         tvPaymentProductName.text = pakaian.nama
         tvPaymentProductSelectedSize.text = "Ukuran ${selectedProductSize}"
-        tvPaymentProductPrice.text = "Rp${pakaian.harga_per_hari} / hari"
+        tvPaymentProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
 
         tvPaymentProductImage.load("${pakaian.gambar}.jpg") {
             placeholder(R.drawable.ic_loading)
@@ -93,7 +93,7 @@ class PaymentActivity : AppCompatActivity() {
         val deliveryFee = 15000
 
         tvPaymentDetailsProductNameLabel.text = pakaian.nama
-        tvPaymentDetailsProductName.text = "${quantity}x Rp${pakaian.harga_per_hari}"
+        tvPaymentDetailsProductName.text = "${quantity}x Rp${pakaian.harga_per_hari.toRupiahFormat()}"
         if (isDelivery) {
             tvPaymentDetailsDeliveryFeeLayout.visibility = View.VISIBLE
             tvPaymentDetailsDeliveryFee.text = "Rp${deliveryFee.toRupiahFormat()}"

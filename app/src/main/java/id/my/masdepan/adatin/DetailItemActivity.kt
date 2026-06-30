@@ -28,29 +28,31 @@ class DetailItemActivity : AppCompatActivity() {
             return
         }
 
-        val ivDetailImage = findViewById<ImageView>(R.id.ivProductImage)
-        val tvDetailNama = findViewById<TextView>(R.id.tvProductName)
-        val tvDetailDeskripsi = findViewById<TextView>(R.id.tvProductDescription)
-        val tvKetersediaan = findViewById<TextView>(R.id.tvAvailibility)
-        val btnRentNow = findViewById<Button>(R.id.btnRentNow)
-        val cgUkuran = findViewById<ChipGroup>(R.id.cgProductSizeSelection)
-        val btnAddToCart = findViewById<Button>(R.id.btnAddToCart)
-        val tvQuantity = findViewById<TextView>(R.id.tvDetailProductQuantity)
-        val btnDecreaseQuantity = findViewById<Button>(R.id.btnDecreaseQuantity)
-        val btnIncreaseQuantity = findViewById<Button>(R.id.btnIncreaseQuantity)
+        val ivDetailProductImage = findViewById<ImageView>(R.id.ivDetailProductImage)
+        val tvDetailProductName = findViewById<TextView>(R.id.tvDetailProductName)
+        val tvDetailProductDescription = findViewById<TextView>(R.id.tvDetailProductDescription)
+        val tvDetailProductPrice = findViewById<TextView>(R.id.tvDetailProductPrice)
+        val tvDetailProductAvailability = findViewById<TextView>(R.id.tvDetailProductAvailability)
+        val tvDetailProductQuantityValue = findViewById<TextView>(R.id.tvDetailProductQuantityValue)
+        val cgDetailProductSizeSelection = findViewById<ChipGroup>(R.id.cgDetailProductSizeSelection)
+        val btnDetailProductRentNow = findViewById<Button>(R.id.btnDetailProductRentNow)
+        val btnDetailProductAddToCart = findViewById<Button>(R.id.btnDetailProductAddToCart)
+        val btnDetailProductDecrease = findViewById<Button>(R.id.btnDetailProductDecrease)
+        val btnDetailProductIncrease = findViewById<Button>(R.id.btnDetailProductIncrease)
 
-        ivDetailImage.load("${pakaian.gambar}.jpg") {
+        ivDetailProductImage.load("${pakaian.gambar}.jpg") {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }
 
-        tvDetailNama.text = pakaian.nama
-        tvDetailDeskripsi.text = pakaian.deskripsi
-        tvKetersediaan.text = if (pakaian.tersedia) "Tersedia" else "Habis"
+        tvDetailProductName.text = pakaian.nama
+        tvDetailProductDescription.text = pakaian.deskripsi
+        tvDetailProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
+        tvDetailProductAvailability.text = if (pakaian.tersedia) "Tersedia" else "Habis"
 
         if (!pakaian.tersedia) {
-            btnRentNow.isEnabled = false
-            btnAddToCart.isEnabled = false
+            btnDetailProductRentNow.isEnabled = false
+            btnDetailProductAddToCart.isEnabled = false
         }
 
         if (productSelectedSize != null) {
@@ -71,22 +73,22 @@ class DetailItemActivity : AppCompatActivity() {
 
         var productQuantity = quantity
 
-        tvQuantity.text = productQuantity.toString()
+        tvDetailProductQuantityValue.text = productQuantity.toString()
 
-        btnIncreaseQuantity.setOnClickListener {
+        btnDetailProductIncrease.setOnClickListener {
             productQuantity++
-            tvQuantity.text = productQuantity.toString()
+            tvDetailProductQuantityValue.text = productQuantity.toString()
         }
 
-        btnDecreaseQuantity.setOnClickListener {
+        btnDetailProductDecrease.setOnClickListener {
             if (productQuantity > 1) {
                 productQuantity--
-                tvQuantity.text = productQuantity.toString()
+                tvDetailProductQuantityValue.text = productQuantity.toString()
             }
         }
 
-        btnAddToCart.setOnClickListener {
-            val checkedChipId = cgUkuran.checkedChipId
+        btnDetailProductAddToCart.setOnClickListener {
+            val checkedChipId = cgDetailProductSizeSelection.checkedChipId
             val selectedChip = findViewById<Chip>(checkedChipId)
             val selectedSize = selectedChip.text.toString()
 
@@ -96,8 +98,8 @@ class DetailItemActivity : AppCompatActivity() {
             Toast.makeText(this, "${pakaian.nama} berhasil ditambahkan ke keranjang", Toast.LENGTH_LONG).show()
         }
 
-        btnRentNow.setOnClickListener {
-            val checkedChipId = cgUkuran.checkedChipId
+        btnDetailProductRentNow.setOnClickListener {
+            val checkedChipId = cgDetailProductSizeSelection.checkedChipId
             val selectedChip = findViewById<Chip>(checkedChipId)
             val selectedSize = selectedChip.text.toString()
 
