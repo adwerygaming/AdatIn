@@ -32,10 +32,10 @@ class ConfirmCancelActivity : AppCompatActivity() {
             return
         }
 
-        val btnConfirmCancel = findViewById<Button>(R.id.btnConfirmCancel)
-        val btnCancelConfirm = findViewById<Button>(R.id.btnCancelConfirm)
+        val btnTransactionProductCancelAction = findViewById<Button>(R.id.btnTransactionProductCancelAction)
+        val btnTransactionProductCancelBack = findViewById<Button>(R.id.btnTransactionProductCancelBack)
 
-        btnConfirmCancel.setOnClickListener {
+        btnTransactionProductCancelAction.setOnClickListener {
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(R.layout.dialog_loading)
                 .setCancelable(false)
@@ -49,12 +49,12 @@ class ConfirmCancelActivity : AppCompatActivity() {
 
                 GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
 
-                Toast.makeText(this, "Pembatalan Berhasil. Menunggu konfirmasi dari penual.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Permintaan pembatalan telah dikirim.", Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }, 2000)
         }
 
-        btnCancelConfirm.setOnClickListener {
+        btnTransactionProductCancelBack.setOnClickListener {
             finish()
         }
     }

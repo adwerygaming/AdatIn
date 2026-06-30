@@ -1,10 +1,10 @@
 package id.my.masdepan.adatin
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 class MyCartActivity : AppCompatActivity() {
+    private lateinit var adapter: MyCartAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,22 +28,20 @@ class MyCartActivity : AppCompatActivity() {
 
         val allMyCarts = GlobalVariable.activeAccount?.getMyCart()
 
-        println("MY CARTS A")
-        println(allMyCarts)
-
         if (allMyCarts.isNullOrEmpty()) {
+            Toast.makeText(this, "You have nothing.", Toast.LENGTH_LONG).show()
             return
         }
 
-        val adapter = CartAdapter(allMyCarts)
+        adapter = MyCartAdapter(allMyCarts)
         rvCarts.adapter = adapter
+    }
 
-        lifecycleScope.launch {
-            adapter.notifyDataSetChanged()
-            adapter.updateData(allMyCarts)
+    override fun onResume() {
+        super.onResume()
 
-            println("MY CARTS B")
-            println(allMyCarts)
-        }
+        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+
+        adapter.updateData(allMyCarts)
     }
 }

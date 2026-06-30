@@ -27,6 +27,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         val pakaianId = intent.getIntExtra("productId", -1)
         val selectedProductSize = intent.getStringExtra("selectedProductSize")
+        val quantity = intent.getIntExtra("quantity", 1)
 
         val pakaian = daftarPakaian.find { it.id == pakaianId }
 
@@ -52,6 +53,7 @@ class CheckoutActivity : AppCompatActivity() {
         val tvProductPrice = findViewById<TextView>(R.id.tvProductPrice)
         val tvTotalPrice = findViewById<TextView>(R.id.tvTotalPrice)
         val tvRentingDuration = findViewById<TextView>(R.id.tvRentingDuration)
+        val tvProductQuantity = findViewById<TextView>(R.id.tvProductQuantity)
 
         val checkoutBtn = findViewById<Button>(R.id.checkoutBtn)
 
@@ -62,7 +64,11 @@ class CheckoutActivity : AppCompatActivity() {
 
         etProductName.text = pakaian.nama
         etProductSizeSelected.text = "Ukuran ${selectedProductSize}"
-        tvProductPrice.text = "Rp${pakaian.harga_per_hari} / hari"
+        tvProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
+        tvProductQuantity.text = "${quantity} Pcs"
+
+        tvRentingDuration.text = "-"
+        tvTotalPrice.text = "-"
 
         var isDelivery = rbDelivery.isChecked
 
@@ -98,8 +104,8 @@ class CheckoutActivity : AppCompatActivity() {
                 rentingDays = tempRentingDays.toInt() + 1
                 tvRentingDuration.text = "${rentingDays} hari"
 
-                totalPrice = (rentingDays) * pakaian.harga_per_hari
-                tvTotalPrice.text = "Rp${totalPrice}"
+                totalPrice = (rentingDays) * (pakaian.harga_per_hari * quantity)
+                tvTotalPrice.text = "Rp${totalPrice.toRupiahFormat()}"
             }
 
             dateRangePicker.show(supportFragmentManager, "DATE_RANGE_PICKER")
@@ -157,6 +163,7 @@ class CheckoutActivity : AppCompatActivity() {
 
             val intent = Intent(this, PaymentActivity::class.java)
             intent.putExtra("productId", pakaianId)
+            intent.putExtra("quantity", quantity)
             intent.putExtra("selectedProductSize", selectedProductSize)
             intent.putExtra("RenterName", etRenterName.text.toString())
             intent.putExtra("RenterPhoneNumber", etRenterPhoneNumber.text.toString())

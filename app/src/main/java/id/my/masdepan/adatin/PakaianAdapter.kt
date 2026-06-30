@@ -35,7 +35,7 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
 
         holder.tvNama.text = pakaian.nama
         holder.tvDaerah.text = pakaian.daerah
-        holder.tvHarga.text = "Rp${pakaian.harga_per_hari} / hari"
+        holder.tvHarga.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context

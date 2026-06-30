@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:padding="24dp"
     tools:context=".ConfirmCancelActivity">
+
+    <ImageView
+        android:id="@+id/ivConfirmCancelIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_credit_card_pending"
+        app:tint="#D32F2F" />
+
+    <TextView
+        android:id="@+id/tvConfirmCancelTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Batalkan Pesanan?"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivConfirmCancelIcon" />
+
+    <TextView
+        android:id="@+id/tvConfirmCancelDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Setelah konfirmasi pembatalan, dana Anda akan segera diproses untuk dikembalikan ke metode pembayaran semula. Tindakan ini tidak dapat dibatalkan."
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvConfirmCancelTitle" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:orientation="vertical"
-        android:padding="24dp">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:tint="#EFEFEF"
-            app:srcCompat="@drawable/ic_credit_card_pending" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingVertical="12dp">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Batalkan Pesanan?"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Setelah kami konfirmasi, uang akan dikembalikan ke metode pembayaran yang kamu pake tadi"
-                android:textAlignment="center" />
-        </LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/btnConfirmCancel"
+            android:id="@+id/btnTransactionProductCancelAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ya, batalkan pesanan" />
+            android:text="Ya, Batalkan Pesanan"
+            android:backgroundTint="#D32F2F" />
 
         <Button
-            android:id="@+id/btnCancelConfirm"
+            android:id="@+id/btnTransactionProductCancelBack"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="eh gak jadi deng" />
+            android:layout_marginTop="8dp"
+            android:text="Kembali" />
+
     </LinearLayout>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

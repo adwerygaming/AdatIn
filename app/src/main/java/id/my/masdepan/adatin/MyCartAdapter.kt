@@ -10,8 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 
-class CartAdapter(private var listCart: List<CartItem>) :
-    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class MyCartAdapter(private var listCart: List<CartItem>) :
+    RecyclerView.Adapter<MyCartAdapter.CartViewHolder>() {
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvCartProductName = itemView.findViewById<TextView>(R.id.tvCartProductName)
@@ -34,6 +34,8 @@ class CartAdapter(private var listCart: List<CartItem>) :
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivCartProductImage)
         val pakaian = daftarPakaian.find { it.id == cartItem.pakaianId }
 
+        val currentUser = GlobalVariable.activeAccount
+
         if (pakaian == null) {
             return
         }
@@ -43,9 +45,11 @@ class CartAdapter(private var listCart: List<CartItem>) :
             error(R.drawable.ic_error)
         }
 
+        val totalPrice = cartItem.quantity * pakaian.harga_per_hari
+
         holder.tvCartProductName.text = pakaian.nama
         holder.tvCartProductDaerah.text = pakaian.daerah
-        holder.tvCartProductPrice.text = "Rp${pakaian.harga_per_hari} / hari"
+        holder.tvCartProductPrice.text = "Rp${totalPrice.toRupiahFormat()} / hari"
         holder.tvCartProductQuantity.text = "${cartItem.quantity}"
         holder.tvCartProductSize.text = "${cartItem.size}"
 
@@ -53,19 +57,27 @@ class CartAdapter(private var listCart: List<CartItem>) :
             if (cartItem.quantity > 1) {
                 cartItem.quantity--
                 holder.tvCartProductQuantity.text = "${cartItem.quantity}"
+                notifyDataSetChanged()
+            } else {
+                currentUser?.removeCartItem(cartItem)
+
+                listCart = listCart.filter { it != cartItem }
+                updateData(listCart)
             }
         }
 
         holder.btnIncreaseQuantity.setOnClickListener {
             cartItem.quantity++
             holder.tvCartProductQuantity.text = "${cartItem.quantity}"
+            notifyDataSetChanged()
         }
-
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailItemActivity::class.java)
             intent.putExtra("productId", pakaian.id)
+            intent.putExtra("productSelectedSize", cartItem.size.toString())
+            intent.putExtra("quantity", cartItem.quantity)
             context.startActivity(intent)
         }
     }

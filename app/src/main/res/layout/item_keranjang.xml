@@ -1,85 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
 
-    <androidx.cardview.widget.CardView
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="12dp">
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/ivCartProductImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/tvCartProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivCartProductImage"
+            app:layout_constraintTop_toTopOf="@id/ivCartProductImage"
+            tools:text="Baju Adat Jawa Tengah" />
+
+        <TextView
+            android:id="@+id/tvCartProductDaerah"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvCartProductName"
+            app:layout_constraintTop_toBottomOf="@id/tvCartProductName"
+            tools:text="Jawa Tengah" />
+
+        <TextView
+            android:id="@+id/tvCartProductSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="#757575"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tvCartProductName"
+            app:layout_constraintTop_toBottomOf="@id/tvCartProductDaerah"
+            tools:text="Ukuran: L" />
+
+        <TextView
+            android:id="@+id/tvCartProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E53935"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ivCartProductImage"
+            app:layout_constraintStart_toStartOf="@id/tvCartProductName"
+            tools:text="Rp 150.000" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/ivCartProductImage"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <ImageView
-                android:id="@+id/ivCartProductImage"
+            <Button
+                android:id="@+id/btnDecreaseQuantity"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="-"
+                app:cornerRadius="16dp" />
+
+            <TextView
+                android:id="@+id/tvCartProductQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:minWidth="36dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:id="@+id/tvCartProductName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="{{ProductName}}" />
-
-                <TextView
-                    android:id="@+id/tvCartProductDaerah"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="{{ProductDaeerah}}" />
-
-                <TextView
-                    android:id="@+id/tvCartProductPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="{{ProductPrice}}" />
-
-                <TextView
-                    android:id="@+id/tvCartProductSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="{{ProductSize}}" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingVertical="12dp">
-
-                    <Button
-                        android:id="@+id/btnDecreaseQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="-" />
-
-                    <TextView
-                        android:id="@+id/tvCartProductQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="{{ProductQuantity}}"
-                        android:textAlignment="center" />
-
-                    <Button
-                        android:id="@+id/btnIncreaseQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+" />
-                </LinearLayout>
-            </LinearLayout>
+            <Button
+                android:id="@+id/btnIncreaseQuantity"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="+"
+                app:cornerRadius="16dp" />
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

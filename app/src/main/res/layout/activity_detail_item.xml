@@ -14,15 +14,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:layout_marginBottom="16dp">
+        android:padding="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="14dp"
+            android:layout_weight="32"
             android:orientation="vertical">
 
             <TextView
@@ -46,72 +47,150 @@
                 android:id="@+id/tvAvailibility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="{{Ketersediaan}}"
                 android:layout_marginBottom="12dp"
-                />
+                android:text="{{Ketersediaan}}" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvSelectSizeLabel"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pilih Ukuran Anda" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingBottom="12dp">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/cgProductSizeSelection"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvSelectSizeLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pilih Ukuran Anda" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cgProductSizeSelection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:checkedChip="@id/chipS"
+                        app:chipSpacingHorizontal="0dp"
+                        app:chipSpacingVertical="0dp"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipS"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="S" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipM"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="M" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipL"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="L" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipXL"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="XL" />
+                    </com.google.android.material.chip.ChipGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipS"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <TextView
+                        android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="S" />
+                        android:text="Kuantitas" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipM"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="M" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="@id/ivCartProductImage"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipL"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L" />
+                        <Button
+                            android:id="@+id/btnDecreaseQuantity"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            android:padding="0dp"
+                            android:text="-"
+                            app:cornerRadius="16dp" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipXL"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="XL" />
-                </com.google.android.material.chip.ChipGroup>
+                        <TextView
+                            android:id="@+id/tvDetailProductQuantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="36dp"
+                            android:text="1"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnIncreaseQuantity"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            android:padding="0dp"
+                            android:text="+"
+                            app:cornerRadius="16dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnRentNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sewa Sekarang"
-            android:padding="16dp"/>
 
-        <Button
-            android:id="@+id/btnAddToCart"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Tambah Ke Keranjang" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnRentNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Sewa Sekarang" />
+
+            <Button
+                android:id="@+id/btnAddToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Tambah Ke Keranjang" />
+        </LinearLayout>
 
     </LinearLayout>
 

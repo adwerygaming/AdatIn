@@ -3,6 +3,7 @@ package id.my.masdepan.adatin
 import android.app.Activity
 import android.content.Intent
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import id.my.masdepan.adatin.MyCartActivity
 
 fun BottomNavigationView.setupBottomNav(currentActivity: Activity) {
     this.setOnItemSelectedListener { item ->

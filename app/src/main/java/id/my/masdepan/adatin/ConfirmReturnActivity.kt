@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okio.Okio
 
@@ -34,13 +36,26 @@ class ConfirmReturnActivity : AppCompatActivity() {
 
         val produk = daftarPakaian.find { it.id == transaction.pakaianId }
 
-        val tvConfirmReturnTitle = findViewById<TextView>(R.id.tvConfirmReturnTitle);
-        val btnConfirmReturn = findViewById<Button>(R.id.btnConfirmReturn)
-        val btnCancelReturn = findViewById<Button>(R.id.btnCancelReturn)
+        if (produk == null) {
+            Toast.makeText(this, "Pakaian Tidak Ditemukan", Toast.LENGTH_LONG).show()
+            return
+        }
 
-        tvConfirmReturnTitle.text = "Kembalikan ${produk?.nama}?"
+        val tvConfirmReturnProductName = findViewById<TextView>(R.id.tvConfirmReturnProductName)
+        val tvConfirmReturnProductSize = findViewById<TextView>(R.id.tvConfirmReturnProductSize)
+        val ivConfirmReturnProductImage = findViewById<ImageView>(R.id.ivConfirmReturnProductImage)
+        val btnTransactionProductReturnAction = findViewById<Button>(R.id.btnTransactionProductReturnAction)
+        val btnTransactionProductReturnBack = findViewById<Button>(R.id.btnTransactionProductReturnBack)
 
-        btnConfirmReturn.setOnClickListener {
+        tvConfirmReturnProductName.text = produk.nama
+        tvConfirmReturnProductSize.text = transaction.ukuran
+
+        ivConfirmReturnProductImage.load("${produk.gambar}.jpg") {
+            placeholder(R.drawable.ic_loading)
+            error(R.drawable.ic_error)
+        }
+
+        btnTransactionProductReturnAction.setOnClickListener {
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(R.layout.dialog_loading)
                 .setCancelable(false)
@@ -59,7 +74,7 @@ class ConfirmReturnActivity : AppCompatActivity() {
             }, 2000)
         }
 
-        btnCancelReturn.setOnClickListener {
+        btnTransactionProductReturnBack.setOnClickListener {
             finish()
         }
     }

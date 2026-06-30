@@ -1,7 +1,5 @@
 package id.my.masdepan.adatin
 
-import java.util.Date
-
 enum class TipePengambilan {
     DELIVERY, PICKUP
 }
@@ -22,8 +20,8 @@ enum class StatusSewa {
     DIBATALKAN
 }
 
-data class Penyewaan(
-    val id: String,
+data class TransactionItem(
+    val id: String, // invoice id
     val pakaianId: Int,
     val tanggal_mulai_sewa_ms: Long,
     val tanggal_selesai_sewa_ms: Long,
@@ -32,7 +30,7 @@ data class Penyewaan(
     val subtotal: Int,
     var status: StatusSewa
 ) {
-    fun updateStatus(newStatus: StatusSewa): Penyewaan? {
+    fun updateStatus(newStatus: StatusSewa): TransactionItem? {
         this.status = newStatus
         return this
     }

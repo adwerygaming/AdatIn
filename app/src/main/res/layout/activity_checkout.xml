@@ -219,6 +219,29 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ProductQuantityGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvProductQuantityLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Jumlah Barang" />
+
+                <TextView
+                    android:id="@+id/tvProductQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="{{ProductQuantity}}"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RentingDurationGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -240,6 +263,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/TotalPriceGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -266,7 +290,7 @@
             android:id="@+id/checkoutBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sewa" />
+            android:text="Lanjut Ke Pembayaran" />
     </LinearLayout>
 
 </ScrollView>

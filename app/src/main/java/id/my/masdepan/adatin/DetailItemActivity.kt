@@ -19,6 +19,8 @@ class DetailItemActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_detail_item)
         val pakaianId = intent.getIntExtra("productId", -1)
+        val productSelectedSize = intent.getStringExtra("productSelectedSize")
+        val quantity = intent.getIntExtra("quantity", 1)
 
         val pakaian = daftarPakaian.find { it.id == pakaianId }
         if (pakaian == null) {
@@ -33,6 +35,9 @@ class DetailItemActivity : AppCompatActivity() {
         val btnRentNow = findViewById<Button>(R.id.btnRentNow)
         val cgUkuran = findViewById<ChipGroup>(R.id.cgProductSizeSelection)
         val btnAddToCart = findViewById<Button>(R.id.btnAddToCart)
+        val tvQuantity = findViewById<TextView>(R.id.tvDetailProductQuantity)
+        val btnDecreaseQuantity = findViewById<Button>(R.id.btnDecreaseQuantity)
+        val btnIncreaseQuantity = findViewById<Button>(R.id.btnIncreaseQuantity)
 
         ivDetailImage.load("${pakaian.gambar}.jpg") {
             placeholder(R.drawable.ic_loading)
@@ -46,6 +51,41 @@ class DetailItemActivity : AppCompatActivity() {
         if (!pakaian.tersedia) {
             btnRentNow.isEnabled = false
             btnAddToCart.isEnabled = false
+        }
+
+        if (productSelectedSize != null) {
+            val size_s = findViewById<Chip>(R.id.chipS)
+            val size_l = findViewById<Chip>(R.id.chipL)
+            val size_m = findViewById<Chip>(R.id.chipM)
+            val size_xl = findViewById<Chip>(R.id.chipXL)
+
+            println(productSelectedSize)
+
+            when (productSelectedSize) {
+                "S" -> size_s.isChecked = true
+                "M" -> size_m.isChecked = true
+                "L" -> size_l.isChecked = true
+                "XL" -> size_xl.isChecked = true
+            }
+        }
+
+        var productQuantity = 1
+        if (quantity != null) {
+            productQuantity = quantity
+        }
+
+        tvQuantity.text = productQuantity.toString()
+
+        btnIncreaseQuantity.setOnClickListener {
+            productQuantity++
+            tvQuantity.text = productQuantity.toString()
+        }
+
+        btnDecreaseQuantity.setOnClickListener {
+            if (productQuantity > 1) {
+                productQuantity--
+                tvQuantity.text = productQuantity.toString()
+            }
         }
 
         btnAddToCart.setOnClickListener {
@@ -67,6 +107,7 @@ class DetailItemActivity : AppCompatActivity() {
             val intent = Intent(this, CheckoutActivity::class.java)
             intent.putExtra("productId", pakaianId)
             intent.putExtra("selectedProductSize", selectedSize)
+            intent.putExtra("quantity", productQuantity)
             this.startActivity(intent)
         }
     }

@@ -12,27 +12,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="24dp"
-            android:paddingTop="56dp">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Semua Transaksi"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:title="Semua Transaksi"
+            app:navigationIcon="?attr/homeAsUpIndicator" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:paddingHorizontal="24dp">
 
             <ScrollView
                 android:layout_width="match_parent"
