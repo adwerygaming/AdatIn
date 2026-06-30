@@ -20,9 +20,14 @@ class ConfirmPickupActivity : AppCompatActivity() {
 
         val transactionId = intent.getStringExtra("transactionId")
 
-        val transaction = GlobalVariable.semuaTransaksi.filter { it.id == transactionId }
+        if (transactionId == null) {
+            Toast.makeText(this, "Tidak ditemukan transactionId. Coba lagi nanti!", Toast.LENGTH_LONG).show()
+            return
+        }
 
-        if (transaction.isEmpty() || transactionId == null) {
+        val transaction = GlobalVariable.activeAccount?.getPurchaseById(transactionId)
+
+        if (transaction == null) {
             Toast.makeText(this, "Transaksi Tidak Ditemukan", Toast.LENGTH_LONG).show()
             return
         }
@@ -41,7 +46,7 @@ class ConfirmPickupActivity : AppCompatActivity() {
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-                updateStatus(transactionId, StatusSewa.SEDANG_DISEWA)
+                GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SEDANG_DISEWA)
 
                 Toast.makeText(this, "Konfirmasi Berhasil. It's all yours.", Toast.LENGTH_LONG).show()
                 startActivity(intent)

@@ -20,9 +20,14 @@ class ConfirmCancelActivity : AppCompatActivity() {
 
         val transactionId = intent.getStringExtra("transactionId")
 
-        val transaction = GlobalVariable.semuaTransaksi.find { it.id == transactionId }
+        if (transactionId == null) {
+            Toast.makeText(this, "Tidak ditemukan transactionId. Coba lagi nanti!", Toast.LENGTH_LONG).show()
+            return
+        }
 
-        if (transaction == null || transactionId == null) {
+        val transaction = GlobalVariable.activeAccount?.getPurchaseById(transactionId)
+
+        if (transaction == null) {
             Toast.makeText(this, "Transaksi Tidak Ditemukan", Toast.LENGTH_LONG).show()
             return
         }
@@ -42,7 +47,7 @@ class ConfirmCancelActivity : AppCompatActivity() {
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-                updateStatus(transactionId, StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
+                GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
 
                 Toast.makeText(this, "Pembatalan Berhasil. Menunggu konfirmasi dari penual.", Toast.LENGTH_LONG).show()
                 startActivity(intent)

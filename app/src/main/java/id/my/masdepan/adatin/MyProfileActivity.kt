@@ -1,6 +1,7 @@
 package id.my.masdepan.adatin
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +17,15 @@ class MyProfileActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_account
         bottomNav.setupBottomNav(this)
+
+        val account = GlobalVariable.activeAccount
+
+        if (account == null) {
+            return
+        }
+
+        val tvUsername = findViewById<TextView>(R.id.tvUsername)
+
+        tvUsername.text = account.fullName
     }
 }
