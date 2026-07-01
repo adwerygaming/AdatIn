@@ -40,12 +40,16 @@ class MyTransactionActivity : AppCompatActivity() {
 
         val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory()  ?: emptyList()
 
+        println("ALL TRANSACTIONS onCreate")
+        println(allTransactions)
+
         adapter = MyTransactionAdapter(allTransactions)
         rvTransactions.adapter = adapter
 
+        updateView()
+
         lifecycleScope.launch {
             adapter.notifyDataSetChanged()
-            updateView()
 
             for (trx in allTransactions) {
                 val transactionId = trx.id
@@ -81,23 +85,23 @@ class MyTransactionActivity : AppCompatActivity() {
         super.onResume()
 
         val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory() ?: emptyList()
-        updateView()
-
         adapter.updateData(allTransactions)
+
+        updateView()
     }
 
     fun updateView() {
         val MyTransactionScrollViewGroup = findViewById<LinearLayout>(R.id.MyTransactionScrollViewGroup)
         val MyTransactionEmptyDetailGroup = findViewById<LinearLayout>(R.id.MyTransactionEmptyDetailGroup)
 
-        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+        val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory() ?: emptyList()
 
-        if (allMyCarts.isEmpty()) {
-            MyTransactionScrollViewGroup.visibility = View.VISIBLE
-            MyTransactionEmptyDetailGroup.visibility = View.GONE
-        } else {
+        if (allTransactions.isEmpty()) {
             MyTransactionScrollViewGroup.visibility = View.GONE
             MyTransactionEmptyDetailGroup.visibility = View.VISIBLE
+        } else {
+            MyTransactionScrollViewGroup.visibility = View.VISIBLE
+            MyTransactionEmptyDetailGroup.visibility = View.GONE
         }
     }
 }

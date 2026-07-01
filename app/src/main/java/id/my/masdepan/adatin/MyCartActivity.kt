@@ -40,10 +40,9 @@ class MyCartActivity : AppCompatActivity() {
         super.onResume()
 
         val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+        adapter.updateData(allMyCarts)
 
         updateView()
-
-        adapter.updateData(allMyCarts)
     }
 
     fun updateView() {
