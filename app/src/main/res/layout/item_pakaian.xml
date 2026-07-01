@@ -50,12 +50,43 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvDaerah"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Asal Daerah"
-                        android:textColor="#544C4C" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="2dp">
+
+                        <TextView
+                            android:id="@+id/tvDaerah"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Asal Daerah"
+                            android:textColor="#544C4C" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingStart="8dp">
+
+                            <ImageView
+                                android:id="@+id/imageView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:tint="#FFC107"
+                                app:srcCompat="@drawable/ic_star" />
+
+                            <TextView
+                                android:id="@+id/tvItemPakaianRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="{{Rating}}" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 

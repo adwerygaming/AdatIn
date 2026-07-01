@@ -40,10 +40,13 @@ class DetailItemActivity : AppCompatActivity() {
         val ivDetailProductImage = findViewById<ImageView>(R.id.ivDetailProductImage)
         val tvDetailProductName = findViewById<TextView>(R.id.tvDetailProductName)
         val tvDetailProductDescription = findViewById<TextView>(R.id.tvDetailProductDescription)
+        val tvDetailProductRating = findViewById<TextView>(R.id.tvDetailProductRating)
         val tvDetailProductPrice = findViewById<TextView>(R.id.tvDetailProductPrice)
         val tvDetailProductAvailability = findViewById<TextView>(R.id.tvDetailProductAvailability)
         val tvDetailProductQuantityValue = findViewById<TextView>(R.id.tvDetailProductQuantityValue)
+
         val cgDetailProductSizeSelection = findViewById<ChipGroup>(R.id.cgDetailProductSizeSelection)
+
         val btnDetailProductRentNow = findViewById<Button>(R.id.btnDetailProductRentNow)
         val btnDetailProductAddToCart = findViewById<Button>(R.id.btnDetailProductAddToCart)
         val btnDetailProductDecrease = findViewById<Button>(R.id.btnDetailProductDecrease)
@@ -56,6 +59,7 @@ class DetailItemActivity : AppCompatActivity() {
 
         tvDetailProductName.text = pakaian.nama
         tvDetailProductDescription.text = pakaian.deskripsi
+        tvDetailProductRating.text = pakaian.rating.toString()
         tvDetailProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
         tvDetailProductAvailability.text = if (pakaian.tersedia) "Tersedia" else "Habis"
 

@@ -15,6 +15,7 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
     class PakaianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNama: TextView = itemView.findViewById(R.id.tvNamaPakaian)
         val tvDaerah: TextView = itemView.findViewById(R.id.tvDaerah)
+        val tvItemPakaianRating: TextView = itemView.findViewById(R.id.tvItemPakaianRating)
         val tvHarga: TextView = itemView.findViewById(R.id.tvHarga)
     }
 
@@ -35,6 +36,7 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
 
         holder.tvNama.text = pakaian.nama
         holder.tvDaerah.text = pakaian.daerah
+        holder.tvItemPakaianRating.text = pakaian.rating.toString()
         holder.tvHarga.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
 
         holder.itemView.setOnClickListener {
