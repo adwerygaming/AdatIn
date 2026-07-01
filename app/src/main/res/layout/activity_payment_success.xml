@@ -54,7 +54,6 @@
                 android:textStyle="bold"
                 android:textSize="14sp" />
         </LinearLayout>
-
     </LinearLayout>
 
     <Button
