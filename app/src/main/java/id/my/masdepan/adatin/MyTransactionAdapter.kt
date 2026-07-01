@@ -32,11 +32,13 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PenyewaanViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_transaksi, parent, false)
+
+        this.semuaTransaksi = semuaTransaksi
         return PenyewaanViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PenyewaanViewHolder, position: Int) {
-        val transaksi = semuaTransaksi[position]
+        val transaksi = this.semuaTransaksi[position]
         val pakaian = daftarPakaian.find { it.id == transaksi.pakaianId }
 
         if (pakaian == null) {
@@ -124,7 +126,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
     }
 
     override fun getItemCount(): Int {
-        return semuaTransaksi.size
+        return this.semuaTransaksi.size
     }
 
     fun updateData(newList: List<TransactionItem>) {
