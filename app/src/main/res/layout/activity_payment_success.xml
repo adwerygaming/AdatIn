@@ -63,6 +63,6 @@
         android:layout_height="56dp"
         android:text="Lihat Transaksi Saya"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="24dp" />
+        android:layout_margin="24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
