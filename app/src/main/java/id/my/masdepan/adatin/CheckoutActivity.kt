@@ -1,6 +1,7 @@
 package id.my.masdepan.adatin
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,6 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -44,11 +47,11 @@ class CheckoutActivity : AppCompatActivity() {
 
         val etRentingDate = findViewById<TextInputEditText>(R.id.etRentingDate)
         val etPickupTime = findViewById<TextInputEditText>(R.id.etPickupTime)
-        val etAddressLayout = findViewById<TextInputLayout>(R.id.etAddressLayout)
-        val etAddress = findViewById<TextInputEditText>(R.id.etAddress)
+        val etCheckoutAddressLayout = findViewById<TextInputLayout>(R.id.etCheckoutAddressLayout)
+        val etCheckoutAddress = findViewById<TextInputEditText>(R.id.etCheckoutAddress)
 
-        val rgDeliveryGroup = findViewById<RadioGroup>(R.id.rgDeliveryMethod)
-        val rbDelivery = findViewById<RadioButton>(R.id.rbDelivery)
+        val btnCheckoutDelivery = findViewById<MaterialButton>(R.id.btnCheckoutDelivery)
+        val btnCheckoutPickup = findViewById<MaterialButton>(R.id.btnCheckoutPickup)
 
         val tvProductPrice = findViewById<TextView>(R.id.tvProductPrice)
         val tvTotalPrice = findViewById<TextView>(R.id.tvTotalPrice)
@@ -70,15 +73,42 @@ class CheckoutActivity : AppCompatActivity() {
         tvRentingDuration.text = "-"
         tvTotalPrice.text = "-"
 
-        var isDelivery = rbDelivery.isChecked
+        var isDelivery = false
 
-        rgDeliveryGroup.setOnCheckedChangeListener { _, i ->
-            isDelivery = (i == rbDelivery.id)
-            if (i == rbDelivery.id) {
-                etAddressLayout.visibility = View.VISIBLE
+        fun toggleButton(btn: MaterialButton, state: Boolean) {
+            if (state) {
+                val white = ContextCompat.getColor(this, android.R.color.white)
+                val brown = ContextCompat.getColor(this, R.color.brand_deep_brown)
+
+                btn.backgroundTintList = ColorStateList.valueOf(brown)
+                btn.setTextColor(white)
+                btn.iconTint = ColorStateList.valueOf(white)
+                btn.strokeWidth = 0
             } else {
-                etAddressLayout.visibility = View.GONE
+                val brown = ContextCompat.getColor(this, R.color.brand_deep_brown)
+
+                btn.backgroundTintList = ColorStateList.valueOf(android.graphics.Color.TRANSPARENT)
+                btn.setTextColor(brown)
+                btn.iconTint = ColorStateList.valueOf(brown)
+                btn.strokeColor = ColorStateList.valueOf(brown)
+                btn.strokeWidth = 6
             }
+        }
+
+        btnCheckoutDelivery.setOnClickListener {
+            isDelivery = true
+            etCheckoutAddressLayout.visibility = View.VISIBLE
+
+            toggleButton(btnCheckoutDelivery, true)
+            toggleButton(btnCheckoutPickup, false)
+        }
+
+        btnCheckoutPickup.setOnClickListener {
+            isDelivery = false
+            etCheckoutAddressLayout.visibility = View.GONE
+
+            toggleButton(btnCheckoutDelivery, false)
+            toggleButton(btnCheckoutPickup, true)
         }
 
         etRentingDate.setOnClickListener {
@@ -131,35 +161,41 @@ class CheckoutActivity : AppCompatActivity() {
             if (etRenterName.text.toString().isEmpty()) {
                 etRenterName.error = "Nama Penyewa Tidak Boleh Kosong"
                 return@setOnClickListener
+            } else {
+                etRenterName.error = null
             }
 
             if (etRenterPhoneNumber.text.toString().isEmpty()) {
                 etRenterPhoneNumber.error = "Nomor WA Tidak Boleh Kosong"
                 return@setOnClickListener
+            } else {
+                etRenterPhoneNumber.error = null
             }
 
             if (isDelivery) {
-                if (etAddress.text.toString().isEmpty()) {
-                    etAddress.error = "Alamat Tidak Boleh Kosong"
+                if (etCheckoutAddress.text.toString().isEmpty()) {
+                    etCheckoutAddress.error = "Alamat Tidak Boleh Kosong"
                     return@setOnClickListener
                 }
+
+                etCheckoutAddress.error = null
+            } else {
+                etCheckoutAddress.error = null
             }
 
             if (etRentingDate.text.toString().isEmpty()) {
                 etRentingDate.error = "Tanggal Sewa Tidak Boleh Kosong"
                 return@setOnClickListener
+            } else {
+                etRentingDate.error = null
             }
 
             if (etPickupTime.text.toString().isEmpty()) {
                 etPickupTime.error = "Waktu Pengambilan Tidak Boleh Kosong"
                 return@setOnClickListener
+            } else {
+                etPickupTime.error = null
             }
-
-            etRenterName.error = null
-            etRenterPhoneNumber.error = null
-            etAddress.error = null
-            etRentingDate.error = null
-            etPickupTime.error = null
 
             val intent = Intent(this, PaymentActivity::class.java)
             intent.putExtra("productId", pakaianId)
@@ -168,7 +204,7 @@ class CheckoutActivity : AppCompatActivity() {
             intent.putExtra("RenterName", etRenterName.text.toString())
             intent.putExtra("RenterPhoneNumber", etRenterPhoneNumber.text.toString())
             intent.putExtra("isDelivery", isDelivery)
-            intent.putExtra("renterAddress", etAddress.text.toString())
+            intent.putExtra("renterAddress", etCheckoutAddress.text.toString())
             intent.putExtra("rentingDays", rentingDays)
             intent.putExtra("totalPrice", totalPrice)
             intent.putExtra("startRentDateMs", startRentDateMs)

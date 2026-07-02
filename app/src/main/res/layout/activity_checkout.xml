@@ -24,7 +24,7 @@
                 android:id="@+id/etPageSectionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sewa Pakaian" />
+                android:text="Sewa Pakaian Adat" />
 
             <TextView
                 android:id="@+id/etProductName"
@@ -46,18 +46,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvInputIdentity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:text="Identitas Penyewa" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="12dp"
-                android:hint="Nama Penyewa"
+                android:hint="Atas Nama"
                 app:expandedHintEnabled="true"
                 app:hintEnabled="true">
 
@@ -93,48 +86,58 @@
                 android:id="@+id/tvSelectRentingTimeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pengambilan" />
+                android:text="Pengambilan barang" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RadioGroup
-                    android:id="@+id/rgDeliveryMethod"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCheckoutDelivery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:padding="24dp"
+                    android:text="Antar Ke Rumah"
+                    android:textColor="@color/brand_deep_brown"
+                    app:backgroundTint="#00FFFFFF"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_cart"
+                    app:iconGravity="top"
+                    app:iconSize="48dp"
+                    app:iconTint="@color/brand_deep_brown"
+                    app:strokeColor="@color/brand_deep_brown"
+                    app:strokeWidth="2dp" />
 
-                    <RadioButton
-                        android:id="@+id/rbDelivery"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:text="Delivery Ke Rumah" />
-
-                    <RadioButton
-                        android:id="@+id/rbPickup"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Ambil Di Tempat" />
-
-                </RadioGroup>
-
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCheckoutPickup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:padding="24dp"
+                    android:text="Ambil di toko"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_handing_package"
+                    app:iconGravity="top"
+                    app:iconSize="48dp" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etAddressLayout"
+                android:id="@+id/etCheckoutAddressLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="Alamat"
+                android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etAddress"
+                    android:id="@+id/etCheckoutAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Alamat Pengiriman" />
+                    android:text="Jl..." />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
