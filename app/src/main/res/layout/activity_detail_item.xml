@@ -36,17 +36,10 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvDetailProductDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="{{DetailProductDescription}}"
-                android:textSize="16sp" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingTop="8dp">
 
@@ -60,9 +53,10 @@
 
                 <TextView
                     android:id="@+id/tvDetailProductRating"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="{{Rating}}" />
+
             </LinearLayout>
 
             <TextView
@@ -71,13 +65,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="{{DetailProductPrice}}"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvDetailProductAvailability"
+                android:id="@+id/tvDetailProductDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
+                android:text="{{DetailProductDescription}}"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDetailProductAvailability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="8dp"
                 android:text="{{DetailProductAvailability}}" />
 
             <LinearLayout
