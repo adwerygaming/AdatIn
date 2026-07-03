@@ -1,5 +1,4 @@
 package id.my.masdepan.adatin
-
 data class Pakaian(
     val id: Int,
     val nama: String,

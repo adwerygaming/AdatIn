@@ -17,7 +17,6 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
     class PenyewaanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTransactionProductInvoiceID = itemView.findViewById<TextView>(R.id.tvTransactionProductInvoiceID)
         val tvTransactionProductStatus = itemView.findViewById<TextView>(R.id.tvTransactionProductStatus)
-
         val ivTransactionProductImage = itemView.findViewById<ImageView>(R.id.ivTransactionProductImage)
         val tvTransactionProductName = itemView.findViewById<TextView>(R.id.tvTransactionProductName)
         val tvTransactionProductSize = itemView.findViewById<TextView>(R.id.tvTransactionProductSize)
