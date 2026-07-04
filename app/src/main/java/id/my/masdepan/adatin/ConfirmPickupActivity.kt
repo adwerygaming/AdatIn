@@ -32,9 +32,9 @@ class ConfirmPickupActivity : AppCompatActivity() {
             return
         }
 
-        val btnConfirm = findViewById<Button>(R.id.btnConfirmOrder)
+        val btnConfirmPickupAction = findViewById<Button>(R.id.btnConfirmPickupAction)
 
-        btnConfirm.setOnClickListener {
+        btnConfirmPickupAction.setOnClickListener {
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(R.layout.dialog_loading)
                 .setCancelable(false)
@@ -48,7 +48,7 @@ class ConfirmPickupActivity : AppCompatActivity() {
 
                 GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SEDANG_DISEWA)
 
-                Toast.makeText(this, "Konfirmasi Berhasil. It's all yours.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Pengambilan dikonfirmasi. Masa sewa dimulai dari sekarang.", Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }, 2000)
         }

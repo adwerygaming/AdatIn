@@ -35,6 +35,7 @@ class PaymentActivity : AppCompatActivity() {
         val totalPrice = intent.getIntExtra("totalPrice", -1)
         val startRentDateMs = intent.getLongExtra("startRentDateMs", -1)
         val endRentDateMs = intent.getLongExtra("endRentDateMs", -1)
+        val quantity = intent.getIntExtra("quantity", 1)
 
         val pakaian = daftarPakaian.find { it.id == productId }
         if (pakaian == null) {
@@ -62,17 +63,10 @@ class PaymentActivity : AppCompatActivity() {
 
         val PaymentCheckoutBtn = findViewById<Button>(R.id.PaymentCheckoutBtn)
 
-//        val rgPayment = findViewById<RadioGroup>(R.id.rgPayment)
-//        val rbBCA = findViewById<RadioButton>(R.id.rbBCA)
-//        val rbMandiri = findViewById<RadioButton>(R.id.rbMandiri)
-//        val rbGoPay = findViewById<RadioButton>(R.id.rbGoPay)
-//        val rbDana = findViewById<RadioButton>(R.id.rbDana)
-//        val rbQRIS = findViewById<RadioButton>(R.id.rbQRIS)
-
         // product info
         tvPaymentProductName.text = pakaian.nama
         tvPaymentProductSelectedSize.text = "Ukuran ${selectedProductSize}"
-        tvPaymentProductPrice.text = "Rp${pakaian.harga_per_hari} / hari"
+        tvPaymentProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
 
         tvPaymentProductImage.load("${pakaian.gambar}.jpg") {
             placeholder(R.drawable.ic_loading)
@@ -96,24 +90,24 @@ class PaymentActivity : AppCompatActivity() {
 
         // payment details
         var subtotal = totalPrice
-        val deliveryFee = 10000
+        val deliveryFee = 15000
 
         tvPaymentDetailsProductNameLabel.text = pakaian.nama
-        tvPaymentDetailsProductName.text = "1x Rp${pakaian.harga_per_hari}"
+        tvPaymentDetailsProductName.text = "${quantity}x Rp${pakaian.harga_per_hari.toRupiahFormat()}"
         if (isDelivery) {
             tvPaymentDetailsDeliveryFeeLayout.visibility = View.VISIBLE
-            tvPaymentDetailsDeliveryFee.text = "Rp10.000"
+            tvPaymentDetailsDeliveryFee.text = "Rp${deliveryFee.toRupiahFormat()}"
             subtotal += deliveryFee
         } else {
             tvPaymentDetailsDeliveryFeeLayout.visibility = View.GONE
         }
 
-        tvPaymentTotal.text = "Rp${subtotal}"
+        tvPaymentTotal.text = "Rp${subtotal.toRupiahFormat()}"
 
         PaymentCheckoutBtn.setOnClickListener {
             val invoiceId = "INV-${System.currentTimeMillis()}"
 
-            val newOrder = Penyewaan(
+            val newOrder = TransactionItem(
                 invoiceId,
                 pakaian.id,
                 startRentDateMs,
@@ -140,9 +134,5 @@ class PaymentActivity : AppCompatActivity() {
                 startActivity(intent)
             }, 2000)
         }
-    }
-
-    fun makePurchase() {
-
     }
 }

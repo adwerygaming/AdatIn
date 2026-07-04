@@ -9,12 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 
-class PakaianAdapter(private val listPakaian: List<Pakaian>) :
+class PakaianAdapter(private var listPakaian: List<Pakaian>) :
     RecyclerView.Adapter<PakaianAdapter.PakaianViewHolder>() {
 
     class PakaianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNama: TextView = itemView.findViewById(R.id.tvNamaPakaian)
         val tvDaerah: TextView = itemView.findViewById(R.id.tvDaerah)
+        val tvItemPakaianRating: TextView = itemView.findViewById(R.id.tvItemPakaianRating)
         val tvHarga: TextView = itemView.findViewById(R.id.tvHarga)
     }
 
@@ -26,7 +27,6 @@ class PakaianAdapter(private val listPakaian: List<Pakaian>) :
 
     override fun onBindViewHolder(holder: PakaianViewHolder, position: Int) {
         val pakaian = listPakaian[position]
-
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivProductImage)
 
         ivPakaian.load("${pakaian.gambar}.jpg") {
@@ -36,7 +36,8 @@ class PakaianAdapter(private val listPakaian: List<Pakaian>) :
 
         holder.tvNama.text = pakaian.nama
         holder.tvDaerah.text = pakaian.daerah
-        holder.tvHarga.text = "Rp${pakaian.harga_per_hari} / hari"
+        holder.tvItemPakaianRating.text = pakaian.rating.toString()
+        holder.tvHarga.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
@@ -48,5 +49,10 @@ class PakaianAdapter(private val listPakaian: List<Pakaian>) :
 
     override fun getItemCount(): Int {
         return listPakaian.size
+    }
+
+    fun updateData(newList: List<Pakaian>) {
+        this.listPakaian = newList
+        notifyDataSetChanged()
     }
 }

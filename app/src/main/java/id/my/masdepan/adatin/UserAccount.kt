@@ -7,7 +7,6 @@ open class UserAccount(
     fun login(email: String, password: String): Boolean {
         return this.email == email && this.password == password
     }
-
 }
 
 class Customer(
@@ -18,50 +17,42 @@ class Customer(
     val address: String,
     val phoneNumber: String
 ): UserAccount(email, password) {
-    private val semuaTransaksi = mutableListOf(
-        Penyewaan(
-            "TRX-TEST-3",
-            3,
-            0,
-            0,
-            TipePengambilan.PICKUP,
-            "[TEST]",
-            0,
-            StatusSewa.DIBATALKAN
-        ),
-        Penyewaan(
-            "TRX-TEST-2",
-            3,
-            0,
-            0,
-            TipePengambilan.PICKUP,
-            "[TEST]",
-            0,
-            StatusSewa.SEDANG_DIPROSES
-        )
-    )
+    private val semuaTransaksi = mutableListOf<TransactionItem>()
 
-    //! somehow i think we need to store the size as well
-    private val keranjang = mutableListOf<Pakaian>()
+    private val keranjang = mutableListOf<CartItem>()
 
-    fun addPurchaseHistory(transaction: Penyewaan) {
+    fun addPurchaseHistory(transaction: TransactionItem) {
         semuaTransaksi.add(transaction)
     }
 
-    fun addToCart(product: Pakaian) {
-        keranjang.add(product)
+    fun addToCart(product: CartItem): CartItem {
+        val items = this.getMyCart()
+
+        for (item in items) {
+            if (item.pakaianId == product.pakaianId && item.size == product.size) {
+                item.quantity += product.quantity
+                return item
+            }
+        }
+
+        this.keranjang.add(product)
+        return product
     }
 
-    fun getMyCart(): List<Pakaian> {
+    fun getMyCart(): List<CartItem> {
         return keranjang
     }
 
-    fun getPurchaseById(transactionId: String): Penyewaan? {
+    fun removeCartItem(item: CartItem) {
+        keranjang.remove(item)
+    }
+
+    fun getPurchaseById(transactionId: String): TransactionItem? {
         val allTransactions = semuaTransaksi
         return allTransactions.find { it.id == transactionId }
     }
 
-    fun getMyPurchaseHistory(): List<Penyewaan> {
+    fun getMyPurchaseHistory(): List<TransactionItem> {
         return semuaTransaksi
     }
 }

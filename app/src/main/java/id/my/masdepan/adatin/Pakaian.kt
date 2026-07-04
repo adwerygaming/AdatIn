@@ -1,21 +1,22 @@
 package id.my.masdepan.adatin
-
 data class Pakaian(
     val id: Int,
     val nama: String,
     val deskripsi: String,
-    val gambar: String, // use placeholder for now
+    val gambar: String,
+    val rating: Double,
     val daerah: String,
     val harga_per_hari: Int,
     val tersedia: Boolean
 )
 
-val daftarPakaian = mutableListOf<Pakaian>(
+val daftarPakaian = mutableListOf(
     Pakaian(
         id = 1,
         nama = "Ulee Balang",
         deskripsi = "Pakaian adat yang dulunya hanya dipakai oleh keluarga kerajaan atau ulama besar.",
         gambar = "https://placehold.co/150",
+        rating = 4.3,
         daerah = "Aceh",
         harga_per_hari = 150000,
         tersedia = true
@@ -25,6 +26,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Ulos",
         deskripsi = "Kain tenun khas Batak yang sering diselempangkan, simbol restu dan kasih sayang.",
         gambar = "https://placehold.co/150",
+        rating = 4.4,
         daerah = "Sumatera Utara",
         harga_per_hari = 100000,
         tersedia = true
@@ -34,6 +36,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Bundo Kanduang",
         deskripsi = "Pakaian adat wanita Minangkabau dengan ciri khas penutup kepala berbentuk tanduk kerbau.",
         gambar = "https://placehold.co/150",
+        rating = 4.1,
         daerah = "Sumatera Barat",
         harga_per_hari = 175000,
         tersedia = false
@@ -43,6 +46,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Aesan Gede",
         deskripsi = "Pakaian kebesaran kerajaan Sriwijaya, didominasi warna merah dan emas yang mewah.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Sumatera Selatan",
         harga_per_hari = 200000,
         tersedia = true
@@ -52,6 +56,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Teluk Belanga",
         deskripsi = "Pakaian khas pria Melayu yang dipadukan dengan kain songket di bagian pinggang.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Kepulauan Riau",
         harga_per_hari = 120000,
         tersedia = true
@@ -61,6 +66,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Kebaya Encim",
         deskripsi = "Perpaduan budaya Tionghoa dan Betawi, berbahan tipis dengan bordir floral yang khas.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "DKI Jakarta",
         harga_per_hari = 85000,
         tersedia = true
@@ -70,6 +76,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Pangsi",
         deskripsi = "Setelan kemeja dan celana longgar berwarna hitam, identik dengan pakaian pendekar.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Banten",
         harga_per_hari = 70000,
         tersedia = true
@@ -79,6 +86,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Kebaya Sunda",
         deskripsi = "Kebaya elegan dengan potongan leher U atau V, dipadukan dengan kain batik kebat.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Jawa Barat",
         harga_per_hari = 110000,
         tersedia = false
@@ -88,6 +96,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Jawi Jangkep",
         deskripsi = "Pakaian resmi pria Jawa Tengah berupa beskap, blangkon, dan kain jarik.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Jawa Tengah",
         harga_per_hari = 130000,
         tersedia = true
@@ -97,6 +106,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Kebaya Kesatrian",
         deskripsi = "Pakaian adat elegan khas keraton, sering dilengkapi dengan sanggul dan perhiasan lengkap.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "DI Yogyakarta",
         harga_per_hari = 150000,
         tersedia = true
@@ -106,6 +116,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Pesa'an",
         deskripsi = "Setelan kaos garis merah putih dan baju luar hitam longgar khas masyarakat Madura.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Jawa Timur",
         harga_per_hari = 60000,
         tersedia = true
@@ -115,6 +126,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Payas Agung",
         deskripsi = "Pakaian mewah bernuansa emas dan mahkota tinggi, biasanya digunakan untuk pernikahan.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Bali",
         harga_per_hari = 250000,
         tersedia = true
@@ -124,6 +136,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Baju Bodo",
         deskripsi = "Pakaian adat tertua di dunia, berbentuk segi empat dengan lengan pendek, berbahan transparan.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Sulawesi Selatan",
         harga_per_hari = 140000,
         tersedia = false
@@ -133,6 +146,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Baju Cele",
         deskripsi = "Kain tebal bermotif kotak-kotak kecil berwarna merah putih yang bernuansa ceria.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Maluku",
         harga_per_hari = 90000,
         tersedia = true
@@ -142,6 +156,7 @@ val daftarPakaian = mutableListOf<Pakaian>(
         nama = "Baju Kurung Ewer",
         deskripsi = "Pakaian adat dengan rok yang terbuat dari susunan daun sagu atau jerami kering.",
         gambar = "https://placehold.co/150",
+        rating = 4.2,
         daerah = "Papua Barat",
         harga_per_hari = 100000,
         tersedia = true

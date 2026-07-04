@@ -3,6 +3,7 @@ package id.my.masdepan.adatin
 import android.app.Activity
 import android.content.Intent
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import id.my.masdepan.adatin.MyCartActivity
 
 fun BottomNavigationView.setupBottomNav(currentActivity: Activity) {
     this.setOnItemSelectedListener { item ->
@@ -18,8 +19,8 @@ fun BottomNavigationView.setupBottomNav(currentActivity: Activity) {
                 true
             }
             R.id.nav_cart -> {
-                if (currentActivity !is MyTransactionActivity) {
-                    val intent = Intent(currentActivity, MyTransactionActivity::class.java)
+                if (currentActivity !is MyCartActivity) {
+                    val intent = Intent(currentActivity, MyCartActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     currentActivity.startActivity(intent)
 
