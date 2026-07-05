@@ -57,8 +57,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRenterName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="MasDepan" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -69,8 +68,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRenterPhoneNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="911" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -170,6 +168,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:cursorVisible="false"
+                    android:drawableTint="@color/brand_deep_brown"
                     android:focusable="false"
                     app:drawableEndCompat="@drawable/ic_calendar" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -187,6 +186,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:cursorVisible="false"
+                    android:drawableTint="@color/brand_deep_brown"
                     android:focusable="false"
                     app:drawableEndCompat="@drawable/ic_clock" />
             </com.google.android.material.textfield.TextInputLayout>

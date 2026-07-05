@@ -88,6 +88,16 @@ class Customer(
         return true
     }
 
+    fun updatePhoneNumber(value: String): Boolean {
+        this.phoneNumber = value
+        return true
+    }
+
+    fun updateAddress(value: String): Boolean {
+        this.address = value
+        return true
+    }
+
     fun updateProfilePhoto(value: Int): Boolean {
         this.profilePhoto = value
         return true

@@ -21,10 +21,19 @@ class EditProfileActivity : AppCompatActivity() {
         val btnSimpan = findViewById<Button>(R.id.btnSimpan)
         val etFullName = findViewById<TextInputEditText>(R.id.etFullName)
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
+        val etAddress = findViewById<TextInputEditText>(R.id.etAddress)
+        val etPhoneNumber = findViewById<TextInputEditText>(R.id.etPhoneNumber)
+
+        // autofill
+        val account = GlobalVariable.activeAccount
+        if (account != null) {
+            etFullName.setText(account.fullName)
+            etEmail.setText(account.email)
+            etAddress.setText(account.address)
+            etPhoneNumber.setText(account.phoneNumber)
+        }
 
         fun simpanProgres() {
-            var account = GlobalVariable.activeAccount
-
             if (account == null) {
                 Toast.makeText(this, "Akun tidak ada. Silahkan login ulang.", Toast.LENGTH_LONG).show()
                 return
@@ -32,6 +41,8 @@ class EditProfileActivity : AppCompatActivity() {
 
             val fullName = etFullName.text?.toString()
             val email = etEmail.text?.toString()
+            val phoneNumber = etPhoneNumber.text?.toString()
+            val address = etAddress.text?.toString()
 
             if (fullName != null) {
                 if (fullName.length > 0) {
@@ -57,6 +68,28 @@ class EditProfileActivity : AppCompatActivity() {
                     }
 
                     account.updateEmail(email)
+                }
+            }
+
+            if (phoneNumber != null) {
+                if (phoneNumber.length > 0) {
+                    if (phoneNumber.length < 10) {
+                        Toast.makeText(this, "Nomor minimal 10 karakter.", Toast.LENGTH_LONG).show()
+                        return
+                    }
+
+                    account.updatePhoneNumber(phoneNumber)
+                }
+            }
+
+            if (address != null) {
+                if (address.length > 0) {
+                    if (address.length < 10) {
+                        Toast.makeText(this, "Alamat minimal 10 karakter.", Toast.LENGTH_LONG).show()
+                        return
+                    }
+
+                    account.updateAddress(address)
                 }
             }
         }

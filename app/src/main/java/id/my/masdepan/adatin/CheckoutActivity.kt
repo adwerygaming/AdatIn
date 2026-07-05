@@ -28,6 +28,12 @@ class CheckoutActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_checkout)
 
+        val account = GlobalVariable.activeAccount
+        if (account == null) {
+            Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_LONG).show()
+            return
+        }
+
         val pakaianId = intent.getIntExtra("productId", -1)
         val selectedProductSize = intent.getStringExtra("selectedProductSize")
         val quantity = intent.getIntExtra("quantity", 1)
@@ -64,6 +70,10 @@ class CheckoutActivity : AppCompatActivity() {
         var endRentDateMs = 0L
         var totalPrice = 0
         var rentingDays = 0
+
+        etRenterName.setText(account.fullName)
+        etRenterPhoneNumber.setText(account.phoneNumber)
+        etCheckoutAddress.setText(account.address)
 
         etProductName.text = pakaian.nama
         etProductSizeSelected.text = "Ukuran ${selectedProductSize}"
