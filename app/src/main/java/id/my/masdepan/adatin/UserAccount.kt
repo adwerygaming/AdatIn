@@ -13,9 +13,9 @@ class Customer(
     email: String,
     password: String,
 
-    val fullName: String,
-    val address: String,
-    val phoneNumber: String
+    var fullName: String,
+    var address: String,
+    var phoneNumber: String
 ): UserAccount(email, password) {
     private val semuaTransaksi = mutableListOf<TransactionItem>()
 
@@ -54,5 +54,20 @@ class Customer(
 
     fun getMyPurchaseHistory(): List<TransactionItem> {
         return semuaTransaksi
+    }
+
+    fun updateName(value: String): Boolean {
+        this.fullName = value
+        return true
+    }
+
+    fun updateEmail(value: String): Boolean {
+        super.email = value
+        return true
+    }
+
+    fun updatePassword(value: String): Boolean {
+        super.password = value
+        return true
     }
 }

@@ -1,4 +1,4 @@
-package id.my.masdepan.adatin
+package id.my.masdepan.adatin.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,6 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import id.my.masdepan.adatin.CartItem
+import id.my.masdepan.adatin.DetailItemActivity
+import id.my.masdepan.adatin.GlobalVariable
+import id.my.masdepan.adatin.R
+import id.my.masdepan.adatin.daftarPakaian
+import id.my.masdepan.adatin.toRupiahFormat
 
 class MyCartAdapter(private var listCart: List<CartItem>) :
     RecyclerView.Adapter<MyCartAdapter.CartViewHolder>() {

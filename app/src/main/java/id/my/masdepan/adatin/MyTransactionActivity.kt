@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.my.masdepan.adatin.adapter.MyTransactionAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
