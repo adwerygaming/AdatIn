@@ -27,6 +27,11 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 // Simulasi login sukses
                 Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
+
+                val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+                val editor = sharedPref.edit()
+                editor.putBoolean("isLoggedIn", true)
+                editor.apply()
                 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -41,6 +46,4 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
 }

@@ -1,5 +1,6 @@
 package id.my.masdepan.adatin
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import coil.load
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.imageview.ShapeableImageView
 
 class MyProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,7 @@ class MyProfileActivity : AppCompatActivity() {
         val menuEditProfile = findViewById<LinearLayout>(R.id.menuEditProfile)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
 
+
         updateProfile()
 
         menuTransaksi.setOnClickListener {
@@ -66,10 +70,23 @@ class MyProfileActivity : AppCompatActivity() {
         }
 
         btnLogout.setOnClickListener {
-            // TODO: add confirm
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            AlertDialog.Builder(this)
+                .setTitle("Konfirmasi Logout")
+                .setMessage("Apakah Anda yakin ingin keluar dari akun?")
+                .setPositiveButton("Ya") { _, _ ->
+                    val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+                    val editor = sharedPref.edit()
+                    editor.putBoolean("isLoggedIn", false)
+                    editor.apply()
+
+                    GlobalVariable.activeAccount = null
+
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+                .setNegativeButton("Batal", null)
+                .show()
         }
     }
 
@@ -86,6 +103,13 @@ class MyProfileActivity : AppCompatActivity() {
 
         val tvName = findViewById<TextView>(R.id.tvName)
         val tvEmail = findViewById<TextView>(R.id.tvEmail)
+        val ivProfilePicture = findViewById<ShapeableImageView>(R.id.ivProfilePicture)
+
+        if (account.profilePhoto != null) {
+            ivProfilePicture.load(account.profilePhoto)
+        } else {
+            ivProfilePicture.setImageResource(R.drawable.user_placeholder)
+        }
 
         tvName.text = account.fullName
         tvEmail.text = account.email

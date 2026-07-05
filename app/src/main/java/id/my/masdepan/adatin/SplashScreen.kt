@@ -23,14 +23,13 @@ class SplashScreen : AppCompatActivity() {
         val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
 
         if (isLoggedIn) {
-            // Jika sudah login, masuk ke MainActivity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         } else {
-            // Jika belum login, masuk ke LoginActivity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        finish() // Tutup SplashScreen agar tidak bisa kembali dengan tombol back
+
+        finish()
     }
 }

@@ -15,7 +15,8 @@ class Customer(
 
     var fullName: String,
     var address: String?,
-    var phoneNumber: String?
+    var phoneNumber: String?,
+    var profilePhoto: Int? // beneran. profile image itu int. wkwkwkw.
 ): UserAccount(email, password) {
     private val semuaTransaksi = mutableListOf<TransactionItem>()
 
@@ -63,6 +64,11 @@ class Customer(
 
     fun updateEmail(value: String): Boolean {
         super.email = value
+        return true
+    }
+
+    fun updateProfilePhoto(value: Int): Boolean {
+        this.profilePhoto = value
         return true
     }
 

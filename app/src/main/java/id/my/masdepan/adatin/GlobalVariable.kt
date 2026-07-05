@@ -1,14 +1,16 @@
 package id.my.masdepan.adatin
 
+import android.content.Context
 import kotlin.collections.mutableListOf
 
+
 object GlobalVariable {
-    var activeAccount: Customer? = Customer("masdepan@adatin.com", "admin#1234", "MasDepan", null, null)
+    var activeAccount: Customer? = Customer("masdepan@adatin.com", "admin#1234", "MasDepan", null, null, R.drawable.team_pic_devan)
     val accounts: MutableList<UserAccount> = mutableListOf(
-        Customer("masdepan@adatin.com", "admin#1234", "MasDepan", null, null),
-        Customer("yoga@adatin.com", "admin#1234", "Yoga A.", null, null),
-        Customer("iqbal@adatin.com", "admin#1234", "Iqbal", null, null),
-        Customer("fikki@adatin.com", "admin#1234", "Fikki", null, null),
-        Customer("indira@adatin.com", "admin#1234", "Indira", null, null),
+        Customer("masdepan@adatin.com", "admin#1234", "MasDepan", null, null, null),
+        Customer("yoga@adatin.com", "admin#1234", "Yoga A.", null, null, R.drawable.team_pic_yoga),
+        Customer("iqbal@adatin.com", "admin#1234", "Iqbal", null, null, null),
+        Customer("fikki@adatin.com", "admin#1234", "Fikki", null, null, null),
+        Customer("indira@adatin.com", "admin#1234", "Indira", null, null, null),
     )
 }
