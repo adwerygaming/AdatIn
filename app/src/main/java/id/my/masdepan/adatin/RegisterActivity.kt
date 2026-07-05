@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class RegisterActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -26,24 +25,41 @@ class RegisterActivity : AppCompatActivity() {
             val confirmPassword = etConfirmPassword.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                if (password == confirmPassword) {
-                    // Simulasi pendaftaran sukses
+                val passwordMatch = password == confirmPassword
+
+                val account = UserAccount(email, password)
+                val registerResult = account.register()
+
+                if (!passwordMatch) {
+                    Toast.makeText(this, "Password tidak cocok", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (registerResult) {
                     Toast.makeText(this, "Registrasi Berhasil, silakan login", Toast.LENGTH_SHORT).show()
-                    
-                    // Kembali ke LoginActivity
+
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Password tidak cocok", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Email sudah terdaftar sebelumnya. Silakan login", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this, LoginActivity::class.java)
+                    // for better ux
+                    intent.putExtra("autoFillEmail", email)
+
+                    startActivity(intent)
+                    finish()
+                    return@setOnClickListener
                 }
+
             } else {
                 Toast.makeText(this, "Harap isi semua field", Toast.LENGTH_SHORT).show()
             }
         }
 
         tvLogin.setOnClickListener {
-            finish() // Kembali ke LoginActivity
+            finish()
         }
     }
 }
