@@ -14,8 +14,8 @@ class Customer(
     password: String,
 
     var fullName: String,
-    var address: String,
-    var phoneNumber: String
+    var address: String?,
+    var phoneNumber: String?
 ): UserAccount(email, password) {
     private val semuaTransaksi = mutableListOf<TransactionItem>()
 

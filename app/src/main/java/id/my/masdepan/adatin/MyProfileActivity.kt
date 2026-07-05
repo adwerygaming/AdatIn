@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyProfileActivity : AppCompatActivity() {
@@ -15,6 +17,12 @@ class MyProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_my_profile)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_account
@@ -26,16 +34,13 @@ class MyProfileActivity : AppCompatActivity() {
             return
         }
 
-        val tvName = findViewById<TextView>(R.id.tvName)
-        val tvEmail = findViewById<TextView>(R.id.tvEmail)
         val menuTransaksi = findViewById<LinearLayout>(R.id.menuTransaksi)
         val menuAbout = findViewById<LinearLayout>(R.id.menuAbout)
         val menuTeam = findViewById<LinearLayout>(R.id.menuTeam)
         val menuEditProfile = findViewById<LinearLayout>(R.id.menuEditProfile)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
 
-        tvName.text = account.fullName
-        tvEmail.text = account.email
+        updateProfile()
 
         menuTransaksi.setOnClickListener {
             val intent = Intent(this, MyTransactionActivity::class.java)
@@ -59,5 +64,30 @@ class MyProfileActivity : AppCompatActivity() {
                 .setPositiveButton("OK", null)
                 .show()
         }
+
+        btnLogout.setOnClickListener {
+            // TODO: add confirm
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateProfile()
+    }
+
+    fun updateProfile() {
+        val account = GlobalVariable.activeAccount
+        if (account == null) {
+            return
+        }
+
+        val tvName = findViewById<TextView>(R.id.tvName)
+        val tvEmail = findViewById<TextView>(R.id.tvEmail)
+
+        tvName.text = account.fullName
+        tvEmail.text = account.email
     }
 }

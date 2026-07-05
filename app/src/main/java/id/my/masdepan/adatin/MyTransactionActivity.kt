@@ -41,9 +41,6 @@ class MyTransactionActivity : AppCompatActivity() {
 
         val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory()  ?: emptyList()
 
-        println("ALL TRANSACTIONS onCreate")
-        println(allTransactions)
-
         adapter = MyTransactionAdapter(allTransactions)
         rvTransactions.adapter = adapter
 

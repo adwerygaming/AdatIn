@@ -34,21 +34,30 @@ class EditProfileActivity : AppCompatActivity() {
             val email = etEmail.text?.toString()
 
             if (fullName != null) {
-                if (fullName.length < 3) {
-                    Toast.makeText(this, "Nama minimal 3 karakter.", Toast.LENGTH_LONG).show()
-                    return
-                }
+                if (fullName.length > 0) {
+                    if (fullName.length < 3) {
+                        Toast.makeText(this, "Nama minimal 3 karakter.", Toast.LENGTH_LONG).show()
+                        return
+                    }
 
-                account.updateName(fullName);
+                    account.updateName(fullName)
+                }
             }
 
             if (email != null) {
-                if (email.length < 3) {
-                    Toast.makeText(this, "Email minimal 3 karakter.", Toast.LENGTH_LONG).show()
-                    return
-                }
+                if (email.length > 0) {
+                    if (email.length < 3) {
+                        Toast.makeText(this, "Email minimal 3 karakter.", Toast.LENGTH_LONG).show()
+                        return
+                    }
 
-                account.updateEmail(email);
+                    if (!email.contains("@")) {
+                        Toast.makeText(this, "Email tidak valid.", Toast.LENGTH_LONG).show()
+                        return
+                    }
+
+                    account.updateEmail(email)
+                }
             }
         }
 
