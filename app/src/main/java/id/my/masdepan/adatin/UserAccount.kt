@@ -23,7 +23,7 @@ open class UserAccount(
         if (account != null) {
             return false
         } else {
-            val account = Customer(email, password, "", "", "")
+            val account = Customer(email, password, "User", null, null, null)
             accounts.add(account)
             return true
         }
