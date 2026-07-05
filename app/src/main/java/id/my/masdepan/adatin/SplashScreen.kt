@@ -12,10 +12,25 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        // Delay 2 detik sebelum pindah ke Login atau Main
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }, 3000)
+            checkSession()
+        }, 2000)
+    }
 
+    private fun checkSession() {
+        val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
+
+        if (isLoggedIn) {
+            // Jika sudah login, masuk ke MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            // Jika belum login, masuk ke LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+        finish() // Tutup SplashScreen agar tidak bisa kembali dengan tombol back
     }
 }

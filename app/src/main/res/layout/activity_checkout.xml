@@ -105,7 +105,7 @@
                     android:textColor="@color/brand_deep_brown"
                     app:backgroundTint="#00FFFFFF"
                     app:cornerRadius="8dp"
-                    app:icon="@drawable/ic_cart"
+                    app:icon="@drawable/ic_shopping"
                     app:iconGravity="top"
                     app:iconSize="48dp"
                     app:iconTint="@color/brand_deep_brown"

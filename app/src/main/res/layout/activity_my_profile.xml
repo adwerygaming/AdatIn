@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,64 +8,241 @@
     android:layout_height="match_parent"
     tools:context=".MyProfileActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="24dp">
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="56dp">
+            android:padding="24dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProfilePicture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                app:strokeColor="?attr/colorOutline"
+                app:strokeWidth="2dp"
+                tools:src="@tools:sample/avatars"/>
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Profil Saya"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="{{Username}}" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="12dp">
-
-            <Button
-                android:id="@+id/btnMyTransactions"
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Transaksi Saya" />
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="Putra Pratama"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="32dp"
+                android:text="putra@email.com"
+                android:textColor="#757575"
+                android:textSize="14sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/menuEditProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="#F5F5F5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/ic_person"
+                            app:tint="@color/brand_deep_brown" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:text="Edit Profil"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"/>
+
+                    <LinearLayout
+                        android:id="@+id/menuTransaksi"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="#F5F5F5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/ic_shopping"
+                            app:tint="@color/brand_deep_brown"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:text="Transaksi Saya"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"/>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/menuAbout"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="#F5F5F5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/ic_info"
+                            app:tint="@color/brand_deep_brown"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:text="Tentang Aplikasi"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/menuTeam"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="#F5F5F5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/ic_group"
+                            app:tint="@color/brand_deep_brown"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:text="Team Kami"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_right"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="#FFE8E8"
+                app:icon="@drawable/ic_logout"
+                app:iconGravity="textStart"
+                app:iconTint="#D32F2F"
+                android:text="Keluar dari Akun"
+                android:textColor="#D32F2F"/>
 
         </LinearLayout>
-    </LinearLayout>
+
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:background="@android:color/white"
         app:itemIconTint="@color/brand_deep_brown"
         app:itemTextColor="@color/brand_deep_brown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

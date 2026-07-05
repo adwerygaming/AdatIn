@@ -25,9 +25,9 @@
         <activity
             android:name=".ConfirmPickupActivity"
             android:exported="false" />
-        <activity
-            android:name=".MyProfileActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".MyProfileActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".MyTransactionActivity"
             android:exported="false" />
@@ -53,7 +53,12 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity android:name=".OurTeamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyProfileActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

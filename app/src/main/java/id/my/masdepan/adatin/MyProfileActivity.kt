@@ -3,11 +3,11 @@ package id.my.masdepan.adatin
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyProfileActivity : AppCompatActivity() {
@@ -26,14 +26,38 @@ class MyProfileActivity : AppCompatActivity() {
             return
         }
 
-        val tvUsername = findViewById<TextView>(R.id.tvUsername)
-        val btnMyTransactions = findViewById<Button>(R.id.btnMyTransactions)
+        val tvName = findViewById<TextView>(R.id.tvName)
+        val tvEmail = findViewById<TextView>(R.id.tvEmail)
+        val menuTransaksi = findViewById<LinearLayout>(R.id.menuTransaksi)
+        val menuAbout = findViewById<LinearLayout>(R.id.menuAbout)
+        val menuTeam = findViewById<LinearLayout>(R.id.menuTeam)
+        val menuEditProfile = findViewById<LinearLayout>(R.id.menuEditProfile)
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
 
-        tvUsername.text = "Hai, ${account.fullName}!"
+        tvName.text = account.fullName
+        tvEmail.text = account.email
 
-        btnMyTransactions.setOnClickListener {
+        menuTransaksi.setOnClickListener {
             val intent = Intent(this, MyTransactionActivity::class.java)
             startActivity(intent)
+        }
+
+        menuEditProfile.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        menuTeam.setOnClickListener {
+            val intent = Intent(this, OurTeamActivity::class.java)
+            startActivity(intent)
+        }
+
+        menuAbout.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Tentang Applikasi")
+                .setMessage("AdatIn adalah aplikasi Android untuk menyewa pakaian adat dari berbagai daerah di Indonesia. Selain memudahkan proses penyewaan, aplikasi ini juga menyediakan informasi sejarah dan filosofi pakaian adat guna mendukung pelestarian budaya Indonesia.")
+                .setPositiveButton("OK", null)
+                .show()
         }
     }
 }
