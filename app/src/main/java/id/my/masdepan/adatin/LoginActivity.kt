@@ -36,6 +36,12 @@ class LoginActivity : AppCompatActivity() {
                 val loginSuccess = account.login()
 
                 if (loginSuccess) {
+                    val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+
+                    val editor = sharedPref.edit()
+                    editor.putBoolean("isLoggedIn", true)
+                    editor.apply()
+
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
