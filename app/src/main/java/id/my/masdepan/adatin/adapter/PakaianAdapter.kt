@@ -17,6 +17,7 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
     RecyclerView.Adapter<PakaianAdapter.PakaianViewHolder>() {
 
     class PakaianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivProductImage: ImageView = itemView.findViewById(R.id.ivProductImage)
         val tvNama: TextView = itemView.findViewById(R.id.tvNamaPakaian)
         val tvDaerah: TextView = itemView.findViewById(R.id.tvDaerah)
         val tvItemPakaianRating: TextView = itemView.findViewById(R.id.tvItemPakaianRating)
@@ -31,9 +32,8 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
 
     override fun onBindViewHolder(holder: PakaianViewHolder, position: Int) {
         val pakaian = listPakaian[position]
-        val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivProductImage)
 
-        ivPakaian.load("${pakaian.gambar}.jpg") {
+        holder.ivProductImage.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }

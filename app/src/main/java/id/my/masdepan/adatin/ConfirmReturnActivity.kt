@@ -49,7 +49,7 @@ class ConfirmReturnActivity : AppCompatActivity() {
         tvConfirmReturnProductName.text = produk.nama
         tvConfirmReturnProductSize.text = "Ukuran ${transaction.ukuran}"
 
-        ivConfirmReturnProductImage.load("${produk.gambar}.jpg") {
+        ivConfirmReturnProductImage.load(produk.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }

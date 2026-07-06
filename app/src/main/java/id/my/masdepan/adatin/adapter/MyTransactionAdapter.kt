@@ -54,7 +54,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
             return
         }
 
-        holder.ivTransactionProductImage.load("${pakaian.gambar}.jpg") {
+        holder.ivTransactionProductImage.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }

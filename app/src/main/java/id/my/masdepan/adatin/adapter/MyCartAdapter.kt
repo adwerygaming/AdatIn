@@ -46,7 +46,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
             return
         }
 
-        ivPakaian.load("${pakaian.gambar}.jpg") {
+        ivPakaian.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }

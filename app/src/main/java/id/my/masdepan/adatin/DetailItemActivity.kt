@@ -52,7 +52,7 @@ class DetailItemActivity : AppCompatActivity() {
         val btnDetailProductDecrease = findViewById<Button>(R.id.btnDetailProductDecrease)
         val btnDetailProductIncrease = findViewById<Button>(R.id.btnDetailProductIncrease)
 
-        ivDetailProductImage.load("${pakaian.gambar}.jpg") {
+        ivDetailProductImage.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }
