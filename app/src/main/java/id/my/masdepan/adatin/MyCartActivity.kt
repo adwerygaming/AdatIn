@@ -2,16 +2,13 @@ package id.my.masdepan.adatin
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.launch
+import id.my.masdepan.adatin.adapter.MyCartAdapter
 
 class MyCartActivity : AppCompatActivity() {
     private lateinit var adapter: MyCartAdapter

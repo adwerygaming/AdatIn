@@ -1,4 +1,4 @@
-package id.my.masdepan.adatin
+package id.my.masdepan.adatin.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,6 +10,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import id.my.masdepan.adatin.ConfirmCancelActivity
+import id.my.masdepan.adatin.ConfirmPickupActivity
+import id.my.masdepan.adatin.ConfirmReturnActivity
+import id.my.masdepan.adatin.R
+import id.my.masdepan.adatin.StatusSewa
+import id.my.masdepan.adatin.TipePengambilan
+import id.my.masdepan.adatin.TransactionItem
+import id.my.masdepan.adatin.daftarPakaian
+import id.my.masdepan.adatin.toRupiahFormat
 
 class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
     RecyclerView.Adapter<MyTransactionAdapter.PenyewaanViewHolder>() {
@@ -45,7 +54,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
             return
         }
 
-        holder.ivTransactionProductImage.load("${pakaian.gambar}.jpg") {
+        holder.ivTransactionProductImage.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }

@@ -13,6 +13,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        val etFullName = findViewById<EditText>(R.id.etFullName)
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
@@ -20,14 +21,15 @@ class RegisterActivity : AppCompatActivity() {
         val tvLogin = findViewById<TextView>(R.id.tvLogin)
 
         btnRegister.setOnClickListener {
+            val fullName = etFullName.text.toString()
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
             val confirmPassword = etConfirmPassword.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() && fullName.isNotEmpty()) {
                 val passwordMatch = password == confirmPassword
 
-                val account = UserAccount(email, password)
+                val account = Customer(email, password, fullName, null, null, R.drawable.user_placeholder)
                 val registerResult = account.register()
 
                 if (!passwordMatch) {

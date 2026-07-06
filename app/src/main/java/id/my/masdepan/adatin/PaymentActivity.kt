@@ -68,7 +68,7 @@ class PaymentActivity : AppCompatActivity() {
         tvPaymentProductSelectedSize.text = "Ukuran ${selectedProductSize}"
         tvPaymentProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
 
-        tvPaymentProductImage.load("${pakaian.gambar}.jpg") {
+        tvPaymentProductImage.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
         }

@@ -7,12 +7,12 @@
 
     <item
         android:id="@+id/nav_cart"
-        android:icon="@drawable/ic_cart"
+        android:icon="@drawable/ic_shopping"
         android:title="Keranjang" />
 
     <item
         android:id="@+id/nav_account"
-        android:icon="@drawable/ic_user"
+        android:icon="@drawable/ic_person"
         android:title="Saya" />
 
 </menu>

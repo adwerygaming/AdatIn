@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.my.masdepan.adatin.adapter.MyTransactionAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -39,9 +40,6 @@ class MyTransactionActivity : AppCompatActivity() {
         rvTransactions.layoutManager = LinearLayoutManager(this)
 
         val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory()  ?: emptyList()
-
-        println("ALL TRANSACTIONS onCreate")
-        println(allTransactions)
 
         adapter = MyTransactionAdapter(allTransactions)
         rvTransactions.adapter = adapter

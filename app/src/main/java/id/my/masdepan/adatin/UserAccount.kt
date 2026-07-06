@@ -23,7 +23,7 @@ open class UserAccount(
         if (account != null) {
             return false
         } else {
-            val account = Customer(email, password, "", "", "")
+            val account = Customer(email, password, "User", null, null, null)
             accounts.add(account)
             return true
         }
@@ -34,9 +34,10 @@ class Customer(
     email: String,
     password: String,
 
-    val fullName: String,
-    val address: String,
-    val phoneNumber: String
+    var fullName: String,
+    var address: String?,
+    var phoneNumber: String?,
+    var profilePhoto: Int? // beneran. profile image itu int. wkwkwkw.
 ): UserAccount(email, password) {
     private val semuaTransaksi = mutableListOf<TransactionItem>()
 
@@ -75,5 +76,35 @@ class Customer(
 
     fun getMyPurchaseHistory(): List<TransactionItem> {
         return semuaTransaksi
+    }
+
+    fun updateName(value: String): Boolean {
+        this.fullName = value
+        return true
+    }
+
+    fun updateEmail(value: String): Boolean {
+        super.email = value
+        return true
+    }
+
+    fun updatePhoneNumber(value: String): Boolean {
+        this.phoneNumber = value
+        return true
+    }
+
+    fun updateAddress(value: String): Boolean {
+        this.address = value
+        return true
+    }
+
+    fun updateProfilePhoto(value: Int): Boolean {
+        this.profilePhoto = value
+        return true
+    }
+
+    fun updatePassword(value: String): Boolean {
+        super.password = value
+        return true
     }
 }

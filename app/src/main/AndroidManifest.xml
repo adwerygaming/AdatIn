@@ -25,9 +25,9 @@
         <activity
             android:name=".ConfirmPickupActivity"
             android:exported="false" />
-        <activity
-            android:name=".MyProfileActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".MyProfileActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".MyTransactionActivity"
             android:exported="false" />
@@ -53,6 +53,15 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity android:name=".OurTeamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyProfileActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -61,6 +70,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
