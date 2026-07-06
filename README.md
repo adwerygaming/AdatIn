@@ -30,7 +30,6 @@ AdatIn provides a platform where users can browse, select, and rent various trad
 
 ## Screenshots
 <p align="center">
-  <img src="docs/screenshots/splash.png" width="200" alt="Splash Screen">
   <img src="docs/screenshots/home.png" width="200" alt="Home Screen">
   <img src="docs/screenshots/product_detail.png" width="200" alt="Product Detail Screen">
   <img src="docs/screenshots/carts.png" width="200" alt="Cart Screen">
