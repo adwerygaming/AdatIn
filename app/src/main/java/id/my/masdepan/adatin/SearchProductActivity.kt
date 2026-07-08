@@ -26,8 +26,6 @@ class SearchProductActivity : AppCompatActivity() {
             insets
         }
 
-        println("DEBUG SearchProductAcitivity")
-
         val ivArrowBack = findViewById<ImageView>(R.id.ivArrowBack)
         val rvKatalog = findViewById<RecyclerView>(R.id.rvKatalog)
 
@@ -66,13 +64,9 @@ class SearchProductActivity : AppCompatActivity() {
         }
 
         cgDaerahChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            println("DEBUG $checkedIds")
-
                 val selectedChipId = checkedIds.first()
                 val selectedChip = group.findViewById<Chip>(selectedChipId)
                 val filterValue = selectedChip.text.toString()
-
-                println("DECODED VALUE $filterValue")
 
                 var filteredList = daftarPakaian.filter { it.daerah == filterValue }
 
@@ -101,7 +95,6 @@ class SearchProductActivity : AppCompatActivity() {
             }
         }
 
-        println(allPakaian)
         adapter.updateData(allPakaian)
     }
 }
