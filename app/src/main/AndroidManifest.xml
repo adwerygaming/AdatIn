@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdatIn">
         <activity
+            android:name=".SearchProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyCartActivity"
             android:exported="false" />
         <activity
@@ -24,10 +27,9 @@
             android:exported="false" />
         <activity
             android:name=".ConfirmPickupActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".MyProfileActivity"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".MyProfileActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".MyTransactionActivity"
             android:exported="false" />
@@ -55,12 +57,12 @@
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
-        <activity android:name=".OurTeamActivity"
+        <activity
+            android:name=".OurTeamActivity"
             android:exported="false" />
         <activity
             android:name=".MyProfileActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".SplashScreen"
             android:exported="true">
@@ -70,7 +72,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package id.my.masdepan.adatin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -30,52 +31,13 @@ class MainActivity : AppCompatActivity() {
         val adapter = PakaianAdapter(daftarPakaian)
         rvKatalog.adapter = adapter
 
-        val cgDaerahChipGroup = findViewById<ChipGroup>(R.id.cgDaerahChipGroup)
-        val filters = daftarPakaian.map { it.daerah }.distinct().sorted().toList()
-
-        var allPakaian = daftarPakaian.toList()
-
-        for (value in filters) {
-            val chip = layoutInflater.inflate(R.layout.item_filter_chip, cgDaerahChipGroup, false) as Chip
-
-            chip.apply {
-                text = value
-                isCheckable = true
-            }
-
-            cgDaerahChipGroup.addView(chip)
-        }
-
-        cgDaerahChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            if (checkedIds.isNotEmpty()) {
-                val selectedChipId = checkedIds.first()
-                val selectedChip = group.findViewById<Chip>(selectedChipId)
-                val filterValue = selectedChip.text.toString()
-
-                val filteredList = allPakaian.filter { it.daerah == filterValue }
-                allPakaian = filteredList;
-                adapter.updateData(filteredList)
-            } else {
-                allPakaian = daftarPakaian.toList()
-                adapter.updateData(daftarPakaian)
-            }
-        }
-
         val etSearch = findViewById<EditText>(R.id.etSearch)
 
-        etSearch.doAfterTextChanged { editable ->
-            val query = editable.toString().trim().lowercase()
-
-            if (query.isEmpty()) {
-                adapter.updateData(allPakaian)
-            } else {
-                val filteredList = allPakaian.filter { pakaian ->
-                    pakaian.nama.lowercase().contains(query)
-                }
-
-                adapter.updateData(filteredList)
-            }
+        etSearch.setOnClickListener {
+            val intent = Intent(this, SearchProductActivity::class.java)
+            startActivity(intent)
         }
 
+        adapter.updateData(daftarPakaian)
     }
 }
