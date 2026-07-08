@@ -82,7 +82,7 @@ class SearchProductActivity : AppCompatActivity() {
                 }
 
                 allPakaian = filteredList
-                adapter.updateData(filteredList)
+                adapter.updateData(allPakaian)
         }
 
         val etSearch = findViewById<EditText>(R.id.etSearch)
