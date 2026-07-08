@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat
 import coil.load
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import id.my.masdepan.adatin.model.CartItem
+import id.my.masdepan.adatin.model.GlobalVariable
 
 class DetailItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

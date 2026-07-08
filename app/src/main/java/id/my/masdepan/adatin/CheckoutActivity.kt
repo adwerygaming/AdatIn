@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import id.my.masdepan.adatin.model.GlobalVariable
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

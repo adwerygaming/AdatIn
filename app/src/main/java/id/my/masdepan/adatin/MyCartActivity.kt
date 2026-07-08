@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.my.masdepan.adatin.adapter.MyCartAdapter
+import id.my.masdepan.adatin.model.GlobalVariable
 
 class MyCartActivity : AppCompatActivity() {
     private lateinit var adapter: MyCartAdapter

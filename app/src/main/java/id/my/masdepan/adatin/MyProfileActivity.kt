@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import coil.load
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.imageview.ShapeableImageView
+import id.my.masdepan.adatin.model.GlobalVariable
 
 class MyProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

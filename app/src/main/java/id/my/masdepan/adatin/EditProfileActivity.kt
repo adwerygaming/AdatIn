@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textfield.TextInputEditText
+import id.my.masdepan.adatin.model.GlobalVariable
 
 class EditProfileActivity : AppCompatActivity() {
 

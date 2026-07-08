@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import id.my.masdepan.adatin.model.GlobalFunction
+import id.my.masdepan.adatin.model.GlobalVariable
+import id.my.masdepan.adatin.model.StatusSewa
 
 class ConfirmCancelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

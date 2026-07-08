@@ -12,6 +12,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import id.my.masdepan.adatin.model.GlobalFunction
+import id.my.masdepan.adatin.model.GlobalVariable
+import id.my.masdepan.adatin.model.StatusSewa
 
 class ConfirmReturnActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
