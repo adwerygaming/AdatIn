@@ -13,6 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.my.masdepan.adatin.adapter.MyTransactionAdapter
+import id.my.masdepan.adatin.model.GlobalFunction
+import id.my.masdepan.adatin.model.GlobalVariable
+import id.my.masdepan.adatin.model.StatusSewa
+import id.my.masdepan.adatin.model.TipePengambilan
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

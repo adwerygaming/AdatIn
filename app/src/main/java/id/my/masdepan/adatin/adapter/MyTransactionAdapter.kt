@@ -14,10 +14,10 @@ import id.my.masdepan.adatin.ConfirmCancelActivity
 import id.my.masdepan.adatin.ConfirmPickupActivity
 import id.my.masdepan.adatin.ConfirmReturnActivity
 import id.my.masdepan.adatin.R
-import id.my.masdepan.adatin.StatusSewa
-import id.my.masdepan.adatin.TipePengambilan
-import id.my.masdepan.adatin.TransactionItem
 import id.my.masdepan.adatin.daftarPakaian
+import id.my.masdepan.adatin.model.StatusSewa
+import id.my.masdepan.adatin.model.TipePengambilan
+import id.my.masdepan.adatin.model.TransactionItem
 import id.my.masdepan.adatin.toRupiahFormat
 
 class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :

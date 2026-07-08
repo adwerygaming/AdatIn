@@ -1,34 +1,7 @@
-package id.my.masdepan.adatin
+package id.my.masdepan.adatin.model
 
-open class UserAccount(
-    internal var email: String,
-    internal var password: String
-) {
-    fun login(): Boolean {
-        val accounts = GlobalVariable.accounts
-        val account = accounts.find { it.email == email && it.password == password }
+import kotlin.collections.plusAssign
 
-        if (account != null) {
-            GlobalVariable.activeAccount = account
-            return true
-        } else {
-            return false
-        }
-    }
-
-    fun register(): Boolean {
-        val accounts = GlobalVariable.accounts
-        val account = accounts.find { it.email == email && it.password == password }
-
-        if (account != null) {
-            return false
-        } else {
-            val account = Customer(email, password, "User", null, null, null)
-            accounts.add(account)
-            return true
-        }
-    }
-}
 
 class Customer(
     email: String,
@@ -40,7 +13,6 @@ class Customer(
     var profilePhoto: Int? // beneran. profile image itu int. wkwkwkw.
 ): UserAccount(email, password) {
     private val semuaTransaksi = mutableListOf<TransactionItem>()
-
     private val keranjang = mutableListOf<CartItem>()
 
     fun addPurchaseHistory(transaction: TransactionItem) {

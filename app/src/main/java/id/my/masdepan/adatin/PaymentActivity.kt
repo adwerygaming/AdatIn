@@ -18,6 +18,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import id.my.masdepan.adatin.model.GlobalVariable
+import id.my.masdepan.adatin.model.StatusSewa
+import id.my.masdepan.adatin.model.TipePengambilan
+import id.my.masdepan.adatin.model.TransactionItem
 
 class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

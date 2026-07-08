@@ -1,24 +1,4 @@
-package id.my.masdepan.adatin
-
-enum class TipePengambilan {
-    DELIVERY, PICKUP
-}
-
-enum class JenisKetersediaan {
-    TERSEDIA, KOSONG
-}
-
-enum class StatusSewa {
-    MENUNGGU_PEMBAYARAN,
-    SEDANG_DIPROSES,
-    SIAP_DIAMBIL,
-    SAMPAI_TUJUAN,
-    SEDANG_DIANTAR,
-    SEDANG_DISEWA,
-    MENUNGGU_KONFIRMASI_PEMBATALAN,
-    SELESAI,
-    DIBATALKAN
-}
+package id.my.masdepan.adatin.model
 
 data class TransactionItem(
     val id: String, // invoice id
@@ -35,4 +15,3 @@ data class TransactionItem(
         return this
     }
 }
-
