@@ -76,8 +76,6 @@ class DetailItemActivity : AppCompatActivity() {
             val size_m = findViewById<Chip>(R.id.chipM)
             val size_xl = findViewById<Chip>(R.id.chipXL)
 
-            println(productSelectedSize)
-
             when (productSelectedSize) {
                 "S" -> size_s.isChecked = true
                 "M" -> size_m.isChecked = true
