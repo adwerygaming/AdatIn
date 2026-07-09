@@ -51,7 +51,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
             error(R.drawable.ic_error)
         }
 
-        val totalPrice = cartItem.quantity * pakaian.harga_per_hari
+        val totalPrice = pakaian.harga_per_hari
 
         holder.tvCartProductName.text = pakaian.nama
         holder.tvCartProductDaerah.text = pakaian.daerah

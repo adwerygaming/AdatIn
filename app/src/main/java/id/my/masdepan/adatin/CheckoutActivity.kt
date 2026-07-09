@@ -49,10 +49,14 @@ class CheckoutActivity : AppCompatActivity() {
         val etProductName = findViewById<TextView>(R.id.etProductName)
         val etProductSizeSelected = findViewById<TextView>(R.id.etProductSizeSelected)
 
+        val etRenterNameLayout = findViewById<TextInputLayout>(R.id.etRenterNameLayout)
         val etRenterName = findViewById<TextInputEditText>(R.id.etRenterName)
+        val etRenterPhoneNumberLayout = findViewById<TextInputLayout>(R.id.etRenterPhoneNumberLayout)
         val etRenterPhoneNumber = findViewById<TextInputEditText>(R.id.etRenterPhoneNumber)
 
+        val etRentingDateLayout = findViewById<TextInputLayout>(R.id.etRentingDateLayout)
         val etRentingDate = findViewById<TextInputEditText>(R.id.etRentingDate)
+        val etPickupTimeLayout = findViewById<TextInputLayout>(R.id.etPickupTimeLayout)
         val etPickupTime = findViewById<TextInputEditText>(R.id.etPickupTime)
         val etCheckoutAddressLayout = findViewById<TextInputLayout>(R.id.etCheckoutAddressLayout)
         val etCheckoutAddress = findViewById<TextInputEditText>(R.id.etCheckoutAddress)
@@ -138,11 +142,24 @@ class CheckoutActivity : AppCompatActivity() {
                 val formattedStart = sdf.format(Date(startDateMillis))
                 val formattedEnd = sdf.format(Date(endDateMillis))
 
-                etRentingDate.setText("$formattedStart - $formattedEnd")
-
                 val diffMillis = endDateMillis - startDateMillis
                 val tempRentingDays = (diffMillis / (1000L * 60 * 60 * 24))
                 rentingDays = tempRentingDays.toInt() + 1
+
+                println("rentingDays: $rentingDays")
+                println("tempRentingDays: ${tempRentingDays.toInt()}")
+
+                val maxRentingDays = GlobalVariable.maxRentingDays
+
+                if (rentingDays > maxRentingDays) {
+                    etRentingDateLayout.error = "Maksimal waktu penyewaan 7 hari."
+                    return@addOnPositiveButtonClickListener
+                }
+
+                etRentingDateLayout.error = null
+
+                etRentingDate.setText("$formattedStart - $formattedEnd")
+
                 tvRentingDuration.text = "${rentingDays} hari"
 
                 totalPrice = (rentingDays) * (pakaian.harga_per_hari * quantity)
@@ -155,13 +172,36 @@ class CheckoutActivity : AppCompatActivity() {
         etPickupTime.setOnClickListener {
             val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
-                .setHour(12)
+                .setHour(7)
                 .setMinute(0)
                 .setTitleText("Pilih Waktu Ambil")
                 .build()
 
             timePicker.addOnPositiveButtonClickListener {
-                val formattedTime = String.format(Locale.getDefault(), "%02d:%02d", timePicker.hour, timePicker.minute)
+                val hours = timePicker.hour
+                val minutes = timePicker.minute
+
+                val openTime = GlobalVariable.openTime.split(":")
+                val closeTime = GlobalVariable.closeTime.split(":")
+
+                val openHour = openTime[0].toInt()
+                val openMinute= openTime[1].toInt()
+
+                val closeHour = closeTime[0].toInt()
+                val closeMinute = closeTime[1].toInt()
+
+                if (hours < openHour || (hours == openHour && minutes < openMinute)) {
+                    etPickupTimeLayout.error = "Waktu Pengambilan Minimal ${GlobalVariable.openTime}"
+                    return@addOnPositiveButtonClickListener
+                } else if (hours > closeHour || (hours == closeHour && minutes > closeMinute)) {
+                    etPickupTimeLayout.error = "Waktu Pengambilan Maximal ${GlobalVariable.closeTime}"
+                    return@addOnPositiveButtonClickListener
+                }
+
+                etPickupTimeLayout.error = null
+
+                val formattedTime = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes)
+
                 etPickupTime.setText(formattedTime)
             }
 
@@ -170,42 +210,49 @@ class CheckoutActivity : AppCompatActivity() {
 
         checkoutBtn.setOnClickListener {
             if (etRenterName.text.toString().isEmpty()) {
-                etRenterName.error = "Nama Penyewa Tidak Boleh Kosong"
+                etRenterNameLayout.error = "Nama Penyewa Tidak Boleh Kosong"
                 return@setOnClickListener
             } else {
-                etRenterName.error = null
+                etRenterNameLayout.error = null
             }
 
             if (etRenterPhoneNumber.text.toString().isEmpty()) {
-                etRenterPhoneNumber.error = "Nomor WA Tidak Boleh Kosong"
+                etRenterPhoneNumberLayout.error = "Nomor WA Tidak Boleh Kosong"
                 return@setOnClickListener
             } else {
-                etRenterPhoneNumber.error = null
+                etRenterPhoneNumberLayout.error = null
             }
 
             if (isDelivery) {
                 if (etCheckoutAddress.text.toString().isEmpty()) {
-                    etCheckoutAddress.error = "Alamat Tidak Boleh Kosong"
+                    etCheckoutAddressLayout.error = "Alamat Tidak Boleh Kosong"
                     return@setOnClickListener
                 }
 
-                etCheckoutAddress.error = null
+                etCheckoutAddressLayout.error = null
             } else {
-                etCheckoutAddress.error = null
+                etCheckoutAddressLayout.error = null
             }
 
             if (etRentingDate.text.toString().isEmpty()) {
-                etRentingDate.error = "Tanggal Sewa Tidak Boleh Kosong"
+                etRentingDateLayout.error = "Tanggal Sewa Tidak Boleh Kosong"
                 return@setOnClickListener
             } else {
-                etRentingDate.error = null
+                etRentingDateLayout.error = null
             }
 
             if (etPickupTime.text.toString().isEmpty()) {
-                etPickupTime.error = "Waktu Pengambilan Tidak Boleh Kosong"
+                etPickupTimeLayout.error = "Waktu Pengambilan Tidak Boleh Kosong"
                 return@setOnClickListener
             } else {
-                etPickupTime.error = null
+                etPickupTimeLayout.error = null
+            }
+
+            if (etPickupTime.text.toString().isEmpty()) {
+                etPickupTimeLayout.error = "Waktu Pengambilan Tidak Boleh Kosong"
+                return@setOnClickListener
+            } else {
+                etPickupTimeLayout.error = null
             }
 
             val intent = Intent(this, PaymentActivity::class.java)

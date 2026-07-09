@@ -27,9 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".ConfirmPickupActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".MyProfileActivity" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
         <activity
             android:name=".MyTransactionActivity"
             android:exported="false" />
@@ -62,7 +60,7 @@
             android:exported="false" />
         <activity
             android:name=".MyProfileActivity"
-            android:exported="false"></activity>
+            android:exported="false"/>
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">

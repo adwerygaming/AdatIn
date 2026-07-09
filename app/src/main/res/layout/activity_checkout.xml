@@ -47,6 +47,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etRenterNameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="12dp"
@@ -61,6 +62,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etRenterPhoneNumberLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Nomor WA">
@@ -85,7 +87,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pengambilan barang" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,6 +156,7 @@
                 android:text="Tanggal dan Jam" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etRentingDateLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,6 +176,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etPickupTimeLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
