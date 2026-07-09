@@ -28,5 +28,5 @@ object GlobalVariable {
 
     val openTime = "09:00"
     val closeTime = "20:00"
-    val maxRentingDays = 7;
+    val maxRentingDays = 7
 }

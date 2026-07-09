@@ -106,13 +106,12 @@ class MyProfileActivity : AppCompatActivity() {
         val tvEmail = findViewById<TextView>(R.id.tvEmail)
         val ivProfilePicture = findViewById<ShapeableImageView>(R.id.ivProfilePicture)
 
-        if (account.profilePhoto != null) {
-            ivProfilePicture.load(account.profilePhoto)
-        } else {
-            ivProfilePicture.setImageResource(R.drawable.user_placeholder)
-        }
+        val fullname = account.getName()
+        val email = account.getEmail()
+        val profilePhoto = account.getProfilePhoto()
 
-        tvName.text = account.fullName
-        tvEmail.text = account.email
+        ivProfilePicture.load(profilePhoto)
+        tvName.text = fullname
+        tvEmail.text = email
     }
 }

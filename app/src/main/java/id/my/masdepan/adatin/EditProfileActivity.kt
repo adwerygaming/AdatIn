@@ -28,10 +28,15 @@ class EditProfileActivity : AppCompatActivity() {
         // autofill
         val account = GlobalVariable.activeAccount
         if (account != null) {
-            etFullName.setText(account.fullName)
-            etEmail.setText(account.email)
-            etAddress.setText(account.address)
-            etPhoneNumber.setText(account.phoneNumber)
+            val fullName = account.getName()
+            val email = account.getEmail()
+            val address = account.getAddress()
+            val phoneNumber = account.getPhoneNumber()
+
+            etFullName.setText(fullName)
+            etEmail.setText(email)
+            etAddress.setText(address)
+            etPhoneNumber.setText(phoneNumber)
         }
 
         fun simpanProgres() {
