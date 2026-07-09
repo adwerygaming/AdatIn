@@ -33,6 +33,7 @@
                 android:layout_marginStart="8dp"
                 android:drawablePadding="8dp"
                 android:hint="Cari baju adat..."
+                android:background="@drawable/bg_search_box"
                 android:inputType="text"
                 android:maxLines="1"
                 android:padding="12dp" />

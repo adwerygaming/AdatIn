@@ -39,6 +39,7 @@ class DetailItemActivity : AppCompatActivity() {
             return
         }
 
+        val icBackButton = findViewById<ImageView>(R.id.icBackButton)
         val ivDetailProductImage = findViewById<ImageView>(R.id.ivDetailProductImage)
         val tvDetailProductName = findViewById<TextView>(R.id.tvDetailProductName)
         val tvDetailProductDescription = findViewById<TextView>(R.id.tvDetailProductDescription)
@@ -87,6 +88,10 @@ class DetailItemActivity : AppCompatActivity() {
         var productQuantity = quantity
 
         tvDetailProductQuantityValue.text = productQuantity.toString()
+
+        icBackButton.setOnClickListener {
+            finish()
+        }
 
         btnDetailProductIncrease.setOnClickListener {
             productQuantity++

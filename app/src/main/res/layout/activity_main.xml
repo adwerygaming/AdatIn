@@ -33,6 +33,7 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="12dp"
                 android:drawableStart="@android:drawable/ic_menu_search"
+                android:background="@drawable/bg_search_box"
                 android:drawablePadding="8dp"
                 android:focusable="false"
                 android:focusableInTouchMode="false"

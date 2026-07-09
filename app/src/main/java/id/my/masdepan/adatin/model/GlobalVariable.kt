@@ -25,4 +25,8 @@ object GlobalVariable {
         Customer("fikki@adatin.com", "admin#1234", "Fikki", null, null, null),
         Customer("indira@adatin.com", "admin#1234", "Indira", null, null, null),
     )
+
+    val openTime = "09:00"
+    val closeTime = "20:00"
+    val maxRentingDays = 7;
 }
