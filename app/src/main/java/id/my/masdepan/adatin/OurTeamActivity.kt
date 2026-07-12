@@ -31,10 +31,10 @@ class OurTeamActivity : AppCompatActivity() {
 
         val teamList = listOf(
             Team("Yoga Aditiya Putra","(25.12.3645)",R.drawable.team_pic_yoga),
-            Team("Iqbal Dimas Saputra","(25.12.3633)",R.drawable.user_placeholder),
+            Team("Iqbal Dimas Saputra","(25.12.3633)",R.drawable.team_pic_iqbal),
+            Team("Indyra Zulaeyka Rabbani","(25.12.3625)",R.drawable.team_pic_indyra),
+            Team("Fikki Rahmat Maulana","(25.12.3618)",R.drawable.team_pic_fikki),
             Team("Dhevan Adhitya Prasetyo","(25.12.3654)",R.drawable.team_pic_devan),
-            Team("Indyra Zulaeyka Rabbani","(25.12.3625)",R.drawable.user_placeholder),
-            Team("Fikki Rahmat Maulana","(25.12.3618)",R.drawable.user_placeholder),
         )
 
         recyclerView.layoutManager = GridLayoutManager(this, 2)
