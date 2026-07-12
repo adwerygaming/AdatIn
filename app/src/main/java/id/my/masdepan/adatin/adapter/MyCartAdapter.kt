@@ -40,21 +40,10 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val cartItem = listCart[position]
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivCartProductImage)
-        val pakaian = daftarPakaian.find { it.id == cartItem.pakaian.id }
+        val pakaian = cartItem.pakaian
 
         val activeAccount = GlobalVariable.activeAccount
         if (activeAccount == null) {
-            val context = holder.itemView.context
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            context.startActivity(intent)
-            if (context is Activity) {
-                context.finish()
-            }
-            return
-        }
-
-        if (pakaian == null) {
             return
         }
 

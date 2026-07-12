@@ -40,7 +40,7 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         val productId = intent.getIntExtra("productId", -1)
-        val selectedProductSize = intent.getStringExtra("selectedProductSize") ?: "None"
+        val selectedProductSize = intent.getStringExtra("selectedProductSize") ?: "S"
         val renterName = intent.getStringExtra("renterName")
         val renterPhoneNumber = intent.getStringExtra("renterPhoneNumber")
         val isDelivery = intent.getBooleanExtra("isDelivery", false)
@@ -82,7 +82,7 @@ class PaymentActivity : AppCompatActivity() {
         tvPaymentRenterAddress.text = renterAddress
 
         val invoiceId = "INV-${System.currentTimeMillis()}"
-        val tipePengambilan = when (isDelivery) { true -> TipePengambilan.DELIVERY; false -> TipePengambilan.PICKUP }
+        val tipePengambilan = if (isDelivery) TipePengambilan.DELIVERY else TipePengambilan.PICKUP
         val ukuranPakaian = UkuranPakaian.valueOf(selectedProductSize)
 
         val newOrder = TransactionItem(

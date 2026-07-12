@@ -26,7 +26,9 @@ data class TransactionItem(
     }
 
     fun calculateDeliveryFee(): Int {
-        return if (tipe_pengambilan == TipePengambilan.DELIVERY) 15000 else 0
+        val deliveryFee = 15000
+        val result = if (tipe_pengambilan == TipePengambilan.DELIVERY) deliveryFee else 0
+        return result
     }
 
     fun calculateTotal(): Int {
