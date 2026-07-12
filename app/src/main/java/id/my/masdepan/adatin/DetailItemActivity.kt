@@ -63,7 +63,7 @@ class DetailItemActivity : AppCompatActivity() {
         tvDetailProductName.text = pakaian.nama
         tvDetailProductDescription.text = pakaian.deskripsi
         tvDetailProductRating.text = pakaian.rating.toString()
-        tvDetailProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
+        tvDetailProductPrice.text = "Rp${pakaian.harga_sewa_per_hari.toRupiahFormat()} / hari"
         tvDetailProductAvailability.text = if (pakaian.tersedia) "Tersedia" else "Habis"
 
         if (!pakaian.tersedia) {

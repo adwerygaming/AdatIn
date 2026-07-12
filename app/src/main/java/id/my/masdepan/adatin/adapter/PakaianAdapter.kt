@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import id.my.masdepan.adatin.DetailItemActivity
 import id.my.masdepan.adatin.R
-import id.my.masdepan.adatin.model.Pakaian
+import id.my.masdepan.adatin.model.PakaianAdat
 import id.my.masdepan.adatin.toRupiahFormat
 
-class PakaianAdapter(private var listPakaian: List<Pakaian>) :
+class PakaianAdapter(private var listPakaian: List<PakaianAdat>) :
     RecyclerView.Adapter<PakaianAdapter.PakaianViewHolder>() {
 
     class PakaianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -48,7 +48,7 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
         holder.tvNama.text = pakaian.nama
         holder.tvDaerah.text = pakaian.daerah
         holder.tvItemPakaianRating.text = pakaian.rating.toString()
-        holder.tvHarga.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
+        holder.tvHarga.text = "Rp${pakaian.harga_sewa_per_hari.toRupiahFormat()} / hari"
 
         var previewDialog: Dialog? = null
 
@@ -73,7 +73,7 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
 
                 tvPreviewNama.text = pakaian.nama
                 tvPreviewDaerah.text = pakaian.daerah
-                tvPreviewHarga.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
+                tvPreviewHarga.text = "Rp${pakaian.harga_sewa_per_hari.toRupiahFormat()} / hari"
 
                 show()
             }
@@ -106,7 +106,7 @@ class PakaianAdapter(private var listPakaian: List<Pakaian>) :
         return listPakaian.size
     }
 
-    fun updateData(newList: List<Pakaian>) {
+    fun updateData(newList: List<PakaianAdat>) {
         this.listPakaian = newList
         notifyDataSetChanged()
     }
