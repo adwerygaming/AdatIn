@@ -9,6 +9,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +30,20 @@ class MyTransactionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_my_transaction)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                    101
+                )
+            }
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -71,25 +89,30 @@ class MyTransactionActivity : AppCompatActivity() {
                     continue
                 }
 
+                val pakaian = transaction.pakaian
+
                 if (trx.status == StatusSewa.SEDANG_DIPROSES) {
                     delay(6000)
 
                     if (trx.tipe_pengambilan == TipePengambilan.DELIVERY) {
                         transaction.updateRentingStatus(StatusSewa.SEDANG_DIANTAR)
+                        this@MyTransactionActivity.showNotification("Update Transaksi #${trx.id}", "${pakaian.nama} sedang dalam perjalanan ke tempatmu")
                         adapter.notifyDataSetChanged()
 
                         delay(6000)
                         transaction.updateRentingStatus(StatusSewa.SAMPAI_TUJUAN)
+                        this@MyTransactionActivity.showNotification("Update Transaksi #${trx.id}", "${pakaian.nama} sudah sampai ke rumahmu!")
                     } else {
                         transaction.updateRentingStatus(StatusSewa.SIAP_DIAMBIL)
+                        this@MyTransactionActivity.showNotification("Update Transaksi #${trx.id}", "${pakaian.nama} sudah siap diambil")
                     }
                 }
 
                 if (trx.status == StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN) {
                     delay(6000)
 
-                    Toast.makeText(this@MyTransactionActivity, "Penjual telah mengkonfirmasi pembatalan. Dana telah dikembalikan ke metode pembayaran anda.", Toast.LENGTH_LONG).show()
                     transaction.updateRentingStatus(StatusSewa.DIBATALKAN)
+                    this@MyTransactionActivity.showNotification("Transaksi #${trx.id} Dibatalkan", "Penjual telah mengkonfirmasi pembatalan. Dana telah dikembalikan ke metode pembayaran anda.")
                 }
 
                 adapter.notifyDataSetChanged()
