@@ -40,13 +40,12 @@
                     app:srcCompat="@drawable/brand_logo" />
 
                 <TextView
+                    style="@style/TextAppearance.Adatin.Cinzel.Heading6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="AdatIn Team"
-                    android:textColor="@color/brand_deep_brown"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/brand_deep_brown" />
 
                 <TextView
                     android:id="@+id/textView3"

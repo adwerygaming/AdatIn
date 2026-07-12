@@ -36,14 +36,13 @@
 
             <TextView
                 android:id="@+id/tvName"
+                style="@style/TextAppearance.Adatin.Cinzel.Heading6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:text="{{Username}}"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/tvEmail"
