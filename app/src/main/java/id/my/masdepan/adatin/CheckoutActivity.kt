@@ -76,9 +76,13 @@ class CheckoutActivity : AppCompatActivity() {
         var totalPrice = 0
         var rentingDays = 0
 
-        etRenterName.setText(account.fullName)
-        etRenterPhoneNumber.setText(account.phoneNumber)
-        etCheckoutAddress.setText(account.address)
+        val account_fullname = account.getName()
+        val account_phone_number = account.getPhoneNumber()
+        val account_address = account.getAddress()
+
+        etRenterName.setText(account_fullname)
+        etRenterPhoneNumber.setText(account_phone_number)
+        etCheckoutAddress.setText(account_address)
 
         etProductName.text = pakaian.nama
         etProductSizeSelected.text = "Ukuran ${selectedProductSize}"

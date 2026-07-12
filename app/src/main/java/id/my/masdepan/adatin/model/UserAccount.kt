@@ -1,7 +1,5 @@
 package id.my.masdepan.adatin.model
 
-import id.my.masdepan.adatin.model.Customer
-
 open class UserAccount(
     internal var email: String,
     internal var password: String

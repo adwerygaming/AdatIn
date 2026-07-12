@@ -96,4 +96,8 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
         this.listCart = newList
         notifyDataSetChanged()
     }
+
+    fun getData(): List<CartItem> {
+        return listCart
+    }
 }

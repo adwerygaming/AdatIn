@@ -1,5 +1,6 @@
 package id.my.masdepan.adatin.model
 
+import id.my.masdepan.adatin.R
 import kotlin.collections.plusAssign
 
 
@@ -7,10 +8,10 @@ class Customer(
     email: String,
     password: String,
 
-    var fullName: String,
-    var address: String?,
-    var phoneNumber: String?,
-    var profilePhoto: Int? // beneran. profile image itu int. wkwkwkw.
+    private var fullName: String,
+    private var address: String?,
+    private var phoneNumber: String?,
+    private var profilePhoto: Int? // beneran. profile image itu int. wkwkwkw.
 ): UserAccount(email, password) {
     private val semuaTransaksi = mutableListOf<TransactionItem>()
     private val keranjang = mutableListOf<CartItem>()
@@ -48,6 +49,26 @@ class Customer(
 
     fun getMyPurchaseHistory(): List<TransactionItem> {
         return semuaTransaksi
+    }
+
+    fun getProfilePhoto(): Int {
+        return profilePhoto ?: R.drawable.user_placeholder;
+    }
+
+    fun getName(): String {
+        return fullName
+    }
+
+    fun getEmail(): String {
+        return super.email
+    }
+
+    fun getPhoneNumber(): String? {
+        return phoneNumber
+    }
+
+    fun getAddress(): String? {
+        return address
     }
 
     fun updateName(value: String): Boolean {

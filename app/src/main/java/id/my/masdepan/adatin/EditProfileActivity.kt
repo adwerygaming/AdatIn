@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import id.my.masdepan.adatin.model.GlobalVariable
 
 class EditProfileActivity : AppCompatActivity() {
@@ -20,25 +21,39 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         val btnSimpan = findViewById<Button>(R.id.btnSimpan)
+        val etFullNameLayout = findViewById<TextInputLayout>(R.id.etFullNameLayout)
         val etFullName = findViewById<TextInputEditText>(R.id.etFullName)
+        val etEmailLayout = findViewById<TextInputLayout>(R.id.etEmailLayout)
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
+        val etAddressLayout = findViewById<TextInputLayout>(R.id.etAddressLayout)
         val etAddress = findViewById<TextInputEditText>(R.id.etAddress)
+        val etPhoneNumberLayout = findViewById<TextInputLayout>(R.id.etPhoneNumberLayout)
         val etPhoneNumber = findViewById<TextInputEditText>(R.id.etPhoneNumber)
 
         // autofill
         val account = GlobalVariable.activeAccount
         if (account != null) {
-            etFullName.setText(account.fullName)
-            etEmail.setText(account.email)
-            etAddress.setText(account.address)
-            etPhoneNumber.setText(account.phoneNumber)
+            val fullName = account.getName()
+            val email = account.getEmail()
+            val address = account.getAddress()
+            val phoneNumber = account.getPhoneNumber()
+
+            etFullName.setText(fullName)
+            etEmail.setText(email)
+            etAddress.setText(address)
+            etPhoneNumber.setText(phoneNumber)
         }
 
-        fun simpanProgres() {
+        fun simpanProgres(): Boolean {
             if (account == null) {
                 Toast.makeText(this, "Akun tidak ada. Silahkan login ulang.", Toast.LENGTH_LONG).show()
-                return
+                return false
             }
+
+            etFullNameLayout.error = null
+            etEmailLayout.error = null
+            etPhoneNumberLayout.error = null
+            etAddressLayout.error = null
 
             val fullName = etFullName.text?.toString()
             val email = etEmail.text?.toString()
@@ -48,8 +63,8 @@ class EditProfileActivity : AppCompatActivity() {
             if (fullName != null) {
                 if (fullName.length > 0) {
                     if (fullName.length < 3) {
-                        Toast.makeText(this, "Nama minimal 3 karakter.", Toast.LENGTH_LONG).show()
-                        return
+                        etFullNameLayout.error = "Nama minimal 3 karakter."
+                        return false
                     }
 
                     account.updateName(fullName)
@@ -59,13 +74,13 @@ class EditProfileActivity : AppCompatActivity() {
             if (email != null) {
                 if (email.length > 0) {
                     if (email.length < 3) {
-                        Toast.makeText(this, "Email minimal 3 karakter.", Toast.LENGTH_LONG).show()
-                        return
+                        etEmailLayout.error = "Email minimal 3 karakter."
+                        return false
                     }
 
                     if (!email.contains("@")) {
-                        Toast.makeText(this, "Email tidak valid.", Toast.LENGTH_LONG).show()
-                        return
+                        etEmailLayout.error = "Email tidak valid."
+                        return false
                     }
 
                     account.updateEmail(email)
@@ -75,8 +90,8 @@ class EditProfileActivity : AppCompatActivity() {
             if (phoneNumber != null) {
                 if (phoneNumber.length > 0) {
                     if (phoneNumber.length < 10) {
-                        Toast.makeText(this, "Nomor minimal 10 karakter.", Toast.LENGTH_LONG).show()
-                        return
+                        etPhoneNumberLayout.error = "Nomor minimal 10 karakter."
+                        return false
                     }
 
                     account.updatePhoneNumber(phoneNumber)
@@ -86,18 +101,20 @@ class EditProfileActivity : AppCompatActivity() {
             if (address != null) {
                 if (address.length > 0) {
                     if (address.length < 10) {
-                        Toast.makeText(this, "Alamat minimal 10 karakter.", Toast.LENGTH_LONG).show()
-                        return
+                        etAddressLayout.error = "Alamat minimal 10 karakter."
+                        return false
                     }
 
                     account.updateAddress(address)
                 }
             }
+            return true
         }
 
         btnSimpan.setOnClickListener {
-            simpanProgres()
-            finish()
+            if (simpanProgres()) {
+                finish()
+            }
         }
     }
 }
