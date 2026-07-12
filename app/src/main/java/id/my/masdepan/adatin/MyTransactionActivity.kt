@@ -43,7 +43,18 @@ class MyTransactionActivity : AppCompatActivity() {
         val rvTransactions = findViewById<RecyclerView>(R.id.rvTransactions)
         rvTransactions.layoutManager = LinearLayoutManager(this)
 
-        val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory()  ?: emptyList()
+        val activeAccount = GlobalVariable.activeAccount
+
+        if (activeAccount == null) {
+            Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        val allTransactions = activeAccount.getMyTransactionHistory()
 
         adapter = MyTransactionAdapter(allTransactions)
         rvTransactions.adapter = adapter
@@ -55,18 +66,23 @@ class MyTransactionActivity : AppCompatActivity() {
 
             for (trx in allTransactions) {
                 val transactionId = trx.id
+                val transaction = activeAccount.getTransactionById(transactionId)
+
+                if (transaction == null) {
+                    continue
+                }
 
                 if (trx.status == StatusSewa.SEDANG_DIPROSES) {
-                    delay(3000)
+                    delay(6000)
 
                     if (trx.tipe_pengambilan == TipePengambilan.DELIVERY) {
-                        GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SEDANG_DIANTAR)
+                        transaction.updateRentingStatus(StatusSewa.SEDANG_DIANTAR)
                         adapter.notifyDataSetChanged()
 
                         delay(6000)
-                        GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SAMPAI_TUJUAN)
+                        transaction.updateRentingStatus(StatusSewa.SAMPAI_TUJUAN)
                     } else {
-                        GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SIAP_DIAMBIL)
+                        transaction.updateRentingStatus(StatusSewa.SIAP_DIAMBIL)
                     }
                 }
 
@@ -74,11 +90,10 @@ class MyTransactionActivity : AppCompatActivity() {
                     delay(6000)
 
                     Toast.makeText(this@MyTransactionActivity, "Penjual telah mengkonfirmasi pembatalan. Dana telah dikembalikan ke metode pembayaran anda.", Toast.LENGTH_LONG).show()
-                    GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.DIBATALKAN)
+                    transaction.updateRentingStatus(StatusSewa.DIBATALKAN)
                 }
 
                 adapter.notifyDataSetChanged()
-
             }
         }
     }
@@ -86,7 +101,16 @@ class MyTransactionActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory() ?: emptyList()
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        val allTransactions = activeAccount.getMyTransactionHistory()
         adapter.updateData(allTransactions)
 
         updateView()
@@ -96,7 +120,8 @@ class MyTransactionActivity : AppCompatActivity() {
         val MyTransactionScrollViewGroup = findViewById<LinearLayout>(R.id.MyTransactionScrollViewGroup)
         val MyTransactionEmptyDetailGroup = findViewById<LinearLayout>(R.id.MyTransactionEmptyDetailGroup)
 
-        val allTransactions = GlobalVariable.activeAccount?.getMyPurchaseHistory() ?: emptyList()
+        val activeAccount = GlobalVariable.activeAccount
+        val allTransactions = activeAccount?.getMyTransactionHistory() ?: emptyList()
 
         if (allTransactions.isEmpty()) {
             MyTransactionScrollViewGroup.visibility = View.GONE

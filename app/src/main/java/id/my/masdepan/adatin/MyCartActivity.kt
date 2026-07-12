@@ -1,5 +1,6 @@
 package id.my.masdepan.adatin
 
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -24,6 +25,15 @@ class MyCartActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_my_cart)
 
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_cart
         bottomNav.setupBottomNav(this)
@@ -31,11 +41,11 @@ class MyCartActivity : AppCompatActivity() {
         val rvCarts = findViewById<RecyclerView>(R.id.rvCarts)
         rvCarts.layoutManager = LinearLayoutManager(this)
 
-        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+        val allMyCarts = activeAccount.getMyCart()
 
         updateView()
 
-        adapter = MyCartAdapter(allMyCarts)
+        adapter = MyCartAdapter(allMyCarts, activeAccount)
         rvCarts.adapter = adapter
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -55,9 +65,9 @@ class MyCartActivity : AppCompatActivity() {
                 val cartData = adapter.getData()
                 val cartItem = cartData[position]
 
-                GlobalVariable.activeAccount?.removeCartItem(cartItem)
+                activeAccount.removeCartItem(cartItem)
 
-                val updatedList = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+                val updatedList = activeAccount.getMyCart()
                 adapter.updateData(updatedList)
                 updateView()
             }
@@ -107,7 +117,16 @@ class MyCartActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        val allMyCarts = activeAccount.getMyCart()
         adapter.updateData(allMyCarts)
 
         updateView()
@@ -117,7 +136,8 @@ class MyCartActivity : AppCompatActivity() {
         val MyCartScrollViewGroup = findViewById<LinearLayout>(R.id.MyCartScrollViewGroup)
         val MyCartEmptyDetailGroup = findViewById<LinearLayout>(R.id.MyCartEmptyDetailGroup)
 
-        val allMyCarts = GlobalVariable.activeAccount?.getMyCart() ?: emptyList()
+        val activeAccount = GlobalVariable.activeAccount
+        val allMyCarts = activeAccount?.getMyCart() ?: emptyList()
 
         if (allMyCarts.isEmpty()) {
             MyCartScrollViewGroup.visibility = View.GONE

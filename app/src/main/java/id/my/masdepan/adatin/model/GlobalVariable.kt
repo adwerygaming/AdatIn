@@ -8,9 +8,9 @@ object GlobalVariable {
         Customer(
             "masdepan@adatin.com",
             "admin#1234",
-            "MasDepan",
-            "Jl. Amikom",
-            "123",
+            "Devan Aditiya",
+            "Jl. Ring Road Utara, Ngringin, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281",
+            "0812317766221",
             R.drawable.team_pic_devan
         ),
         Customer("yoga@adatin.com", "admin#1234", "Yoga A.", null, null, R.drawable.team_pic_yoga),

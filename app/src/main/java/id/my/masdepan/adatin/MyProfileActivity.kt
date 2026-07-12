@@ -32,9 +32,13 @@ class MyProfileActivity : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.nav_account
         bottomNav.setupBottomNav(this)
 
-        val account = GlobalVariable.activeAccount
+        val activeAccount = GlobalVariable.activeAccount
 
-        if (account == null) {
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
             return
         }
 
@@ -43,8 +47,7 @@ class MyProfileActivity : AppCompatActivity() {
         val menuTeam = findViewById<LinearLayout>(R.id.menuTeam)
         val menuEditProfile = findViewById<LinearLayout>(R.id.menuEditProfile)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
-
-
+        
         updateProfile()
 
         menuTransaksi.setOnClickListener {
@@ -98,8 +101,12 @@ class MyProfileActivity : AppCompatActivity() {
     }
 
     fun updateProfile() {
-        val account = GlobalVariable.activeAccount
-        if (account == null) {
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
             return
         }
 
@@ -107,9 +114,9 @@ class MyProfileActivity : AppCompatActivity() {
         val tvEmail = findViewById<TextView>(R.id.tvEmail)
         val ivProfilePicture = findViewById<ShapeableImageView>(R.id.ivProfilePicture)
 
-        val fullname = account.getName()
-        val email = account.getEmail()
-        val profilePhoto = account.getProfilePhoto()
+        val fullname = activeAccount.getName()
+        val email = activeAccount.getEmail()
+        val profilePhoto = activeAccount.getProfilePhoto()
 
         ivProfilePicture.load(profilePhoto)
         tvName.text = fullname

@@ -9,14 +9,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import android.app.Activity
 import id.my.masdepan.adatin.DetailItemActivity
+import id.my.masdepan.adatin.LoginActivity
 import id.my.masdepan.adatin.model.GlobalVariable
 import id.my.masdepan.adatin.R
 import id.my.masdepan.adatin.daftarPakaian
 import id.my.masdepan.adatin.model.CartItem
+import id.my.masdepan.adatin.model.Customer
 import id.my.masdepan.adatin.toRupiahFormat
 
-class MyCartAdapter(private var listCart: List<CartItem>) :
+class MyCartAdapter(
+    private var listCart: List<CartItem>,
+    private var account: Customer
+) :
     RecyclerView.Adapter<MyCartAdapter.CartViewHolder>() {
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,13 +44,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val cartItem = listCart[position]
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivCartProductImage)
-        val pakaian = daftarPakaian.find { it.id == cartItem.pakaianId }
-
-        val currentUser = GlobalVariable.activeAccount
-
-        if (pakaian == null) {
-            return
-        }
+        val pakaian = cartItem.pakaian
 
         ivPakaian.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
@@ -65,7 +65,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
                 holder.tvCartProductQuantity.text = "${cartItem.quantity}"
                 notifyDataSetChanged()
             } else {
-                currentUser?.removeCartItem(cartItem)
+                account.removeCartItem(cartItem)
 
                 listCart = listCart.filter { it != cartItem }
                 updateData(listCart)

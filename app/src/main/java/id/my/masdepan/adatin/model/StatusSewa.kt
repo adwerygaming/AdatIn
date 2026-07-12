@@ -1,6 +1,7 @@
 package id.my.masdepan.adatin.model
 
 enum class StatusSewa {
+    PENDING,
     MENUNGGU_PEMBAYARAN,
     SEDANG_DIPROSES,
     SIAP_DIAMBIL,

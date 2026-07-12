@@ -22,6 +22,15 @@ class ConfirmReturnActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_confirm_return)
 
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         val transactionId = intent.getStringExtra("transactionId")
 
         if (transactionId == null) {
@@ -29,14 +38,14 @@ class ConfirmReturnActivity : AppCompatActivity() {
             return
         }
 
-        val transaction = GlobalVariable.activeAccount?.getPurchaseById(transactionId)
+        val transaction = activeAccount.getTransactionById(transactionId)
 
         if (transaction == null) {
             Toast.makeText(this, "Transaksi Tidak Ditemukan", Toast.LENGTH_LONG).show()
             return
         }
 
-        val produk = daftarPakaian.find { it.id == transaction.pakaianId }
+        val produk = daftarPakaian.find { it.id == transaction.pakaian.id }
 
         if (produk == null) {
             Toast.makeText(this, "Pakaian Tidak Ditemukan", Toast.LENGTH_LONG).show()

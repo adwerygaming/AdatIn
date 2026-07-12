@@ -7,20 +7,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import id.my.masdepan.adatin.ConfirmCancelActivity
 import id.my.masdepan.adatin.ConfirmPickupActivity
 import id.my.masdepan.adatin.ConfirmReturnActivity
 import id.my.masdepan.adatin.R
-import id.my.masdepan.adatin.daftarPakaian
+import id.my.masdepan.adatin.model.Customer
 import id.my.masdepan.adatin.model.StatusSewa
 import id.my.masdepan.adatin.model.TipePengambilan
 import id.my.masdepan.adatin.model.TransactionItem
 import id.my.masdepan.adatin.toRupiahFormat
 
-class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
+class MyTransactionAdapter(
+    private var semuaTransaksi: List<TransactionItem>,
+) :
     RecyclerView.Adapter<MyTransactionAdapter.PenyewaanViewHolder>() {
 
     class PenyewaanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -47,12 +48,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
 
     override fun onBindViewHolder(holder: PenyewaanViewHolder, position: Int) {
         val transaksi = this.semuaTransaksi[position]
-        val pakaian = daftarPakaian.find { it.id == transaksi.pakaianId }
-
-        if (pakaian == null) {
-            Toast.makeText(holder.itemView.context, "Pakaian Tidak Ditemukan", Toast.LENGTH_LONG).show()
-            return
-        }
+        val pakaian = transaksi.pakaian
 
         holder.ivTransactionProductImage.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
@@ -101,6 +97,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
         }
 
         val formattedStatus = when (transaksi.status) {
+            StatusSewa.PENDING -> "Pending"
             StatusSewa.MENUNGGU_PEMBAYARAN -> "Menunggu Pembayaran"
             StatusSewa.SEDANG_DIPROSES -> "Sedang Diproses"
             StatusSewa.SIAP_DIAMBIL -> "Siap Diambil"
@@ -112,9 +109,8 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
             StatusSewa.DIBATALKAN -> "Dibatalkan"
         }
 
-        val diffMs = transaksi.tanggal_selesai_sewa_ms - transaksi.tanggal_mulai_sewa_ms
-        var totalDays = (diffMs / (1000 * 60 * 60 * 24)).toInt()
-        totalDays = totalDays + 1
+        val totalDays = transaksi.getRentingDays()
+        val subtotal = transaksi.calculateSubtotal()
 
         val deliveryString = if (transaksi.tipe_pengambilan == TipePengambilan.DELIVERY) {
             "Delivery"
@@ -128,7 +124,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
         holder.tvTransactionProductName.text = pakaian.nama
         holder.tvTransactionProductSize.text = "${transaksi.ukuran}"
 
-        holder.tvTransactionProductSubtotal.text = "Rp${transaksi.subtotal.toRupiahFormat()}"
+        holder.tvTransactionProductSubtotal.text = "Rp${subtotal.toRupiahFormat()}"
 
         holder.tvTransactionProductRentalDetails.text = "${pakaian.daerah} • $deliveryString • $totalDays Hari"
     }

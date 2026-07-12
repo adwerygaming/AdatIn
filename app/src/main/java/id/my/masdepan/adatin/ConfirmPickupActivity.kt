@@ -8,8 +8,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import id.my.masdepan.adatin.model.GlobalFunction
 import id.my.masdepan.adatin.model.GlobalVariable
@@ -21,6 +19,15 @@ class ConfirmPickupActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_confirm_pickup)
 
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         val transactionId = intent.getStringExtra("transactionId")
 
         if (transactionId == null) {
@@ -28,7 +35,7 @@ class ConfirmPickupActivity : AppCompatActivity() {
             return
         }
 
-        val transaction = GlobalVariable.activeAccount?.getPurchaseById(transactionId)
+        val transaction = activeAccount.getTransactionById(transactionId)
 
         if (transaction == null) {
             Toast.makeText(this, "Transaksi Tidak Ditemukan", Toast.LENGTH_LONG).show()

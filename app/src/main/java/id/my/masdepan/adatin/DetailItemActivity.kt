@@ -16,12 +16,22 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import id.my.masdepan.adatin.model.CartItem
 import id.my.masdepan.adatin.model.GlobalVariable
+import id.my.masdepan.adatin.model.UkuranPakaian
 
 class DetailItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_detail_item)
+
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -110,8 +120,8 @@ class DetailItemActivity : AppCompatActivity() {
             val selectedChip = findViewById<Chip>(checkedChipId)
             val selectedSize = selectedChip.text.toString()
 
-            val cartItem = CartItem(pakaianId, productQuantity, UkuranPakaian.valueOf(selectedSize))
-            GlobalVariable.activeAccount?.addToCart(cartItem)
+            val cartItem = CartItem(pakaian, productQuantity, UkuranPakaian.valueOf(selectedSize))
+            activeAccount.addToCart(cartItem)
 
             Toast.makeText(this, "${pakaian.nama} berhasil ditambahkan ke keranjang", Toast.LENGTH_LONG).show()
         }

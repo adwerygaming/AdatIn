@@ -22,6 +22,7 @@ import id.my.masdepan.adatin.model.GlobalVariable
 import id.my.masdepan.adatin.model.StatusSewa
 import id.my.masdepan.adatin.model.TipePengambilan
 import id.my.masdepan.adatin.model.TransactionItem
+import id.my.masdepan.adatin.model.UkuranPakaian
 
 class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,17 +30,25 @@ class PaymentActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_payment)
 
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         val productId = intent.getIntExtra("productId", -1)
-        val selectedProductSize = intent.getStringExtra("selectedProductSize") ?: "None"
-        val renterName = intent.getStringExtra("RenterName")
-        val renterPhoneNumber = intent.getStringExtra("RenterPhoneNumber")
+        val selectedProductSize = intent.getStringExtra("selectedProductSize") ?: "S"
+        val renterName = intent.getStringExtra("renterName")
+        val renterPhoneNumber = intent.getStringExtra("renterPhoneNumber")
         val isDelivery = intent.getBooleanExtra("isDelivery", false)
         val renterAddress = intent.getStringExtra("renterAddress")
         val rentingDays = intent.getIntExtra("rentingDays", -1)
-        val totalPrice = intent.getIntExtra("totalPrice", -1)
         val startRentDateMs = intent.getLongExtra("startRentDateMs", -1)
         val endRentDateMs = intent.getLongExtra("endRentDateMs", -1)
-        val quantity = intent.getIntExtra("quantity", 1)
+        val quantity = intent.getIntExtra("quantity", -1)
 
         val pakaian = daftarPakaian.find { it.id == productId }
         if (pakaian == null) {
@@ -67,20 +76,35 @@ class PaymentActivity : AppCompatActivity() {
 
         val PaymentCheckoutBtn = findViewById<Button>(R.id.PaymentCheckoutBtn)
 
-        // product info
-        tvPaymentProductName.text = pakaian.nama
-        tvPaymentProductSelectedSize.text = "Ukuran ${selectedProductSize}"
-        tvPaymentProductPrice.text = "Rp${pakaian.harga_sewa_per_hari.toRupiahFormat()} / hari"
-
-        tvPaymentProductImage.load(pakaian.gambar) {
-            placeholder(R.drawable.ic_loading)
-            error(R.drawable.ic_error)
-        }
-
         // renter info
         tvPaymentRenterName.text = renterName
         tvPaymentRenterPhoneNumber.text = renterPhoneNumber
         tvPaymentRenterAddress.text = renterAddress
+
+        val invoiceId = "INV-${System.currentTimeMillis()}"
+        val tipePengambilan = if (isDelivery) TipePengambilan.DELIVERY else TipePengambilan.PICKUP
+        val ukuranPakaian = UkuranPakaian.valueOf(selectedProductSize)
+
+        val newOrder = TransactionItem(
+            invoiceId,
+            pakaian,
+            quantity,
+            startRentDateMs,
+            endRentDateMs,
+            tipePengambilan,
+            ukuranPakaian,
+            StatusSewa.PENDING
+        )
+
+        // product info
+        tvPaymentProductName.text = newOrder.pakaian.nama
+        tvPaymentProductSelectedSize.text = "Ukuran ${newOrder.ukuran}"
+        tvPaymentProductPrice.text = "Rp${newOrder.pakaian.harga_sewa_per_hari.toRupiahFormat()} / hari"
+
+        tvPaymentProductImage.load(newOrder.pakaian.gambar) {
+            placeholder(R.drawable.ic_loading)
+            error(R.drawable.ic_error)
+        }
 
         if (isDelivery) {
             tvPaymentRenterAddressLayout.visibility = View.VISIBLE
@@ -93,36 +117,26 @@ class PaymentActivity : AppCompatActivity() {
         tvPaymentRentingDuration.text = "${rentingDays} hari"
 
         // payment details
-        var subtotal = totalPrice
-        val deliveryFee = 15000
+        val total = newOrder.calculateTotal()
+        println(newOrder)
 
         tvPaymentDetailsProductNameLabel.text = pakaian.nama
         tvPaymentDetailsProductName.text = "${quantity}x Rp${pakaian.harga_sewa_per_hari.toRupiahFormat()}"
-        if (isDelivery) {
+
+        if (tipePengambilan == TipePengambilan.DELIVERY) {
+            val deliveryFee = newOrder.calculateDeliveryFee()
+
             tvPaymentDetailsDeliveryFeeLayout.visibility = View.VISIBLE
             tvPaymentDetailsDeliveryFee.text = "Rp${deliveryFee.toRupiahFormat()}"
-            subtotal += deliveryFee
         } else {
             tvPaymentDetailsDeliveryFeeLayout.visibility = View.GONE
         }
 
-        tvPaymentTotal.text = "Rp${subtotal.toRupiahFormat()}"
+        tvPaymentTotal.text = "Rp${total.toRupiahFormat()}"
 
         PaymentCheckoutBtn.setOnClickListener {
-            val invoiceId = "INV-${System.currentTimeMillis()}"
-
-            val newOrder = TransactionItem(
-                invoiceId,
-                pakaian.id,
-                startRentDateMs,
-                endRentDateMs,
-                when (isDelivery) { true -> TipePengambilan.DELIVERY; false -> TipePengambilan.PICKUP },
-                selectedProductSize,
-                subtotal,
-                StatusSewa.SEDANG_DIPROSES
-            )
-
-            GlobalVariable.activeAccount?.addPurchaseHistory(newOrder)
+            newOrder.updateRentingStatus(StatusSewa.SEDANG_DIPROSES)
+            activeAccount.addPurchaseHistory(newOrder)
 
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(R.layout.dialog_loading)

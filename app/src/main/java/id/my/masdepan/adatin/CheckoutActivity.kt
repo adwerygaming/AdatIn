@@ -29,9 +29,13 @@ class CheckoutActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_checkout)
 
-        val account = GlobalVariable.activeAccount
-        if (account == null) {
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
             Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
             return
         }
 
@@ -43,6 +47,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         if (pakaian == null) {
             Toast.makeText(this, "Pakaian Tidak Ditemukan", Toast.LENGTH_LONG).show()
+            finish()
             return
         }
 
@@ -71,18 +76,18 @@ class CheckoutActivity : AppCompatActivity() {
 
         val checkoutBtn = findViewById<Button>(R.id.checkoutBtn)
 
-        var startRentDateMs = 0L
-        var endRentDateMs = 0L
-        var totalPrice = 0
-        var rentingDays = 0
-
-        val account_fullname = account.getName()
-        val account_phone_number = account.getPhoneNumber()
-        val account_address = account.getAddress()
+        val account_fullname = activeAccount.getName()
+        val account_phone_number = activeAccount.getPhoneNumber()
+        val account_address = activeAccount.getAddress()
 
         etRenterName.setText(account_fullname)
         etRenterPhoneNumber.setText(account_phone_number)
         etCheckoutAddress.setText(account_address)
+
+        var startRentDateMs = 0L
+        var endRentDateMs = 0L
+        var totalPrice = 0
+        var rentingDays = 0
 
         etProductName.text = pakaian.nama
         etProductSizeSelected.text = "Ukuran ${selectedProductSize}"
@@ -91,8 +96,6 @@ class CheckoutActivity : AppCompatActivity() {
 
         tvRentingDuration.text = "-"
         tvTotalPrice.text = "-"
-
-        var isDelivery = false
 
         fun toggleButton(btn: MaterialButton, state: Boolean) {
             if (state) {
@@ -113,6 +116,8 @@ class CheckoutActivity : AppCompatActivity() {
                 btn.strokeWidth = 6
             }
         }
+
+        var isDelivery = false
 
         btnCheckoutDelivery.setOnClickListener {
             isDelivery = true
@@ -263,8 +268,8 @@ class CheckoutActivity : AppCompatActivity() {
             intent.putExtra("productId", pakaianId)
             intent.putExtra("quantity", quantity)
             intent.putExtra("selectedProductSize", selectedProductSize)
-            intent.putExtra("RenterName", etRenterName.text.toString())
-            intent.putExtra("RenterPhoneNumber", etRenterPhoneNumber.text.toString())
+            intent.putExtra("renterName", etRenterName.text.toString())
+            intent.putExtra("renterPhoneNumber", etRenterPhoneNumber.text.toString())
             intent.putExtra("isDelivery", isDelivery)
             intent.putExtra("renterAddress", etCheckoutAddress.text.toString())
             intent.putExtra("rentingDays", rentingDays)
