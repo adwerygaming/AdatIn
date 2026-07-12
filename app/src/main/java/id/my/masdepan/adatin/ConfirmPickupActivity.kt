@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import id.my.masdepan.adatin.model.GlobalFunction
 import id.my.masdepan.adatin.model.GlobalVariable
 import id.my.masdepan.adatin.model.StatusSewa
 
@@ -53,10 +52,10 @@ class ConfirmPickupActivity : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed({
                 dialog.dismiss()
 
+                transaction.updateRentingStatus(StatusSewa.SEDANG_DISEWA)
+
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SEDANG_DISEWA)
 
                 Toast.makeText(this, "Pengambilan dikonfirmasi. Masa sewa dimulai dari sekarang.", Toast.LENGTH_LONG).show()
                 startActivity(intent)
