@@ -86,7 +86,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         etProductName.text = pakaian.nama
         etProductSizeSelected.text = "Ukuran ${selectedProductSize}"
-        tvProductPrice.text = "Rp${pakaian.harga_per_hari.toRupiahFormat()} / hari"
+        tvProductPrice.text = "Rp${pakaian.harga_sewa_per_hari.toRupiahFormat()} / hari"
         tvProductQuantity.text = "${quantity} Pcs"
 
         tvRentingDuration.text = "-"
@@ -166,7 +166,7 @@ class CheckoutActivity : AppCompatActivity() {
 
                 tvRentingDuration.text = "${rentingDays} hari"
 
-                totalPrice = (rentingDays) * (pakaian.harga_per_hari * quantity)
+                totalPrice = (rentingDays) * (pakaian.harga_sewa_per_hari * quantity)
                 tvTotalPrice.text = "Rp${totalPrice.toRupiahFormat()}"
             }
 
