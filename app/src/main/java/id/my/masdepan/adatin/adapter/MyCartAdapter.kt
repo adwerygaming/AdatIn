@@ -38,7 +38,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val cartItem = listCart[position]
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivCartProductImage)
-        val pakaian = daftarPakaian.find { it.id == cartItem.pakaianId }
+        val pakaian = daftarPakaian.find { it.id == cartItem.pakaian.id }
 
         val currentUser = GlobalVariable.activeAccount
 

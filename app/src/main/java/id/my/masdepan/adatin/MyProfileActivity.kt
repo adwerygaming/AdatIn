@@ -43,8 +43,7 @@ class MyProfileActivity : AppCompatActivity() {
         val menuTeam = findViewById<LinearLayout>(R.id.menuTeam)
         val menuEditProfile = findViewById<LinearLayout>(R.id.menuEditProfile)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
-
-
+        
         updateProfile()
 
         menuTransaksi.setOnClickListener {

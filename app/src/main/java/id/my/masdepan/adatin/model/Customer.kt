@@ -1,8 +1,6 @@
 package id.my.masdepan.adatin.model
 
 import id.my.masdepan.adatin.R
-import kotlin.collections.plusAssign
-
 
 class Customer(
     email: String,
@@ -11,7 +9,7 @@ class Customer(
     private var fullName: String,
     private var address: String?,
     private var phoneNumber: String?,
-    private var profilePhoto: Int? // beneran. profile image itu int. wkwkwkw.
+    private var profilePhoto: Int?
 ): UserAccount(email, password) {
     private val semuaTransaksi = mutableListOf<TransactionItem>()
     private val keranjang = mutableListOf<CartItem>()
@@ -24,7 +22,7 @@ class Customer(
         val items = this.getMyCart()
 
         for (item in items) {
-            if (item.pakaianId == product.pakaianId && item.size == product.size) {
+            if (item.pakaian == product.pakaian && item.size == product.size) {
                 item.quantity += product.quantity
                 return item
             }
@@ -42,12 +40,12 @@ class Customer(
         keranjang.remove(item)
     }
 
-    fun getPurchaseById(transactionId: String): TransactionItem? {
+    fun getTransactionById(transactionId: String): TransactionItem? {
         val allTransactions = semuaTransaksi
         return allTransactions.find { it.id == transactionId }
     }
 
-    fun getMyPurchaseHistory(): List<TransactionItem> {
+    fun getMyTransactionHistory(): List<TransactionItem> {
         return semuaTransaksi
     }
 

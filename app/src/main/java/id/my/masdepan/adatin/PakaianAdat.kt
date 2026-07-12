@@ -264,7 +264,3 @@ val daftarPakaian = mutableListOf(
         gambar = R.drawable.ic_launcher_background
     )
 )
-
-enum class UkuranPakaian {
-    S, M, L, XL
-}

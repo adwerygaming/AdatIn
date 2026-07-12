@@ -47,12 +47,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
 
     override fun onBindViewHolder(holder: PenyewaanViewHolder, position: Int) {
         val transaksi = this.semuaTransaksi[position]
-        val pakaian = daftarPakaian.find { it.id == transaksi.pakaianId }
-
-        if (pakaian == null) {
-            Toast.makeText(holder.itemView.context, "Pakaian Tidak Ditemukan", Toast.LENGTH_LONG).show()
-            return
-        }
+        val pakaian = transaksi.pakaian
 
         holder.ivTransactionProductImage.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
@@ -101,6 +96,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
         }
 
         val formattedStatus = when (transaksi.status) {
+            StatusSewa.PENDING -> "Pending"
             StatusSewa.MENUNGGU_PEMBAYARAN -> "Menunggu Pembayaran"
             StatusSewa.SEDANG_DIPROSES -> "Sedang Diproses"
             StatusSewa.SIAP_DIAMBIL -> "Siap Diambil"
@@ -112,9 +108,8 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
             StatusSewa.DIBATALKAN -> "Dibatalkan"
         }
 
-        val diffMs = transaksi.tanggal_selesai_sewa_ms - transaksi.tanggal_mulai_sewa_ms
-        var totalDays = (diffMs / (1000 * 60 * 60 * 24)).toInt()
-        totalDays = totalDays + 1
+        val totalDays = transaksi.getRentingDays()
+        val subtotal = transaksi.calculateSubtotal()
 
         val deliveryString = if (transaksi.tipe_pengambilan == TipePengambilan.DELIVERY) {
             "Delivery"
@@ -128,7 +123,7 @@ class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
         holder.tvTransactionProductName.text = pakaian.nama
         holder.tvTransactionProductSize.text = "${transaksi.ukuran}"
 
-        holder.tvTransactionProductSubtotal.text = "Rp${transaksi.subtotal.toRupiahFormat()}"
+        holder.tvTransactionProductSubtotal.text = "Rp${subtotal.toRupiahFormat()}"
 
         holder.tvTransactionProductRentalDetails.text = "${pakaian.daerah} • $deliveryString • $totalDays Hari"
     }

@@ -8,5 +8,5 @@ data class PakaianAdat(
     val rating: Double,
     val daerah: String,
     val harga_sewa_per_hari: Int,
-    val tersedia: Boolean
+    val tersedia: Boolean,
 )

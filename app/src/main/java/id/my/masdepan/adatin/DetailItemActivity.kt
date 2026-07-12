@@ -16,6 +16,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import id.my.masdepan.adatin.model.CartItem
 import id.my.masdepan.adatin.model.GlobalVariable
+import id.my.masdepan.adatin.model.UkuranPakaian
 
 class DetailItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,8 +111,15 @@ class DetailItemActivity : AppCompatActivity() {
             val selectedChip = findViewById<Chip>(checkedChipId)
             val selectedSize = selectedChip.text.toString()
 
-            val cartItem = CartItem(pakaianId, productQuantity, UkuranPakaian.valueOf(selectedSize))
-            GlobalVariable.activeAccount?.addToCart(cartItem)
+            val activeAccount = GlobalVariable.activeAccount
+
+            if (activeAccount == null) {
+                Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val cartItem = CartItem(pakaian, productQuantity, UkuranPakaian.valueOf(selectedSize))
+            activeAccount.addToCart(cartItem)
 
             Toast.makeText(this, "${pakaian.nama} berhasil ditambahkan ke keranjang", Toast.LENGTH_LONG).show()
         }

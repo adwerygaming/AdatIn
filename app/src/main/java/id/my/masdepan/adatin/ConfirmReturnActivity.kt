@@ -29,14 +29,14 @@ class ConfirmReturnActivity : AppCompatActivity() {
             return
         }
 
-        val transaction = GlobalVariable.activeAccount?.getPurchaseById(transactionId)
+        val transaction = GlobalVariable.activeAccount?.getTransactionById(transactionId)
 
         if (transaction == null) {
             Toast.makeText(this, "Transaksi Tidak Ditemukan", Toast.LENGTH_LONG).show()
             return
         }
 
-        val produk = daftarPakaian.find { it.id == transaction.pakaianId }
+        val produk = daftarPakaian.find { it.id == transaction.pakaian.id }
 
         if (produk == null) {
             Toast.makeText(this, "Pakaian Tidak Ditemukan", Toast.LENGTH_LONG).show()
