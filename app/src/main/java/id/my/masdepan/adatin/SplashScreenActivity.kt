@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import id.my.masdepan.adatin.model.UserAccount
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,15 +25,25 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun checkSession() {
         val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
-        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
+        val savedEmail = sharedPref.getString("email", null)
+        val savedPassword = sharedPref.getString("password", null)
 
-        if (isLoggedIn) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        } else {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        if (savedEmail != null && savedPassword != null) {
+            // Auto login
+            val account = UserAccount(savedEmail, savedPassword)
+            val login = account.login()
+
+            if (login) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                return
+            } else {
+                Toast.makeText(this, "Sesi anda telah berakhir, silahkan login ulang.", Toast.LENGTH_LONG).show()
+            }
         }
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
 
         finish()
     }

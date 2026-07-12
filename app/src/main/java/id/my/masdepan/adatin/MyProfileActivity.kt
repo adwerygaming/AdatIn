@@ -77,7 +77,8 @@ class MyProfileActivity : AppCompatActivity() {
                 .setPositiveButton("Ya") { _, _ ->
                     val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
                     val editor = sharedPref.edit()
-                    editor.putBoolean("isLoggedIn", false)
+                    editor.putString("email", null)
+                    editor.putString("password", null)
                     editor.apply()
 
                     GlobalVariable.activeAccount = null
