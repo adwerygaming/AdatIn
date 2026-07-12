@@ -1,5 +1,6 @@
 package id.my.masdepan.adatin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -14,6 +15,15 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
 
         val toolbar = findViewById<MaterialToolbar>(R.id.editAppBar)
         toolbar.setNavigationOnClickListener {
@@ -31,81 +41,73 @@ class EditProfileActivity : AppCompatActivity() {
         val etPhoneNumber = findViewById<TextInputEditText>(R.id.etPhoneNumber)
 
         // autofill
-        val account = GlobalVariable.activeAccount
-        if (account != null) {
-            val fullName = account.getName()
-            val email = account.getEmail()
-            val address = account.getAddress()
-            val phoneNumber = account.getPhoneNumber()
+        val fullName = activeAccount.getName()
+        val email = activeAccount.getEmail()
+        val address = activeAccount.getAddress()
+        val phoneNumber = activeAccount.getPhoneNumber()
 
-            etFullName.setText(fullName)
-            etEmail.setText(email)
-            etAddress.setText(address)
-            etPhoneNumber.setText(phoneNumber)
-        }
+        etFullName.setText(fullName)
+        etEmail.setText(email)
+        etAddress.setText(address)
+        etPhoneNumber.setText(phoneNumber)
 
         fun simpanProgres(): Boolean {
-            if (account == null) {
-                Toast.makeText(this, "Akun tidak ada. Silahkan login ulang.", Toast.LENGTH_LONG).show()
-                return false
-            }
-
             etFullNameLayout.error = null
             etEmailLayout.error = null
             etPhoneNumberLayout.error = null
             etAddressLayout.error = null
 
-            val fullName = etFullName.text?.toString()
-            val email = etEmail.text?.toString()
-            val phoneNumber = etPhoneNumber.text?.toString()
-            val address = etAddress.text?.toString()
+            val fullNameInput = etFullName.text?.toString()
+            val emailInput = etEmail.text?.toString()
+            val phoneNumberInput = etPhoneNumber.text?.toString()
+            val addressInput = etAddress.text?.toString()
 
-            if (fullName != null) {
-                if (fullName.length > 0) {
-                    if (fullName.length < 3) {
+            if (fullNameInput != null) {
+                if (fullNameInput.length > 0) {
+                    if (fullNameInput.length < 3) {
                         etFullNameLayout.error = "Nama minimal 3 karakter."
                         return false
                     }
 
-                    account.updateName(fullName)
+                    activeAccount.updateName(fullNameInput)
                 }
             }
 
-            if (email != null) {
-                if (email.length > 0) {
-                    if (email.length < 3) {
+            if (emailInput != null) {
+                if (emailInput.length > 0) {
+                    if (emailInput.length < 3) {
                         etEmailLayout.error = "Email minimal 3 karakter."
                         return false
                     }
 
-                    if (!email.contains("@")) {
+                    if (!emailInput.contains("@")) {
                         etEmailLayout.error = "Email tidak valid."
                         return false
                     }
 
-                    account.updateEmail(email)
+                    activeAccount.updateEmail(emailInput)
                 }
             }
 
-            if (phoneNumber != null) {
-                if (phoneNumber.length > 0) {
-                    if (phoneNumber.length < 10) {
+            if (phoneNumberInput != null) {
+                if (phoneNumberInput.length > 0) {
+                    if (phoneNumberInput.length < 10) {
                         etPhoneNumberLayout.error = "Nomor minimal 10 karakter."
                         return false
                     }
 
-                    account.updatePhoneNumber(phoneNumber)
+                    activeAccount.updatePhoneNumber(phoneNumberInput)
                 }
             }
 
-            if (address != null) {
-                if (address.length > 0) {
-                    if (address.length < 10) {
+            if (addressInput != null) {
+                if (addressInput.length > 0) {
+                    if (addressInput.length < 10) {
                         etAddressLayout.error = "Alamat minimal 10 karakter."
                         return false
                     }
 
-                    account.updateAddress(address)
+                    activeAccount.updateAddress(addressInput)
                 }
             }
             return true

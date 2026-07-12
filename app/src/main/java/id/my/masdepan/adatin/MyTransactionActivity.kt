@@ -47,6 +47,10 @@ class MyTransactionActivity : AppCompatActivity() {
 
         if (activeAccount == null) {
             Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
             return
         }
 
@@ -97,7 +101,16 @@ class MyTransactionActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val allTransactions = GlobalVariable.activeAccount?.getMyTransactionHistory() ?: emptyList()
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        val allTransactions = activeAccount.getMyTransactionHistory()
         adapter.updateData(allTransactions)
 
         updateView()
@@ -107,7 +120,8 @@ class MyTransactionActivity : AppCompatActivity() {
         val MyTransactionScrollViewGroup = findViewById<LinearLayout>(R.id.MyTransactionScrollViewGroup)
         val MyTransactionEmptyDetailGroup = findViewById<LinearLayout>(R.id.MyTransactionEmptyDetailGroup)
 
-        val allTransactions = GlobalVariable.activeAccount?.getMyTransactionHistory() ?: emptyList()
+        val activeAccount = GlobalVariable.activeAccount
+        val allTransactions = activeAccount?.getMyTransactionHistory() ?: emptyList()
 
         if (allTransactions.isEmpty()) {
             MyTransactionScrollViewGroup.visibility = View.GONE

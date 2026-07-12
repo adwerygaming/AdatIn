@@ -29,9 +29,12 @@ class CheckoutActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_checkout)
 
-        val account = GlobalVariable.activeAccount
-        if (account == null) {
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
             Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
             finish()
             return
         }
@@ -73,9 +76,9 @@ class CheckoutActivity : AppCompatActivity() {
 
         val checkoutBtn = findViewById<Button>(R.id.checkoutBtn)
 
-        val account_fullname = account.getName()
-        val account_phone_number = account.getPhoneNumber()
-        val account_address = account.getAddress()
+        val account_fullname = activeAccount.getName()
+        val account_phone_number = activeAccount.getPhoneNumber()
+        val account_address = activeAccount.getAddress()
 
         etRenterName.setText(account_fullname)
         etRenterPhoneNumber.setText(account_phone_number)

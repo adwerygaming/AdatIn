@@ -9,7 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import android.app.Activity
 import id.my.masdepan.adatin.DetailItemActivity
+import id.my.masdepan.adatin.LoginActivity
 import id.my.masdepan.adatin.model.GlobalVariable
 import id.my.masdepan.adatin.R
 import id.my.masdepan.adatin.daftarPakaian
@@ -40,7 +42,17 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivCartProductImage)
         val pakaian = daftarPakaian.find { it.id == cartItem.pakaian.id }
 
-        val currentUser = GlobalVariable.activeAccount
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val context = holder.itemView.context
+            val intent = Intent(context, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            context.startActivity(intent)
+            if (context is Activity) {
+                context.finish()
+            }
+            return
+        }
 
         if (pakaian == null) {
             return
@@ -65,7 +77,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
                 holder.tvCartProductQuantity.text = "${cartItem.quantity}"
                 notifyDataSetChanged()
             } else {
-                currentUser?.removeCartItem(cartItem)
+                activeAccount.removeCartItem(cartItem)
 
                 listCart = listCart.filter { it != cartItem }
                 updateData(listCart)

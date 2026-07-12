@@ -24,6 +24,15 @@ class DetailItemActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_detail_item)
 
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
@@ -110,13 +119,6 @@ class DetailItemActivity : AppCompatActivity() {
             val checkedChipId = cgDetailProductSizeSelection.checkedChipId
             val selectedChip = findViewById<Chip>(checkedChipId)
             val selectedSize = selectedChip.text.toString()
-
-            val activeAccount = GlobalVariable.activeAccount
-
-            if (activeAccount == null) {
-                Toast.makeText(this, "Akun Tidak Ditemukan", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
 
             val cartItem = CartItem(pakaian, productQuantity, UkuranPakaian.valueOf(selectedSize))
             activeAccount.addToCart(cartItem)

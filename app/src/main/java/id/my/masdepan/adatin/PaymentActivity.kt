@@ -30,6 +30,15 @@ class PaymentActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_payment)
 
+        val activeAccount = GlobalVariable.activeAccount
+        if (activeAccount == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         val productId = intent.getIntExtra("productId", -1)
         val selectedProductSize = intent.getStringExtra("selectedProductSize") ?: "None"
         val renterName = intent.getStringExtra("renterName")
@@ -127,7 +136,7 @@ class PaymentActivity : AppCompatActivity() {
 
         PaymentCheckoutBtn.setOnClickListener {
             newOrder.updateRentingStatus(StatusSewa.SEDANG_DIPROSES)
-            GlobalVariable.activeAccount?.addPurchaseHistory(newOrder)
+            activeAccount.addPurchaseHistory(newOrder)
 
             val dialog = MaterialAlertDialogBuilder(this)
                 .setView(R.layout.dialog_loading)
