@@ -1,12 +1,13 @@
 package id.my.masdepan.adatin.model
 
 data class PakaianAdat(
-    val id: Int,
-    val nama: String,
-    val deskripsi: String,
-    val gambar: Int,
-    val rating: Double,
+    override val id: Int,
+    override val nama: String,
+    override val deskripsi: String,
+    override val gambar: Int,
+    override val rating: Double,
+    override val harga_sewa_per_hari: Int,
+    override val tersedia: Boolean,
+
     val daerah: String,
-    val harga_sewa_per_hari: Int,
-    val tersedia: Boolean,
-)
+) : Product(id, nama, deskripsi, gambar, rating, harga_sewa_per_hari, tersedia)

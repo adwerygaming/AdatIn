@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import id.my.masdepan.adatin.model.GlobalFunction
 import id.my.masdepan.adatin.model.GlobalVariable
 import id.my.masdepan.adatin.model.StatusSewa
 
@@ -54,10 +53,10 @@ class ConfirmCancelActivity : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed({
                 dialog.dismiss()
 
+                transaction.updateRentingStatus(StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
+
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN)
 
                 Toast.makeText(this, "Permintaan pembatalan telah dikirim.", Toast.LENGTH_LONG).show()
                 startActivity(intent)

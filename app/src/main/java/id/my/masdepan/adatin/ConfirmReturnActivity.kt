@@ -12,7 +12,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import id.my.masdepan.adatin.model.GlobalFunction
 import id.my.masdepan.adatin.model.GlobalVariable
 import id.my.masdepan.adatin.model.StatusSewa
 
@@ -75,10 +74,10 @@ class ConfirmReturnActivity : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed({
                 dialog.dismiss()
 
+                transaction.updateRentingStatus(StatusSewa.SELESAI)
+
                 val intent = Intent(this, MyTransactionActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                GlobalFunction.changePenyewaanStatus(transactionId, StatusSewa.SELESAI)
 
                 Toast.makeText(this, "Pengembalian Berhasil. Terima kasih.", Toast.LENGTH_LONG).show()
                 startActivity(intent)
