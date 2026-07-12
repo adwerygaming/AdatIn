@@ -43,11 +43,10 @@
 
             <TextView
                 android:id="@+id/tvDetailProductName"
+                style="@style/TextAppearance.Adatin.Cinzel.Heading5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="{{DetailProductName}}"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:text="{{DetailProductName}}" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

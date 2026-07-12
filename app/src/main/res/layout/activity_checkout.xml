@@ -28,11 +28,10 @@
 
             <TextView
                 android:id="@+id/etProductName"
+                style="@style/TextAppearance.Adatin.Jakarta.Heading6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="{{NamaPakaian}}"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:text="{{NamaPakaian}}" />
 
             <TextView
                 android:id="@+id/etProductSizeSelected"

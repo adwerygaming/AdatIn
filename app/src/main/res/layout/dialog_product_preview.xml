@@ -37,12 +37,11 @@
 
             <TextView
                 android:id="@+id/tvPreviewNama"
+                style="@style/TextAppearance.Adatin.Jakarta.Heading6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textColor="@color/brand_deep_brown"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/brand_deep_brown" />
 
             <TextView
                 android:id="@+id/tvPreviewDaerah"
