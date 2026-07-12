@@ -16,9 +16,13 @@ import id.my.masdepan.adatin.model.GlobalVariable
 import id.my.masdepan.adatin.R
 import id.my.masdepan.adatin.daftarPakaian
 import id.my.masdepan.adatin.model.CartItem
+import id.my.masdepan.adatin.model.Customer
 import id.my.masdepan.adatin.toRupiahFormat
 
-class MyCartAdapter(private var listCart: List<CartItem>) :
+class MyCartAdapter(
+    private var listCart: List<CartItem>,
+    private var account: Customer
+) :
     RecyclerView.Adapter<MyCartAdapter.CartViewHolder>() {
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,11 +46,6 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
         val ivPakaian = holder.itemView.findViewById<ImageView>(R.id.ivCartProductImage)
         val pakaian = cartItem.pakaian
 
-        val activeAccount = GlobalVariable.activeAccount
-        if (activeAccount == null) {
-            return
-        }
-
         ivPakaian.load(pakaian.gambar) {
             placeholder(R.drawable.ic_loading)
             error(R.drawable.ic_error)
@@ -66,7 +65,7 @@ class MyCartAdapter(private var listCart: List<CartItem>) :
                 holder.tvCartProductQuantity.text = "${cartItem.quantity}"
                 notifyDataSetChanged()
             } else {
-                activeAccount.removeCartItem(cartItem)
+                account.removeCartItem(cartItem)
 
                 listCart = listCart.filter { it != cartItem }
                 updateData(listCart)

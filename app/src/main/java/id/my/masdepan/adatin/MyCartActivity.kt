@@ -45,7 +45,7 @@ class MyCartActivity : AppCompatActivity() {
 
         updateView()
 
-        adapter = MyCartAdapter(allMyCarts)
+        adapter = MyCartAdapter(allMyCarts, activeAccount)
         rvCarts.adapter = adapter
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

@@ -7,20 +7,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import id.my.masdepan.adatin.ConfirmCancelActivity
 import id.my.masdepan.adatin.ConfirmPickupActivity
 import id.my.masdepan.adatin.ConfirmReturnActivity
 import id.my.masdepan.adatin.R
-import id.my.masdepan.adatin.daftarPakaian
+import id.my.masdepan.adatin.model.Customer
 import id.my.masdepan.adatin.model.StatusSewa
 import id.my.masdepan.adatin.model.TipePengambilan
 import id.my.masdepan.adatin.model.TransactionItem
 import id.my.masdepan.adatin.toRupiahFormat
 
-class MyTransactionAdapter(private var semuaTransaksi: List<TransactionItem>) :
+class MyTransactionAdapter(
+    private var semuaTransaksi: List<TransactionItem>,
+) :
     RecyclerView.Adapter<MyTransactionAdapter.PenyewaanViewHolder>() {
 
     class PenyewaanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
