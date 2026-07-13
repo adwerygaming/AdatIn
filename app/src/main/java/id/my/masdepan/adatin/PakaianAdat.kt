@@ -71,7 +71,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 200000,
         tersedia = true,
         rating = 4.8,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_ulee_balang
     ),
     PakaianAdat(
         id = 8,
@@ -81,7 +81,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 250000,
         tersedia = true,
         rating = 4.4,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_bundo_kanduang
     ),
     PakaianAdat(
         id = 9,
@@ -91,7 +91,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 150000,
         tersedia = true,
         rating = 4.7,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_ulos
     ),
     PakaianAdat(
         id = 10,
@@ -101,7 +101,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 300000,
         tersedia = true,
         rating = 4.9,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_aesan_gede
     ),
     PakaianAdat(
         id = 11,
@@ -111,7 +111,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 150000,
         tersedia = true,
         rating = 4.2,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_teluk_belanga
     ),
     PakaianAdat(
         id = 12,
@@ -121,7 +121,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 100000,
         tersedia = true,
         rating = 4.5,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_pangsi
     ),
     PakaianAdat(
         id = 13,
@@ -131,7 +131,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 275000,
         tersedia = true,
         rating = 4.6,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_tulang_bawang
     ),
     PakaianAdat(
         id = 14,
@@ -141,7 +141,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 200000,
         tersedia = true,
         rating = 4.4,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_melayu_jambi
     ),
     PakaianAdat(
         id = 15,
@@ -151,7 +151,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 225000,
         tersedia = true,
         rating = 4.7,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_bertabur
     ),
     PakaianAdat(
         id = 16,
@@ -161,7 +161,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 150000,
         tersedia = true,
         rating = 4.5,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_king_baba_king_bibige
     ),
     PakaianAdat(
         id = 17,
@@ -171,7 +171,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 150000,
         tersedia = true,
         rating = 4.3,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_sangkarut
     ),
     PakaianAdat(
         id = 18,
@@ -181,7 +181,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 250000,
         tersedia = true,
         rating = 4.8,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_kustim
     ),
     PakaianAdat(
         id = 19,
@@ -191,7 +191,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 250000,
         tersedia = true,
         rating = 4.6,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_biliu_makuta
     ),
     PakaianAdat(
         id = 20,
@@ -201,7 +201,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 175000,
         tersedia = true,
         rating = 4.4,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_laku_tedong
     ),
     PakaianAdat(
         id = 21,
@@ -211,7 +211,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 150000,
         tersedia = true,
         rating = 4.5,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_nggembe
     ),
     PakaianAdat(
         id = 22,
@@ -221,7 +221,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 200000,
         tersedia = true,
         rating = 4.9,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_bodo
     ),
     PakaianAdat(
         id = 23,
@@ -231,7 +231,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 150000,
         tersedia = true,
         rating = 4.3,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_cele
     ),
     PakaianAdat(
         id = 24,
@@ -241,7 +241,7 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 200000,
         tersedia = true,
         rating = 4.7,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_amarasi
     ),
     PakaianAdat(
         id = 25,
@@ -251,16 +251,16 @@ val daftarPakaian = mutableListOf(
         harga_sewa_per_hari = 175000,
         tersedia = true,
         rating = 4.6,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_pegon
     ),
     PakaianAdat(
         id = 26,
         nama = "Koteka & Rok Rumbai",
-        deskripsi = "Koteka dari labu air untuk menutupi alat vital pria, dan rok berbahan rajutan daun sagu untuk kaum wanita.",
+        deskripsi = "Koteka dari labu air untuk menutupi alat vital pria, and rok berbahan rajutan daun sagu untuk kaum wanita.",
         daerah = "Papua",
         harga_sewa_per_hari = 100000,
         tersedia = true,
         rating = 4.2,
-        gambar = R.drawable.ic_launcher_background
+        gambar = R.drawable.item_pic_koteka_rok_rumbai
     )
 )
