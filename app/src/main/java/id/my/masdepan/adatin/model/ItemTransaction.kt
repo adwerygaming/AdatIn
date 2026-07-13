@@ -4,12 +4,20 @@ data class TransactionItem(
     val id: String, // invoice id
     val pakaian: PakaianAdat,
     val qty: Int,
-    val tanggal_mulai_sewa_ms: Long,
-    val tanggal_selesai_sewa_ms: Long,
-    val tipe_pengambilan: TipePengambilan,
+    private val tanggal_mulai_sewa_ms: Long,
+    private val tanggal_selesai_sewa_ms: Long,
+    private val tipe_pengambilan: TipePengambilan,
     val ukuran: UkuranPakaian,
-    var status: StatusSewa
+    private var status: StatusSewa
 ) {
+    fun getStatus(): StatusSewa {
+        return status
+    }
+
+    fun getPickupMethod(): TipePengambilan {
+        return tipe_pengambilan
+    }
+
     fun updateRentingStatus(newStatus: StatusSewa): TransactionItem {
         this.status = newStatus
         return this

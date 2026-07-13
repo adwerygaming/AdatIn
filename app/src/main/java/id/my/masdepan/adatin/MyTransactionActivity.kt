@@ -90,11 +90,13 @@ class MyTransactionActivity : AppCompatActivity() {
                 }
 
                 val pakaian = transaction.pakaian
+                val status = transaction.getStatus()
+                val tipePengambilan = transaction.getPickupMethod()
 
-                if (trx.status == StatusSewa.SEDANG_DIPROSES) {
+                if (status == StatusSewa.SEDANG_DIPROSES) {
                     delay(6000)
 
-                    if (trx.tipe_pengambilan == TipePengambilan.DELIVERY) {
+                    if (tipePengambilan == TipePengambilan.DELIVERY) {
                         transaction.updateRentingStatus(StatusSewa.SEDANG_DIANTAR)
                         this@MyTransactionActivity.showNotification("Update Transaksi #${trx.id}", "${pakaian.nama} sedang dalam perjalanan ke tempatmu")
                         adapter.notifyDataSetChanged()
@@ -108,7 +110,7 @@ class MyTransactionActivity : AppCompatActivity() {
                     }
                 }
 
-                if (trx.status == StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN) {
+                if (status == StatusSewa.MENUNGGU_KONFIRMASI_PEMBATALAN) {
                     delay(6000)
 
                     transaction.updateRentingStatus(StatusSewa.DIBATALKAN)
