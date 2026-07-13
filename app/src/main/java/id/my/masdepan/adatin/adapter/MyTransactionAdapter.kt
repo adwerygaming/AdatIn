@@ -13,7 +13,6 @@ import id.my.masdepan.adatin.ConfirmCancelActivity
 import id.my.masdepan.adatin.ConfirmPickupActivity
 import id.my.masdepan.adatin.ConfirmReturnActivity
 import id.my.masdepan.adatin.R
-import id.my.masdepan.adatin.model.Customer
 import id.my.masdepan.adatin.model.StatusSewa
 import id.my.masdepan.adatin.model.TipePengambilan
 import id.my.masdepan.adatin.model.TransactionItem
@@ -55,7 +54,7 @@ class MyTransactionAdapter(
             error(R.drawable.ic_error)
         }
 
-        val status = transaksi.status
+        val status = transaksi.getStatus()
 
         if (status == StatusSewa.SEDANG_DISEWA) {
             holder.btnTransactionProductReturn.visibility = View.VISIBLE
@@ -96,7 +95,13 @@ class MyTransactionAdapter(
             context.startActivity(intent)
         }
 
-        val formattedStatus = when (transaksi.status) {
+
+        val totalDays = transaksi.getRentingDays()
+        val subtotal = transaksi.calculateSubtotal()
+        val trxStatus = transaksi.getStatus()
+        val trxPickupMethod = transaksi.getPickupMethod()
+
+        val formattedStatus = when (trxStatus) {
             StatusSewa.PENDING -> "Pending"
             StatusSewa.MENUNGGU_PEMBAYARAN -> "Menunggu Pembayaran"
             StatusSewa.SEDANG_DIPROSES -> "Sedang Diproses"
@@ -109,10 +114,7 @@ class MyTransactionAdapter(
             StatusSewa.DIBATALKAN -> "Dibatalkan"
         }
 
-        val totalDays = transaksi.getRentingDays()
-        val subtotal = transaksi.calculateSubtotal()
-
-        val deliveryString = if (transaksi.tipe_pengambilan == TipePengambilan.DELIVERY) {
+        val deliveryString = if (trxPickupMethod == TipePengambilan.DELIVERY) {
             "Delivery"
         } else {
             "Ambil di Tempat"
