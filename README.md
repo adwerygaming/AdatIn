@@ -1,53 +1,89 @@
-<p align="center">
-  <img src="app/src/main/res/drawable/brand_logo.png" width="150" alt="AdatIn Logo">
-</p>
+# AdatIn
 
-<p align="center">
-  <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin">
-  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-  <img src="https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white" alt="Android Studio">
-  <img src="https://img.shields.io/badge/Material%20Design-757575?style=for-the-badge&logo=material-design&logoColor=white" alt="Material Design">
-  <img src="https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white" alt="Gradle">
-</p>
+AdatIn is a specialized mobile application engineered for the Android platform, designed to facilitate the rental of traditional Indonesian clothing (Pakaian Adat).
 
-<h1 align="center">AdatIn</h1>
+[![Build Status](https://img.shields.io/badge/Build-Success-brightgreen?style=for-the-badge)](https://github.com/adwerygaming/AdatIn)
+[![Platform](https://img.shields.io/badge/Platform-Android%2012%20--%2015-blue?style=for-the-badge)](https://developer.android.com/)
+[![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple?style=for-the-badge)](https://kotlinlang.org/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-orange?style=for-the-badge)](http://www.apache.org/licenses/LICENSE-2.0)
 
-**AdatIn** is an Android application designed to facilitate the rental of traditional Indonesian clothing (*Pakaian Adat*). This project is dedicated to preserving and promoting Indonesian culture by making traditional attire more accessible for various events and ceremonies.
+## Table of Contents
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Screenshots](#screenshots)
+5. [Installation](#installation)
+6. [Usage](#usage)
+7. [Project Structure](#project-structure)
+8. [License](#license)
+9. [Development Team](#development-team)
 
-This project was developed as the **Final Project for Bahasa Pemrograman 1, Semester 2**.
+## Overview
+AdatIn is designed to preserve and promote Indonesian cultural heritage by lowering the barrier to accessing traditional garments for cultural ceremonies, educational events, and festivals. By providing a digitized marketplace for traditional attire, the application bridges the gap between local vendors and consumers, fostering cultural appreciation and supporting local artisanal economies.
 
-## What the App Does
-AdatIn provides a platform where users can browse, select, and rent various traditional Indonesian outfits from different regions. It streamlines the process from discovery to payment and delivery/pickup, ensuring a seamless experience for users looking to celebrate Indonesian heritage.
+## Features
+- **User Authentication and Session Management**: Persistent user session validation via local shared preferences and registration/login validation handlers.
+- **UI/UX and Dynamic Asset Binding**: Interface conforming to Material Design 3 guidelines with seamless bottom navigation transitions and asynchronous image loading.
+- **Data Management and Search**: Dynamic catalog search and regional filtering of traditional garments.
+- **In-Memory Cart State**: Local state management enabling dynamic item addition, quantity modification, and item removal.
+- **Transaction and Order Lifecycle Tracking**: Checkout flow supporting delivery fee calculation, pickup configurations, and a simulated transaction status state machine (processing, shipping, pickup, return, completion, and cancellation) driven by Kotlin coroutines.
 
-## Key Features
-- **Browse Catalog**: Explore a wide variety of traditional Indonesian clothes with detailed descriptions, ratings, and pricing.
-- **Search & Filter**: Find specific attire by name or filter by region (e.g., Yogyakarta, Bali, West Java).
-- **Shopping Cart**: Add multiple items to a cart for easy management before checkout.
-- **Flexible Rental Options**: Choose between delivery or self-pickup, and select rental durations.
-- **Order Management**: Track transaction history and manage current rentals (pickup confirmation, return, and cancellation).
-- **User Profile**: Manage account details and profile information.
-- **Responsive UI**: Built with a modern design using Material Design components.
+## Tech Stack
+- **Language**: Kotlin
+- **UI Framework**: Native Android (XML Views & Material Components)
+- **Image Loading**: Coil (v2.7.0)
+- **Build System**: Gradle Kotlin DSL (v9.2.1 Android Gradle Plugin)
+- **Minimum SDK**: API 31 (Android 12)
+- **Target SDK**: API 37 (Android 15)
 
 ## Screenshots
-<p align="center">
-  <img src="docs/screenshots/home.png" width="200" alt="Home Screen">
-  <img src="docs/screenshots/product_detail.png" width="200" alt="Product Detail Screen">
-  <img src="docs/screenshots/carts.png" width="200" alt="Cart Screen">
-  <img src="docs/screenshots/transactions.png" width="200" alt="Transactions Screen">
-</p>
+Below are the interface previews for key application screens:
 
-## Technical Information
-- **Language**: Kotlin
-- **Platform**: Android
-- **UI Framework**: XML Layouts with Material Design 3
-- **Architecture**: Activity-based with Adapters for data handling
-- **Image Loading**: Coil (Image loading library for Android)
-- **Minimum SDK**: Android 7.0 (API Level 24) or higher
+| Splash Screen | Home Catalog | Product Detail |
+| :---: | :---: | :---: |
+| ![Splash Screen](docs/screenshots/splash.png) | ![Home Catalog](docs/screenshots/home.png) | ![Product Detail](docs/screenshots/product_detail.png) |
+
+| Shopping Cart | Transactions |
+| :---: | :---: |
+| ![Shopping Cart](docs/screenshots/carts.png) | ![Transactions](docs/screenshots/transactions.png) |
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/adwerygaming/AdatIn.git
+   cd AdatIn
+   ```
+2. Open the project in Android Studio (Giraffe or newer recommended).
+3. Sync the Gradle files (`build.gradle.kts`).
+4. Run the application on an emulator or physical device running Android 12 (API 31) or higher.
+
+## Usage
+- **Launch**: Open the application, which loads the `SplashScreenActivity` and redirects to `LoginActivity` or `MainActivity` depending on the session status.
+- **Browse & Search**: Use the home catalog to view traditional garments, search for names, or filter by regional categories.
+- **Rent**: Select an item to view details, add it to the cart, specify delivery options, and proceed through the simulated checkout and payment flow.
+
+## Project Structure
+```
+app/src/main/
+├── AndroidManifest.xml
+├── java/id/my/masdepan/adatin/
+│   ├── adapter/             # RecyclerView Adapters
+│   ├── model/               # Data models
+│   ├── BottomNav.kt         # Bottom navigation helper
+│   ├── CheckoutActivity.kt  # Checkout controller
+│   └── ...                  # Activity controllers
+└── res/
+    ├── layout/              # XML layout resources
+    ├── menu/                # Bottom navigation menu
+    └── values/              # Strings, colors, and themes
+```
+
+## License
+This project is licensed under the Apache License 2.0. See the file headers or reference the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) for details.
 
 ## Development Team
-This project was developed by:
-- **Yoga Aditiya Putra** (25.12.3645)
-- **Iqbal Dimas Saputra** (25.12.3633)
-- **Dhevan Adhitya Prasetyo** (25.12.3654)
-- **Indyra Zulaeyka Rabbani** (25.12.3625)
-- **Fikki Rahmat Maulana** (25.12.3618)
+- Yoga Aditiya Putra
+- Iqbal Dimas Saputra
+- Indyra Zulaeyka Rabbani
+- Fikki Rahmat Maulana
+- Dhevan Adhitya Prasetyo
